@@ -224,10 +224,17 @@ function setUpGame() {
     let row = 0;
     let x, y;
 
-    for (let i = 0; i < totalCards; i++) {
-      //get the sequence from the sequence set 
-      let env = sequence[parseInt(experiment.sequenceSet)][i]
+    //load the sequence to the environment variable
+    for (let i = 0; i < totalCards-1; i++) {
+      //get the sequence from the sequence set
+      let env = sequence[parseInt(experiment.sequenceSet)-1][i]
       environment.push(env);
+    }
+
+    //lay out the card
+    for (let i = 0; i < totalCards; i++) {
+      //get the sequence from the sequence set
+      let env = environment[i];
 
       if (x > 1000) {
         col = 1;
