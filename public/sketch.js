@@ -36,15 +36,17 @@ document.body.addEventListener('touchstart', () => {
 });
 
 fetch('/sequence')
-    .then((response) => {
-        response.json().then((data) => {
-          JSON.parse(data[0], (key, value) => {
-              console.log(value); // log the current property name, the last is "".
-              return value;     // return the unchanged property value.
-            });
-        });
-    })
-    .catch((err) => { console.log("something went wrong");});
+  .then((response) => {
+    response.json().then((data) => {
+      for (let i in data[0]) {
+        // alert(i); // alerts key
+        console.log(data[0][i]); //alerts key's value
+      }
+    });
+  })
+  .catch((err) => {
+    console.log("something went wrong");
+  });
 
 //bind the click event listener with the submit button
 $getUserContext.addEventListener('click', getUserContext);
@@ -250,12 +252,12 @@ function setUpGame() {
 
   function setFirstBunny() {
     drawBunny({
-      x:85,
-      y:75
+      x: 85,
+      y: 75
     });
   }
 
-  function revealFirstCard(){
+  function revealFirstCard() {
     $cards[0].setAttribute('data-env', environment[0]);
   }
 
@@ -317,10 +319,12 @@ function setUpGame() {
       }
     })
   });
-  function showFeedback(){
+
+  function showFeedback() {
     fadeIn($feedback);
     fadeOut($feedback, false, 0.5)
   }
+
   function moveNext() {
     // console.log(choices);
     //change the current $card
@@ -505,7 +509,7 @@ function setUpGame() {
 
 ////////////
 //some utility functions for fading in and out using Greensock animation library (GSAP)
-function fadeIn(elem, delay, display="block") {
+function fadeIn(elem, delay, display = "block") {
   elem.style.display = display;
   elem.style.opacity = 0;
   gsap.to(elem, {
@@ -533,7 +537,7 @@ function hideElem(elem) {
   elem.style.display = "none";
 }
 
-function enable(elem){
+function enable(elem) {
   elem.style.pointerEvents = "auto";
 }
 
