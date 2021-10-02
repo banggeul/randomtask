@@ -15,7 +15,7 @@ const totalCards = 41;
 let currentCardNum = 0;
 
 //make array for sequence set
-var environment = [];
+var environment = [1];
 //array to store choices
 var choices = [-99];
 //array to store if the choice is correct guess or not
@@ -47,13 +47,6 @@ fetch('/sequence')
         }
         sequence.push(innerarray);
       }
-      // for(let j in data){
-      //   for (let i in data[j]) {
-      //     // alert(i); // alerts key
-      //     // console.log(data[0][i]); //alerts key's value
-      //     sequence[j][i] = data[j][i];
-      //   }
-      // }
       console.log(sequence[0]);
     });
   })
@@ -99,6 +92,8 @@ function getUserContext() {
   experiment.gender = gender;
   experiment.imageSet = imageSet;
   experiment.sequenceSet = sequenceSet;
+
+
 
   // console.log(experiment);
   //make sure the game view is all hidden
@@ -228,10 +223,11 @@ function setUpGame() {
     let col = 0;
     let row = 0;
     let x, y;
-    //generate random number sequence of 0 and 1
+
     for (let i = 0; i < totalCards; i++) {
-      let r = Math.random() < 0.5 ? 0 : 1;
-      environment.push(r);
+      //get the sequence from the sequence set 
+      let env = sequence[parseInt(experiment.sequenceSet)][i]
+      environment.push(env);
 
       if (x > 1000) {
         col = 1;
@@ -244,7 +240,7 @@ function setUpGame() {
       let $card = drawBGCard({
         x: x,
         y: y,
-        env: r,
+        env: env,
         id: i
       });
       $cards.push($card);
