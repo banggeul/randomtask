@@ -40,11 +40,12 @@ let sequence = [];
 fetch('/sequence')
   .then((response) => {
     response.json().then((data) => {
-      console.log(data.length);
-      for(let i=0; i < data.length; i++){
-        for(let j=0; j < 42; j++){
-          sequence.push([i,j]);
+      for(let i in data){
+        let innerarray = [];
+        for(let j in data[i]){
+          innerarray.push(data[i][j]);
         }
+        sequence.push(innerarray);
       }
       // for(let j in data){
       //   for (let i in data[j]) {
@@ -53,7 +54,7 @@ fetch('/sequence')
       //     sequence[j][i] = data[j][i];
       //   }
       // }
-      console.log(sequence.length);
+      console.log(sequence[0]);
     });
   })
   .catch((err) => {
