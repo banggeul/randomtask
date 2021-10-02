@@ -1,0 +1,21 @@
+{
+  "name": "RabbitTask",
+  "short_name": "RabbitTask",
+  "description": "Experiment Task One",
+  "version": "0.0.0.1",
+  "manifest_version": 1,
+  "author": "Bang Geul Han",
+  "start_url": "index.html",
+  "display": "standalone",
+  "orientation": "landscape",
+  "theme_color": "#015174",
+  "background_color": "#F7F4F3",
+  "app": {
+    "urls": [
+      "https://rabbittask-experiment.herokuapp.com/"
+    ],
+    "permissions": [
+      "fullscreen"
+    ]
+  }
+}
