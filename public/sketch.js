@@ -35,13 +35,19 @@ document.body.addEventListener('touchstart', () => {
   document.activeElement.blur();
 });
 
+let sequence = [];
+
 fetch('/sequence')
   .then((response) => {
     response.json().then((data) => {
-      for (let i in data[0]) {
-        // alert(i); // alerts key
-        console.log(data[0][i]); //alerts key's value
+      for(let j in data){
+        for (let i in data[j]) {
+          // alert(i); // alerts key
+          // console.log(data[0][i]); //alerts key's value
+          sequence[j][i] = data[j][i];
+        }
       }
+      console.log(sequence.length);
     });
   })
   .catch((err) => {
