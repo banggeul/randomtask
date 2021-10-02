@@ -40,6 +40,7 @@ let sequence = [];
 fetch('/sequence')
   .then((response) => {
     response.json().then((data) => {
+      console.log(data.length);
       for(let j in data){
         for (let i in data[j]) {
           // alert(i); // alerts key
