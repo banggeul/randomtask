@@ -1,6 +1,8 @@
 //import the data storing script
 import store from './utils/storage.js'
 
+
+
 //get the current data stored, unpack it as object
 const {
   data
@@ -32,6 +34,14 @@ const $game = document.querySelector('#content');
 document.body.addEventListener('touchstart', () => {
   document.activeElement.blur();
 });
+
+fetch('/sequence')
+    .then((response) => {
+        response.json().then((data) => {
+            console.log(data[0]);
+        });
+    })
+    .catch((err) => { console.log("something went wrong");});
 
 //bind the click event listener with the submit button
 $getUserContext.addEventListener('click', getUserContext);
@@ -72,7 +82,7 @@ function getUserContext() {
   experiment.imageSet = imageSet;
   experiment.sequenceSet = sequenceSet;
 
-  console.log(experiment);
+  // console.log(experiment);
   //make sure the game view is all hidden
   $game.style.display = "none";
   $game.style.opacity = 0;
@@ -226,7 +236,7 @@ function setUpGame() {
   function setUpBunny() {
     let $current = $cards[currentCardNum];
     let bunnyPosition = $current.getBoundingClientRect();
-    console.log($current);
+    // console.log($current);
     let x = bunnyPosition.x + bunnyPosition.width / 2;
     let y = bunnyPosition.y + bunnyPosition.height / 2;
     drawBunny({
@@ -289,10 +299,10 @@ function setUpGame() {
   $choiceCards.forEach(function(userItem) {
     userItem.addEventListener('click', function(e) {
       e.preventDefault();
-      console.log("current card number: " + currentCardNum);
+      // console.log("current card number: " + currentCardNum);
       if (currentCardNum <= totalCards - 1) {
         let choice = e.target.dataset.choice;
-        console.log("choice: " + choice);
+        // console.log("choice: " + choice);
         choices = [...choices, parseInt(choice)];
         //choices.push[choice];
         moveNext();
@@ -309,7 +319,7 @@ function setUpGame() {
     fadeOut($feedback, false, 0.5)
   }
   function moveNext() {
-    console.log(choices);
+    // console.log(choices);
     //change the current $card
     if (currentCardNum == totalCards - 1) {
       finishGame();
@@ -323,7 +333,7 @@ function setUpGame() {
       //get the environment
       const env = environment[parseInt(index)];
       const ch = choices[choices.length - 1];
-      console.log("env: " + env + ", choice: " + ch);
+      // console.log("env: " + env + ", choice: " + ch);
       if (env == ch) {
         $feedback.innerHTML = "Correct!";
         correct = [...correct, 1];
@@ -403,7 +413,7 @@ function setUpGame() {
     //get the environment
     const env = environment[parseInt(index)];
     const ch = choices[choices.length - 1];
-    console.log("env: " + env + ", choice: " + ch);
+    // console.log("env: " + env + ", choice: " + ch);
     if (env == ch) {
       $feedback.innerHTML = "Correct!";
       correct = [...correct, 1];
@@ -426,7 +436,7 @@ function setUpGame() {
       "correct": correct
     }
     //log the data
-    console.log(sessionData.length);
+    // console.log(sessionData.length);
     //put the dots to the experiment object
     experiment.sequences = sessionData;
     //then store it to the storage which will post it to the database
