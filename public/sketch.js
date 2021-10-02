@@ -1,9 +1,5 @@
 //import the data storing script
 import store from './utils/storage.js'
-// import sequenceSets from '../server.js'
-
-import {resultArray} from '../server.js'
-console.log(resultArray);
 
 //get the current data stored, unpack it as object
 const {
