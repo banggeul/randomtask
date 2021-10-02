@@ -41,13 +41,18 @@ fetch('/sequence')
   .then((response) => {
     response.json().then((data) => {
       console.log(data.length);
-      for(let j in data){
-        for (let i in data[j]) {
-          // alert(i); // alerts key
-          // console.log(data[0][i]); //alerts key's value
-          sequence[j][i] = data[j][i];
+      for(let i=0; i < data.length; i++){
+        for(let j=0; j < 42; j++){
+          sequence.push([i,j]);
         }
       }
+      // for(let j in data){
+      //   for (let i in data[j]) {
+      //     // alert(i); // alerts key
+      //     // console.log(data[0][i]); //alerts key's value
+      //     sequence[j][i] = data[j][i];
+      //   }
+      // }
       console.log(sequence.length);
     });
   })
