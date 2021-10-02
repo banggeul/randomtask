@@ -38,7 +38,10 @@ document.body.addEventListener('touchstart', () => {
 fetch('/sequence')
     .then((response) => {
         response.json().then((data) => {
-            console.log(data[0]);
+          JSON.parse(data[0], (key, value) => {
+              console.log(value); // log the current property name, the last is "".
+              return value;     // return the unchanged property value.
+            });
         });
     })
     .catch((err) => { console.log("something went wrong");});
