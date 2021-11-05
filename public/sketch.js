@@ -196,7 +196,8 @@ function setUpGame() {
     //fade out the game ui
     fadeOut($gameUI, true);
     $gameUI.style.pointerEvents = "none";
-    //showOptions();
+
+    //move the bunny to the next position
     moveNext();
 
     //get the clickable area and store it to the variable
@@ -265,6 +266,20 @@ function setUpGame() {
     });
   }
 
+  function moveUpBunny() {
+    let $current = $cards[currentCardNum];
+    let bunnyPosition = $current.getBoundingClientRect();
+    // console.log($current);
+    let x = bunnyPosition.x + bunnyPosition.width / 2;
+    let y = bunnyPosition.y + bunnyPosition.height / 2;
+    let duration = 1;
+    moveBunny({
+      x,
+      y,
+      duration
+    });
+  }
+
   function setFirstBunny() {
     drawBunny({
       x: 85,
@@ -283,7 +298,9 @@ function setUpGame() {
 
     $leftChoice.setAttribute('data-choice', r > 0.5 ? 1 : 0);
     $rightChoice.setAttribute('data-choice', r > 0.5 ? 0 : 1);
-    fadeIn($gameHUD, 1, "flex");
+
+    //fade in the game hud - where the option buttons are drawn with 2 second delay
+    fadeIn($gameHUD, 2, "flex");
   }
 
   function drawBGCard(options, fadeOut = true, remove = true) {
@@ -315,6 +332,14 @@ function setUpGame() {
     // card.style.transform = "scale(0.6,0.6)"
   }
 
+  function moveBunny(options){
+    gsap.to(".bunny", {
+      x: options.x,
+      y: options.y,
+      duration: options.duration
+    });
+  }
+
 
   //event listeners
   $choiceCards.forEach(function(userItem) {
@@ -342,16 +367,17 @@ function setUpGame() {
   }
 
   function moveNext() {
-    // console.log(choices);
+    //move the bunny to the next position
     //change the current $card
     if (currentCardNum == totalCards - 1) {
       finishGame();
     } else {
-      showOptions();
+
       currentCardNum++;
       $cards[currentCardNum - 1].classList.remove('currentCard');
       $cards[currentCardNum].classList.add('currentCard');
-      setUpBunny();
+      // setUpBunny();
+      moveUpBunny();
       const index = $cards[currentCardNum - 1].dataset.index;
       //get the environment
       const env = environment[parseInt(index)];
@@ -370,6 +396,9 @@ function setUpGame() {
         }
       }
       $cards[currentCardNum - 1].setAttribute('data-env', env);
+
+      //show the buttons
+      showOptions();
     }
 
   }
