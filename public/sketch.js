@@ -92,8 +92,7 @@ function getUserContext() {
   experiment.gender = gender;
   experiment.imageSet = imageSet;
   experiment.sequenceSet = sequenceSet;
-
-
+  experiment.pValue = sequence[parseInt(sequenceSet)-1][41];
 
   // console.log(experiment);
   //make sure the game view is all hidden
@@ -197,7 +196,7 @@ function setUpGame() {
     //fade out the game ui
     fadeOut($gameUI, true);
     $gameUI.style.pointerEvents = "none";
-    showOptions();
+    //showOptions();
     moveNext();
 
     //get the clickable area and store it to the variable
@@ -278,6 +277,7 @@ function setUpGame() {
   }
 
   function showOptions() {
+    //show the cards
     // $gameHUD.style.opacity = 1;
     let r = Math.random();
 
