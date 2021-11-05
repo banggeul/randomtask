@@ -273,10 +273,12 @@ function setUpGame() {
     let x = bunnyPosition.x + bunnyPosition.width / 2 - 85;
     let y = bunnyPosition.y + bunnyPosition.height / 2 - 75;
     let duration = 1;
+    let delay = 1;
     moveBunny({
       x,
       y,
-      duration
+      duration,
+      delay
     });
   }
 
@@ -336,7 +338,8 @@ function setUpGame() {
     gsap.to(".bunny", {
       x: options.x,
       y: options.y,
-      duration: options.duration
+      duration: options.duration,
+      delay: options.delay
     });
   }
 
@@ -377,30 +380,34 @@ function setUpGame() {
       $cards[currentCardNum - 1].classList.remove('currentCard');
       $cards[currentCardNum].classList.add('currentCard');
       // setUpBunny();
+      revealCard();
       moveUpBunny();
-      const index = $cards[currentCardNum - 1].dataset.index;
-      //get the environment
-      const env = environment[parseInt(index)];
-      const ch = choices[choices.length - 1];
-      // console.log("env: " + env + ", choice: " + ch);
-      if (env == ch) {
-        $feedback.innerHTML = "Correct!";
-        correct = [...correct, 1];
-      } else {
-        correct = [...correct, 0];
-        $feedback.innerHTML = "Oops, there was ";
-        if (env == 0) {
-          $feedback.innerHTML += "no carrot!";
-        } else {
-          $feedback.innerHTML += "a carrot!";
-        }
-      }
-      $cards[currentCardNum - 1].setAttribute('data-env', env);
-
       //show the buttons
       showOptions();
     }
 
+  }
+
+  function revealCard() {
+    const index = $cards[currentCardNum - 1].dataset.index;
+    //get the environment
+    const env = environment[parseInt(index)];
+    const ch = choices[choices.length - 1];
+    // console.log("env: " + env + ", choice: " + ch);
+    if (env == ch) {
+      $feedback.innerHTML = "Correct!";
+      correct = [...correct, 1];
+    } else {
+      correct = [...correct, 0];
+      $feedback.innerHTML = "Oops, there was ";
+      if (env == 0) {
+        $feedback.innerHTML += "no carrot!";
+      } else {
+        $feedback.innerHTML += "a carrot!";
+      }
+    }
+
+    $cards[currentCardNum - 1].setAttribute('data-env', env);
   }
 
   // function finishGame() {
