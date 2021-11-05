@@ -270,8 +270,8 @@ function setUpGame() {
     let $current = $cards[currentCardNum];
     let bunnyPosition = $current.getBoundingClientRect();
     // console.log($current);
-    let x = bunnyPosition.x + bunnyPosition.width / 2;
-    let y = bunnyPosition.y + bunnyPosition.height / 2;
+    let x = bunnyPosition.x + bunnyPosition.width / 2 - 85;
+    let y = bunnyPosition.y + bunnyPosition.height / 2 - 75;
     let duration = 1;
     moveBunny({
       x,
