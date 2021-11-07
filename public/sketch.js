@@ -417,18 +417,22 @@ function setUpGame() {
     $cards[currentCardNum - 1].style.visibility = "hidden";
     //flip animation goes here
     //set up the animation
-    var revealAnim = gsap.fromTo(animation,1,{autoAlpha:1},
-      {
-        autoAlpha: 1,
-        repeat:1,
-        x:-2250,
-        ease:SteppedEase.config(15),
-        onComplete:hideAnimation,
-        onCompleteParams:[animation, $cards[currentCardNum - 1]]
-      }
-    );
-    // //pause the animation
-    // revealAnim.pause();
+    if(currentCardNum != 0) {
+      var revealAnim = gsap.fromTo(animation,1,{autoAlpha:1},
+        {
+          autoAlpha: 1,
+          repeat:1,
+          x:-2250,
+          ease:SteppedEase.config(15),
+          onComplete:hideAnimation,
+          onCompleteParams:[animation, $cards[currentCardNum - 1]]
+        }
+      );
+      // //pause the animation
+      revealAnim.pause();
+      revealAnim.restart();
+    }
+
   }
 
   function hideAnimation(elem1, elem2) {
