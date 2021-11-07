@@ -375,7 +375,15 @@ function setUpGame() {
         //choices.push[choice];
         moveNext();
         $gameHUD.style.pointerEvents = "none";
-        fadeOut($gameHUD, false);
+        //todo///////////////////////////////////
+        //make the click feedback animation here
+        gsap.to(e.target, {
+          duration:0.5,
+          y:10
+        })
+        //then fade out the buttons
+        fadeOut($gameHUD, false, 0.5);
+        ////////////////////////////////////////
         showFeedback();
       } else {
         //finish the game;
@@ -392,6 +400,7 @@ function setUpGame() {
     //move the bunny to the next position
     //change the current $card
     if (currentCardNum == totalCards - 1) {
+      moveAnimation();
       finishGame();
     } else {
       moveAnimation();
@@ -552,42 +561,6 @@ function setUpGame() {
   }
 }
 
-//function for drawing the dot on the screen
-// function createDot(options, $gameView, fadeOut = true, remove = true) {
-//   const dot = document.createElement('div');
-//   dot.classList.add('rainDrop');
-//   dot.style.pointerEvents = "none";
-//   $gameView.append(dot);
-//   dot.style.top = options.y + "px";
-//   dot.style.left = options.x + "px";
-//   dot.style.opacity = 0.6;
-//   dot.style.transform = "scale(0.6,0.6)"
-//   // fadeIn(dot);
-//   gsap.to(dot, {
-//     duration: .3,
-//     ease: "power4.out",
-//     transform: "scale(1,1)",
-//     opacity: 1,
-//     onComplete: fadeOut ? fade : null
-//   });
-//
-//   function fade() {
-//     gsap.to(dot, {
-//       duration: 1,
-//       ease: "power4.in",
-//       opacity: 0,
-//       onComplete: remove ? removeDot : null
-//     });
-//   }
-//
-//   function removeDot() {
-//     dot.remove();
-//   }
-//
-//   // if(fadeOut){
-//   //   fade(dot, remove);
-//   // }
-// }
 
 ////////////
 //some utility functions for fading in and out using Greensock animation library (GSAP)
