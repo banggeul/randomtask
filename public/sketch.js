@@ -120,7 +120,7 @@ function setUpGame() {
         <div id="game-container">
         <!-- gameboard gets drawn here -->
           <div class="bunny" id="bunny"></div>
-          <div class="animContainer">
+          <div class="animContainer" id="animContainer">
             <img class="character2" id="character" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/183204/char.png">
           </div>
         </div>
@@ -162,8 +162,9 @@ function setUpGame() {
   const $leftChoice = document.querySelector('#left');
   const $rightChoice = document.querySelector('#right');
   const $bunny = document.querySelector("#bunny");
-  var animation = document.getElementById("character");
-  animation.style.visibility = "hidden";
+  var $animation = document.getElementById("character");
+  var $animContainer = document.getElementById("animContainer");
+  $animation.style.visibility = "hidden";
 
 
   const $feedback = document.querySelector('#feedback');
@@ -287,6 +288,19 @@ function setUpGame() {
     });
   }
 
+  function moveAnimation() {
+    let $current = $cards[currentCardNum];
+    let animPosition = $current.getBoundingClientRect();
+    // console.log($current);
+    let x = animPosition.x + animPosition.width / 2 - 85;
+    let y = animPosition.y + animPosition.height / 2 - 75;
+
+    $animContainer.style.pointerEvents = "none";
+    $animContainer.style.top = options.y + "px";
+    $animContainer.style.left = options.x + "px";
+    $animContainer.style.transform = "translate(-50%, -50%)";
+  }
+
   function setFirstBunny() {
     drawBunny({
       x: 85,
@@ -380,7 +394,7 @@ function setUpGame() {
     if (currentCardNum == totalCards - 1) {
       finishGame();
     } else {
-
+      moveAnimation();
       currentCardNum++;
       $cards[currentCardNum - 1].classList.remove('currentCard');
       $cards[currentCardNum].classList.add('currentCard');
@@ -418,14 +432,14 @@ function setUpGame() {
     //flip animation goes here
     //set up the animation
     if(currentCardNum > 1 ) {
-      var revealAnim = gsap.fromTo(animation,1,{autoAlpha:1,x:0},
+      var revealAnim = gsap.fromTo($animation,1,{autoAlpha:1,x:0},
         {
           autoAlpha: 1,
           repeat:1,
           x:-2250,
           ease:SteppedEase.config(15),
           onComplete:hideAnimation,
-          onCompleteParams:[animation, $cards[currentCardNum - 1]]
+          onCompleteParams:[$animation, $cards[currentCardNum - 1]]
         }
       );
       // //pause the animation
