@@ -579,12 +579,12 @@ function fadeIn(elem, delay, display = "block") {
 
 function fadeOut(elem, hide, delay = 0) {
   gsap.to(elem, {
-    duration: .5,
+    duration: 1,
+    delay: delay,
     ease: "power1.inOut",
     opacity: 0,
     onComplete: hide ? hideElem : null,
-    onCompleteParams: [elem],
-    delay: delay
+    onCompleteParams: [elem]
   });
 }
 
