@@ -296,8 +296,8 @@ function setUpGame() {
     let y = animPosition.y + animPosition.height / 2 - 75;
 
     $animContainer.style.pointerEvents = "none";
-    $animContainer.style.top = options.y + "px";
-    $animContainer.style.left = options.x + "px";
+    $animContainer.style.top = y + "px";
+    $animContainer.style.left = x + "px";
     $animContainer.style.transform = "translate(-50%, -50%)";
   }
 
