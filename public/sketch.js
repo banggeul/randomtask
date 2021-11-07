@@ -374,7 +374,7 @@ function setUpGame() {
         choices = [...choices, parseInt(choice)];
         //choices.push[choice];
         moveNext();
-        $gameHUD.style.pointerEvents = "none";
+        // $gameHUD.style.pointerEvents = "none";
         //todo///////////////////////////////////
         //make the click feedback animation here
         gsap.fromTo(e.target, 0.5, {y:0},{
