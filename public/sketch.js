@@ -366,8 +366,9 @@ function setUpGame() {
 
   //event listeners
   $choiceCards.forEach(function(userItem) {
-    userItem.addEventListener('click', function(e) {
+    userItem.addEventListener('mousedown', function(e) {
       e.preventDefault();
+      $gameHUD.style.pointerEvents = "none";
       // console.log("current card number: " + currentCardNum);
       if (currentCardNum <= totalCards - 1) {
         let choice = e.target.dataset.choice;
@@ -375,7 +376,7 @@ function setUpGame() {
         choices = [...choices, parseInt(choice)];
         //choices.push[choice];
         moveNext();
-        $gameHUD.style.pointerEvents = "none";
+
         //todo///////////////////////////////////
         //make the click feedback animation here
         gsap.fromTo(e.target, 0.5, {y:0},{
