@@ -453,39 +453,6 @@ function setUpGame() {
     elem1.style.visibility = "hidden";
     elem2.style.visibility = "visible";
   }
-
-  // function finishGame() {
-  //   currentCardNum++;
-  //   const index = $cards[currentCardNum - 1].dataset.index;
-  //   //get the environment
-  //   const env = environment[parseInt(index)];
-  //   const ch = choices[choices.length - 1];
-  //   console.log("env: " + env + ", choice: " + ch);
-  //   if (env == ch) {
-  //     $feedback.innerHTML = "Correct!";
-  //     correct = [...correct, 1];
-  //   } else {
-  //     correct = [...correct, 0];
-  //     $feedback.innerHTML = "Oops, there was ";
-  //     if (env == 0) {
-  //       $feedback.innerHTML += "no carrot!";
-  //     } else {
-  //       $feedback.innerHTML += "a carrot!";
-  //     }
-  //   }
-  //   $cards[currentCardNum - 1].setAttribute('data-env', env);
-  //   $cards[currentCardNum - 1].classList.remove('currentCard');
-  //   console.log("game finished");
-  //   //package the data
-  //   data = {
-  //     "environment": environment,
-  //     "choices": choices,
-  //     "correct": correct
-  //   }
-  //   //log the data
-  //   console.log(data);
-  // }
-
   //these are not functioning since these buttons are hidden
   //but left here just in case we bring back the feature
   $submitButton.addEventListener('click', function(e) {
@@ -530,6 +497,25 @@ function setUpGame() {
       }
     }
     $cards[currentCardNum - 1].setAttribute('data-env', env);
+    //hide the current card
+    $cards[currentCardNum - 1].style.visibility = "hidden";
+    //flip animation goes here
+    //set up the animation
+    if(currentCardNum > 1 ) {
+      var revealAnim = gsap.fromTo($animation,1,{autoAlpha:1,x:0},
+        {
+          autoAlpha: 1,
+          repeat:1,
+          x:-2250,
+          ease:SteppedEase.config(15),
+          onComplete:hideAnimation,
+          onCompleteParams:[$animation, $cards[currentCardNum - 1]]
+        }
+      );
+      // //pause the animation
+      revealAnim.pause();
+      revealAnim.restart();
+    }
     $cards[currentCardNum - 1].classList.remove('currentCard');
     console.log("game finished");
     //package the data
