@@ -278,7 +278,7 @@ function setUpGame() {
     let x = bunnyPosition.x + bunnyPosition.width / 2 - 85;
     let y = bunnyPosition.y + bunnyPosition.height / 2 - 75;
     let duration = 1;
-    let delay = 1;
+    let delay = 2;
     moveBunny({
       x,
       y,
@@ -307,7 +307,7 @@ function setUpGame() {
     $rightChoice.setAttribute('data-choice', r > 0.5 ? 0 : 1);
 
     //fade in the game hud - where the option buttons are drawn with 2 second delay
-    fadeIn($gameHUD, 2, "flex");
+    fadeIn($gameHUD, 2.5, "flex");
   }
 
   function drawBGCard(options, fadeOut = true, remove = true) {
@@ -417,8 +417,8 @@ function setUpGame() {
     $cards[currentCardNum - 1].style.visibility = "hidden";
     //flip animation goes here
     //set up the animation
-    if(currentCardNum != 0) {
-      var revealAnim = gsap.fromTo(animation,1,{autoAlpha:1},
+    if(currentCardNum > 1 ) {
+      var revealAnim = gsap.fromTo(animation,1,{autoAlpha:1,x:0},
         {
           autoAlpha: 1,
           repeat:1,
