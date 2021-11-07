@@ -321,7 +321,7 @@ function setUpGame() {
     $rightChoice.setAttribute('data-choice', r > 0.5 ? 0 : 1);
 
     //fade in the game hud - where the option buttons are drawn with 2 second delay
-    fadeIn($gameHUD, 2.5, "flex");
+    // fadeIn($gameHUD, 2.5, "flex");
   }
 
   function drawBGCard(options, fadeOut = true, remove = true) {
@@ -358,7 +358,8 @@ function setUpGame() {
       x: options.x,
       y: options.y,
       duration: options.duration,
-      delay: options.delay
+      delay: options.delay,
+      onComplete: fadeInButtons
     });
   }
 
@@ -374,23 +375,32 @@ function setUpGame() {
         choices = [...choices, parseInt(choice)];
         //choices.push[choice];
         moveNext();
-        // $gameHUD.style.pointerEvents = "none";
+        $gameHUD.style.pointerEvents = "none";
         //todo///////////////////////////////////
         //make the click feedback animation here
         gsap.fromTo(e.target, 0.5, {y:0},{
           y:10,
           yoyo: true,
-          repeat:1
+          repeat:1,
+          onComplete: fadeOutButtons
         })
         //then fade out the buttons
         //fadeOut($gameHUD, false, 1);
         ////////////////////////////////////////
-        showFeedback();
+        // showFeedback();
       } else {
         //finish the game;
       }
     })
   });
+
+  function fadeInButtons(){
+    fadeIn($gameHUD, 0, "flex");
+  }
+
+  function fadeOutButtons(){
+    fadeOut($gameHUD, false);
+  }
 
   function showFeedback() {
     fadeIn($feedback);
@@ -567,7 +577,7 @@ function setUpGame() {
 //some utility functions for fading in and out using Greensock animation library (GSAP)
 function fadeIn(elem, delay, display = "block") {
   elem.style.display = display;
-  elem.style.opacity = 0;
+  //elem.style.opacity = 0;
   gsap.to(elem, {
     duration: 1,
     ease: "power1.inOut",
