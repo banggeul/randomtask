@@ -377,12 +377,12 @@ function setUpGame() {
         $gameHUD.style.pointerEvents = "none";
         //todo///////////////////////////////////
         //make the click feedback animation here
-        gsap.to(e.target, {
+        gsap.fromTo(e.target, {y:0},{
           duration:0.5,
           y:10
         })
         //then fade out the buttons
-        fadeOut($gameHUD, false, 0.5);
+        fadeOut($gameHUD, false, 1);
         ////////////////////////////////////////
         showFeedback();
       } else {
