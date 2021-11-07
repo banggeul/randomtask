@@ -40,9 +40,9 @@ let sequence = [];
 fetch('/sequence')
   .then((response) => {
     response.json().then((data) => {
-      for(let i in data){
+      for (let i in data) {
         let innerarray = [];
-        for(let j in data[i]){
+        for (let j in data[i]) {
           innerarray.push(data[i][j]);
         }
         sequence.push(innerarray);
@@ -92,7 +92,7 @@ function getUserContext() {
   experiment.gender = gender;
   experiment.imageSet = imageSet;
   experiment.sequenceSet = sequenceSet;
-  experiment.pValue = sequence[parseInt(sequenceSet)-1][41];
+  experiment.pValue = sequence[parseInt(sequenceSet) - 1][41];
 
   // console.log(experiment);
   //make sure the game view is all hidden
@@ -120,6 +120,9 @@ function setUpGame() {
         <div id="game-container">
         <!-- gameboard gets drawn here -->
           <div class="bunny" id="bunny"></div>
+          <div class="animContainer">
+            <img class="character2" id="character" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/183204/char.png">
+          </div>
         </div>
         <div id="game-HUD" class="game-HUD">
             <!-- carrot or no carrot button goes here -->
@@ -159,6 +162,8 @@ function setUpGame() {
   const $leftChoice = document.querySelector('#left');
   const $rightChoice = document.querySelector('#right');
   const $bunny = document.querySelector("#bunny");
+  var animation = document.getElementById("character");
+  animation.style.visibility = "hidden";
 
 
   const $feedback = document.querySelector('#feedback');
@@ -225,9 +230,9 @@ function setUpGame() {
     let x, y;
 
     //load the sequence to the environment variable
-    for (let i = 0; i < totalCards-1; i++) {
+    for (let i = 0; i < totalCards - 1; i++) {
       //get the sequence from the sequence set
-      let env = sequence[parseInt(experiment.sequenceSet)-1][i]
+      let env = sequence[parseInt(experiment.sequenceSet) - 1][i]
       environment.push(env);
     }
 
@@ -334,7 +339,7 @@ function setUpGame() {
     // card.style.transform = "scale(0.6,0.6)"
   }
 
-  function moveBunny(options){
+  function moveBunny(options) {
     gsap.to(".bunny", {
       x: options.x,
       y: options.y,
@@ -408,6 +413,27 @@ function setUpGame() {
     }
 
     $cards[currentCardNum - 1].setAttribute('data-env', env);
+    //hide the current card
+    $cards[currentCardNum - 1].style.visibility = "hidden";
+    //flip animation goes here
+    //set up the animation
+    var revealAnim = gsap.fromTo(animation,1,{autoAlpha:1},
+      {
+        autoAlpha: 1,
+        repeat:1,
+        x:-2250,
+        ease:SteppedEase.config(15),
+        onComplete:hideAnimation,
+        onCompleteParams:[animation, $cards[currentCardNum - 1]]
+      }
+    );
+    // //pause the animation
+    // revealAnim.pause();
+  }
+
+  function hideAnimation(elem1, elem2) {
+    elem1.style.visibility = "hidden";
+    elem2.style.visibility = "visible";
   }
 
   // function finishGame() {

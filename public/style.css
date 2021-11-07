@@ -196,6 +196,15 @@ input[type="radio"] {
   position: absolute;
 }
 
+.animContainer {
+      width: 150px;
+      height: 150px;
+      overflow: hidden;
+      position: absolute;
+      left:0;
+      top:0;
+}
+
 .currentCard {
   border: double red 10px;
 }
