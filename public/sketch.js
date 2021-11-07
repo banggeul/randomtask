@@ -379,7 +379,7 @@ function setUpGame() {
 
         //todo///////////////////////////////////
         //make the click feedback animation here
-        gsap.fromTo(e.target, 0.5, {y:0},{
+        gsap.fromTo(e.target, 0.3, {y:0},{
           y:10,
           yoyo: true,
           repeat:1,
@@ -397,6 +397,9 @@ function setUpGame() {
 
   function fadeInButtons(){
     fadeIn($gameHUD, 0, "flex");
+    //draw some border around the card
+    $cards[currentCardNum - 1].classList.remove('currentCard');
+    $cards[currentCardNum].classList.add('currentCard');
   }
 
   function fadeOutButtons(){
@@ -417,8 +420,8 @@ function setUpGame() {
     } else {
       moveAnimation();
       currentCardNum++;
-      $cards[currentCardNum - 1].classList.remove('currentCard');
-      $cards[currentCardNum].classList.add('currentCard');
+      // $cards[currentCardNum - 1].classList.remove('currentCard');
+      // $cards[currentCardNum].classList.add('currentCard');
       // setUpBunny();
       revealCard();
       moveUpBunny();
@@ -452,6 +455,8 @@ function setUpGame() {
     $cards[currentCardNum - 1].style.visibility = "hidden";
     //flip animation goes here
     //set up the animation
+    //make sure the animation has a baked in delay at the beginning to
+    //account for the button push time.
     if(currentCardNum > 1 ) {
       var revealAnim = gsap.fromTo($animation,1,{autoAlpha:1,x:0},
         {
