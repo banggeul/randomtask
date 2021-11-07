@@ -298,7 +298,7 @@ function setUpGame() {
     $animContainer.style.pointerEvents = "none";
     $animContainer.style.top = y + "px";
     $animContainer.style.left = x + "px";
-    $animContainer.style.transform = "translate(-50%, -50%)";
+    // $animContainer.style.transform = "translate(-50%, -50%)";
   }
 
   function setFirstBunny() {
