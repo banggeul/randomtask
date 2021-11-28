@@ -120,9 +120,11 @@ function setUpGame() {
         <div id="game-container">
         <!-- gameboard gets drawn here -->
           <div class="bunny" id="bunny"></div>
-          <div class="animContainer" id="animContainer">
+          <!-- <div class="animContainer" id="animContainer">
             <img class="character2" id="character" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/183204/char.png">
-          </div>
+          </div> -->
+          <canvas class="animContainer" id="canvas-carrot"></canvas>
+          <canvas class="animContainer" id="canvas-dirt"></canvas>
         </div>
         <div id="game-HUD" class="game-HUD">
             <!-- carrot or no carrot button goes here -->
@@ -162,10 +164,18 @@ function setUpGame() {
   const $leftChoice = document.querySelector('#left');
   const $rightChoice = document.querySelector('#right');
   const $bunny = document.querySelector("#bunny");
-  var $animation = document.getElementById("character");
-  var $animContainer = document.getElementById("animContainer");
-  $animation.style.visibility = "hidden";
-
+  // var $animation = document.getElementById("character");
+  // var $animContainer = document.getElementById("animContainer");
+  // $animation.style.visibility = "hidden";
+  let $canvas_carrot = document.querySelector("#canvas-carrot");
+  let $canvas_dirt = document.querySelector("#canvas-dirt");
+  let context_c = canvas_carrot.getContext("2d");
+  let context_d = canvas_dirt.getContext("2d");
+  let resolution = window.devicePixelRatio || 1;
+  let tl_c, tl_d;
+  let vw, vh, cx, cy;
+  let animationWidth = 250;
+  let animationHeight = 218;
 
   const $feedback = document.querySelector('#feedback');
 
@@ -180,6 +190,9 @@ function setUpGame() {
   //hide the thank you screen
   $thanks.style.display = "none";
   $thanks.style.opacity = 0;
+
+  let bunnyX = 85;
+  let bunnyY = 75;
 
   setUpGameBoard();
   setFirstBunny();
@@ -242,14 +255,21 @@ function setUpGame() {
       //get the sequence from the sequence set
       let env = environment[i];
 
-      if (x > 1000) {
-        col = 1;
-        row++;
-      }
+      //this is the test set up//
+      // if (x > 1000) {
+      //   col = 1;
+      //   row++;
+      // }
+      //
+      // x = (cardWidth) * col + 20;
+      // y = row * (cardWidth) + 10;
+      // col++;
+      ///////////////////////////
 
-      x = (cardWidth) * col + 20;
-      y = row * (cardWidth) + 10;
-      col++;
+      //get the card positions from the json file//
+      x = cardPositions[i].x;
+      y = cardPositions[i].y;
+
       let $card = drawBGCard({
         x: x,
         y: y,
@@ -276,8 +296,8 @@ function setUpGame() {
     let $current = $cards[currentCardNum];
     let bunnyPosition = $current.getBoundingClientRect();
     // console.log($current);
-    let x = bunnyPosition.x + bunnyPosition.width / 2 - 85;
-    let y = bunnyPosition.y + bunnyPosition.height / 2 - 75;
+    let x = bunnyPosition.x + bunnyPosition.width / 2 - bunnyX;
+    let y = bunnyPosition.y + bunnyPosition.height / 2 - bunnyY;
     let duration = 1;
     let delay = 2;
     moveBunny({
@@ -292,19 +312,20 @@ function setUpGame() {
     let $current = $cards[currentCardNum];
     let animPosition = $current.getBoundingClientRect();
     // console.log($current);
-    let x = animPosition.x + animPosition.width / 2 - 85;
-    let y = animPosition.y + animPosition.height / 2 - 75;
+    let x = animPosition.x + animPosition.width / 2 - bunnyX;
+    let y = animPosition.y + animPosition.height / 2 - bunnyY;
 
-    $animContainer.style.pointerEvents = "none";
-    $animContainer.style.top = y + "px";
-    $animContainer.style.left = x + "px";
+    $canvas_carrot.style.pointerEvents = "none";
+    $canvas_carrot.style.top = y + "px";
+    $canvas_carrot.style.left = x + "px";
+    $canvas_carrot.style.visibility = "hidden";
     // $animContainer.style.transform = "translate(-50%, -50%)";
   }
 
   function setFirstBunny() {
     drawBunny({
-      x: 85,
-      y: 75
+      x: bunnyX,
+      y: bunnyY
     });
   }
 
@@ -338,8 +359,9 @@ function setUpGame() {
     $gameContainer.append(card);
     card.style.top = options.y + "px";
     card.style.left = options.x + "px";
-    card.style.opacity = 0.6;
-    card.style.transform = "scale(0.6,0.6)"
+    card.style.transform = "translate(-50%, -50%)";
+    //card.style.opacity = 0.6;
+    // card.style.transform = "scale(0.6,0.6)"
     card.setAttribute('data-index', options.id);
     return card;
   }
@@ -458,19 +480,20 @@ function setUpGame() {
     //make sure the animation has a baked in delay at the beginning to
     //account for the button push time.
     if(currentCardNum > 1 ) {
-      var revealAnim = gsap.fromTo($animation,1,{autoAlpha:1,x:0},
-        {
-          autoAlpha: 1,
-          repeat:1,
-          x:-2250,
-          ease:SteppedEase.config(15),
-          onComplete:hideAnimation,
-          onCompleteParams:[$animation, $cards[currentCardNum - 1]]
-        }
-      );
-      // //pause the animation
-      revealAnim.pause();
-      revealAnim.restart();
+      // var revealAnim = gsap.fromTo($animation,1,{autoAlpha:1,x:0},
+      //   {
+      //     autoAlpha: 1,
+      //     repeat:1,
+      //     x:-2250,
+      //     ease:SteppedEase.config(15),
+      //     onComplete:hideAnimation,
+      //     onCompleteParams:[$animation, $cards[currentCardNum - 1]]
+      //   }
+      // );
+      // // //pause the animation
+      // revealAnim.pause();
+      // revealAnim.restart();
+      playAnimation(env);
     }
 
   }
@@ -479,6 +502,134 @@ function setUpGame() {
     elem1.style.visibility = "hidden";
     elem2.style.visibility = "visible";
   }
+  //animation codes
+  resize($canvas_dirt);
+  resize($canvas_carrot);
+
+  let carrot = {
+    rotation: 0,
+    frame: 0,
+    x: -animationWidth / 2,
+    y: -animationHeight / 2
+  };
+
+  let dirt = {
+    rotation: 0,
+    frame: 0,
+    x: -animationWidth / 2,
+    y: -animationHeight / 2
+  };
+
+  let sprite_c = new Image();
+  sprite_c.onload = initCarrot;
+  sprite_c.src = "animations/carrot.png";
+
+  let sprite_d = new Image();
+  sprite_d.onload = initDirt;
+  sprite_d.src = "animations/dirt.png";
+
+  // window.addEventListener("resize", resizeCarrot);
+
+  function initCarrot() {
+    tl_c = gsap.timeline({ onUpdate: updateCarrot, onComplete: carrotFinished })
+      .to(carrot, { frame: carrot_frames.length - 1, roundProps: "frame", repeat: 0, ease: "none", duration: 1 }, 0);
+  }
+
+  function initDirt() {
+    tl_d = gsap.timeline({ onUpdate: updateDirt, onComplete: dirtFinished })
+        .to(dirt, { frame: dirt_frames.length - 1, roundProps: "frame", repeat: 0, ease: "none", duration: 1 }, 0);
+  }
+
+  function updateCarrot() {
+
+    let frame = carrot_frames[carrot.frame];
+
+    let f = frame.frame;
+    let s = frame.spriteSourceSize;
+    // let r = frame.rotated;
+
+    let x = carrot.x + s.x;
+    let y = carrot.y + s.y;
+
+    // console.log(f);
+
+    context_c.save();
+    context_c.clearRect(0, 0, vw, vh);
+    context_c.translate(cx, cy);
+    context_c.drawImage(sprite_c, f.x, f.y, f.w, f.h, x, y, f.w, f.h);
+    context_c.restore();
+  }
+
+  function updateDirt() {
+
+    let frame = dirt_frames[dirt.frame];
+
+    let f = frame.frame;
+    let s = frame.spriteSourceSize;
+    // let r = frame.rotated;
+
+    let x = dirt.x + s.x;
+    let y = dirt.y + s.y;
+
+    // console.log(f);
+
+    context_d.save();
+    context_d.clearRect(0, 0, vw, vh);
+    context_d.translate(cx, cy);
+    context_d.drawImage(sprite_d, f.x, f.y, f.w, f.h, x, y, f.w, f.h);
+    context_d.restore();
+  }
+
+  function carrotFinished(){
+    console.log("carrot finished");
+    $canvas_carrot.style.visibility = "hidden";
+    $cards[currentCardNum - 1].style.visibility = "visible";
+  }
+
+  function dirtFinished(){
+    console.log("dirt finished");
+    $canvas_dirt.style.visibility = "hidden";
+    $cards[currentCardNum - 1].style.visibility = "visible";
+  }
+
+  function resize(canvas) {
+    vw = animationWidth;
+    vh = animationHeight;
+
+    cx = vw / 2;
+    cy = vh / 2;
+
+    canvas.width  = vw * resolution;
+    canvas.height = vh * resolution;
+
+    canvas.style.width  = vw + "px";
+    canvas.style.height = vh + "px";
+
+    canvas.getContext("2d").scale(resolution, resolution);
+
+    // console.log(resolution)
+  }
+
+  function playAnimation(mode) {
+    if(mode==1) {
+      tl_c.restart();
+      // canvas_carrot.style.display = "block";
+      canvas_carrot.style.visibility = "visible";
+    } else {
+      tl_d.restart();
+      // canvas_dirt.style.display = "block";
+      canvas_dirt.style.visibility = "visible";
+    }
+  }
+
+  function showAnimation(){
+    if(Math.random() < 0.5){
+      playAnimation(1);
+    }else{
+      playAnimation(0);
+    }
+  }
+
   //these are not functioning since these buttons are hidden
   //but left here just in case we bring back the feature
   $submitButton.addEventListener('click', function(e) {
@@ -528,19 +679,20 @@ function setUpGame() {
     //flip animation goes here
     //set up the animation
     if(currentCardNum > 1 ) {
-      var revealAnim = gsap.fromTo($animation,1,{autoAlpha:1,x:0},
-        {
-          autoAlpha: 1,
-          repeat:1,
-          x:-2250,
-          ease:SteppedEase.config(15),
-          onComplete:hideAnimation,
-          onCompleteParams:[$animation, $cards[currentCardNum - 1]]
-        }
-      );
-      // //pause the animation
-      revealAnim.pause();
-      revealAnim.restart();
+      // var revealAnim = gsap.fromTo($animation,1,{autoAlpha:1,x:0},
+      //   {
+      //     autoAlpha: 1,
+      //     repeat:1,
+      //     x:-2250,
+      //     ease:SteppedEase.config(15),
+      //     onComplete:hideAnimation,
+      //     onCompleteParams:[$animation, $cards[currentCardNum - 1]]
+      //   }
+      // );
+      // // //pause the animation
+      // revealAnim.pause();
+      // revealAnim.restart();
+      playAnimation(env);
     }
     $cards[currentCardNum - 1].classList.remove('currentCard');
     console.log("game finished");
@@ -613,14 +765,6 @@ function enable(elem) {
   elem.style.pointerEvents = "auto";
 }
 
-// function isInside(x, y, rect) {
-//   if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
-//     return true;
-//   }
-//
-//   return false;
-// }
-
 function mapRange(num, in_min, in_max, out_min, out_max) {
   return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
@@ -628,38 +772,3 @@ function mapRange(num, in_min, in_max, out_min, out_max) {
 function timeout(ms) {
   return new Promise(res => setTimeout(res, ms));
 }
-// //dots play back function
-// //not used right now but left here just in case
-// async function replay(data, $gameView) {
-//   $gameView.style.pointerEvents = "none";
-//   // console.log(data);
-//   let dTime = 0;
-//   [...$gameView.children].forEach((dot) => {
-//     dot.style.display = "none";
-//     dot.style.opacity = 0;
-//     dot.remove();
-//   });
-//
-//   await timeout(500);
-//
-//   data.forEach(d => {
-//     const playback = setTimeout(function() {
-//       createDot(d.position, $gameView, false, false);
-//     }, d.time - data[0].time);
-//     dTime = d.time - data[0].time;
-//   })
-//
-//   const done = setTimeout(function() {
-//
-//     [...$gameView.children].forEach((dot) => {
-//       dot.style.display = "unset";
-//       dot.style.opacity = .9;
-//     });
-//
-//     document.querySelector('#playback').classList.remove('disabled');
-//     document.querySelector('#submit').innerHTML = "Reset";
-//     document.querySelector('#submit').classList.remove('disabled');
-//
-//   }, dTime + 500);
-//
-// }
