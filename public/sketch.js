@@ -414,7 +414,8 @@ function setUpGame() {
           y:10,
           yoyo: true,
           repeat:1,
-          onComplete: fadeOutButtons
+          onComplete: fadeOutButtons,
+          onCompleteParams: e.target
         })
         //then fade out the buttons
         //fadeOut($gameHUD, false, 1);
@@ -433,12 +434,22 @@ function setUpGame() {
     $cards[currentCardNum].classList.add('currentCard');
   }
 
-  function fadeOutButtons(){
+  function fadeOutButtons(e.target){
     //fadeOut($gameHUD, false);
     if(currentCardNum < totalCards - 1)
     {
       fadeOutShowOptions();
     }
+  }
+
+  function fadeOutShowOptions(elem, delay=0) {
+    gsap.to(elem, {
+      duration: 1,
+      delay: delay,
+      ease: "power1.inOut",
+      opacity: 0,
+      onComplete: generateNextOptions
+    });
   }
 
   function showFeedback() {
@@ -749,15 +760,6 @@ function setUpGame() {
   //some utility functions for fading in and out using Greensock animation library (GSAP)
 
 
-  function fadeOutShowOptions(elem, delay=0) {
-    gsap.to(elem, {
-      duration: 1,
-      delay: delay,
-      ease: "power1.inOut",
-      opacity: 0,
-      onComplete: generateNextOptions
-    });
-  }
 
 
 }
