@@ -207,7 +207,7 @@ canvas.animContainer {
 }
 
 .currentCard {
-  border: double red 10px;
+  /* border: double red 10px; */
 }
 
 .bunny {
