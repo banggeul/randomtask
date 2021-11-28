@@ -747,29 +747,7 @@ function setUpGame() {
 
   ////////////
   //some utility functions for fading in and out using Greensock animation library (GSAP)
-  function fadeIn(elem, delay, display = "block") {
-    elem.style.display = display;
-    //elem.style.opacity = 0;
-    gsap.to(elem, {
-      duration: 1,
-      ease: "power1.inOut",
-      opacity: 1,
-      delay: delay,
-      onComplete: enable,
-      onCompleteParams: [elem]
-    });
-  }
 
-  function fadeOut(elem, hide, delay = 0) {
-    gsap.to(elem, {
-      duration: 1,
-      delay: delay,
-      ease: "power1.inOut",
-      opacity: 0,
-      onComplete: hide ? hideElem : null,
-      onCompleteParams: [elem]
-    });
-  }
 
   function fadeOutShowOptions(elem, delay=0) {
     gsap.to(elem, {
@@ -781,19 +759,45 @@ function setUpGame() {
     });
   }
 
-  function hideElem(elem) {
-    elem.style.display = "none";
-  }
 
-  function enable(elem) {
-    elem.style.pointerEvents = "auto";
-  }
+}
 
-  function mapRange(num, in_min, in_max, out_min, out_max) {
-    return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-  }
+function fadeIn(elem, delay, display = "block") {
+  elem.style.display = display;
+  //elem.style.opacity = 0;
+  gsap.to(elem, {
+    duration: 1,
+    ease: "power1.inOut",
+    opacity: 1,
+    delay: delay,
+    onComplete: enable,
+    onCompleteParams: [elem]
+  });
+}
 
-  function timeout(ms) {
-    return new Promise(res => setTimeout(res, ms));
-  }
+function fadeOut(elem, hide, delay = 0) {
+  gsap.to(elem, {
+    duration: 1,
+    delay: delay,
+    ease: "power1.inOut",
+    opacity: 0,
+    onComplete: hide ? hideElem : null,
+    onCompleteParams: [elem]
+  });
+}
+
+function hideElem(elem) {
+  elem.style.display = "none";
+}
+
+function enable(elem) {
+  elem.style.pointerEvents = "auto";
+}
+
+function mapRange(num, in_min, in_max, out_min, out_max) {
+  return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
+function timeout(ms) {
+  return new Promise(res => setTimeout(res, ms));
 }
