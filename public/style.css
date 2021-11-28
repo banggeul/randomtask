@@ -247,7 +247,7 @@ canvas.animContainer {
 
 .choice-card:active {
   /* border: 2px red solid; */
-  background-position: 340px 0;
+  background-position: 50% 0;
 }
 
 div[data-choice='0'] {
