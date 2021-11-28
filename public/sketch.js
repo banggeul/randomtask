@@ -562,7 +562,7 @@ function setUpGame() {
 
   function initCarrot() {
     tl_c = gsap.timeline({ onUpdate: updateCarrot, onComplete: carrotFinished })
-      .to(carrot, { frame: carrot_frames.length - 1, roundProps: "frame", repeat: 0, ease: "none", duration: 1 }, 0);
+      .to(carrot, { frame: carrot_frames.length - 1, roundProps: "frame", repeat: 0, ease: "none", duration: 1, delay:0.3 }, 0);
     tl_c.pause();
   }
 
