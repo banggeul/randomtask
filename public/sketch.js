@@ -348,6 +348,8 @@ function setUpGame() {
     let right = r > 0.5 ? 0 : 1;
     $leftChoice.setAttribute('data-choice', left);
     $rightChoice.setAttribute('data-choice', right);
+    $leftChoice.classList.remove('activeChoiceCard');
+    $rightChoice.classList.remove('activeChoiceCard');
     console.log("show the cards to click");
     console.log("leftChoice: " + left + ", rightChoice: " + right);
     //fade in the game hud - where the option buttons are drawn with 2 second delay
@@ -407,6 +409,10 @@ function setUpGame() {
         choices = [...choices, parseInt(choice)];
         //choices.push[choice];
         console.log("choice has been made: " + choice );
+        //add the class to the activeChoiceCard
+        //don't forget to remove this when you generate the card
+        e.target.classList.add("activeChoiceCard");
+
         moveNext();
         //todo///////////////////////////////////
         //make the click feedback animation here

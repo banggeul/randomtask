@@ -255,6 +255,16 @@ canvas.animContainer {
   background-position: 100% 0;
 }
 
+.activeChoiceCard {
+  /* border: 2px red solid; */
+  background-position: 100% 0;
+}
+
+.inactiveChoiceCard {
+  /* border: 2px red solid; */
+  background-position: 0 0;
+}
+
 div[data-choice='0'] {
   /* background-color: red; */
   /* this should be the clickable card face */
