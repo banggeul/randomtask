@@ -434,11 +434,11 @@ function setUpGame() {
     $cards[currentCardNum].classList.add('currentCard');
   }
 
-  function fadeOutButtons(e.target){
+  function fadeOutButtons(elem){
     //fadeOut($gameHUD, false);
     if(currentCardNum < totalCards - 1)
     {
-      fadeOutShowOptions();
+      fadeOutShowOptions(elem);
     }
   }
 
