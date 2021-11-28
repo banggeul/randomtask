@@ -194,7 +194,9 @@ input[type="radio"] {
   height: 218px;
   /* background: rgba(255,200,200,1); */
   position: absolute;
-  background-image: url(animations/cardBackUntrimmed.png);
+  background-image: url(animations/cardBackTrimmed.png);
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 canvas.animContainer {
@@ -204,7 +206,7 @@ canvas.animContainer {
       position: absolute;
       left:0;
       top:0;
-      transform: translate(-50%, -50%);
+      /* transform: translate(-50%, -50%); */
 }
 
 .currentCard {
@@ -250,12 +252,16 @@ div[data-choice="1"] {
 
 div[data-env="0"]{
   /* background-color: green; */
-  background-image: url(animations/dirtCardStillUntrimmed.png);
+  background-image: url(animations/dirtCardStillTrimmed.png);
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 div[data-env="1"]{
   /* background-color: orange; */
-  background-image: url(animations/carrotCardStilluntrimmed.png);
+  background-image: url(animations/carrotCardStillTrimmed.png);
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 
