@@ -508,8 +508,8 @@ function setUpGame() {
     elem2.style.visibility = "visible";
   }
   //animation codes
-  resize($canvas_dirt);
-  resize($canvas_carrot);
+  // resize($canvas_dirt);
+  // resize($canvas_carrot);
 
   let carrot = {
     rotation: 0,
