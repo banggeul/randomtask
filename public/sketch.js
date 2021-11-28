@@ -171,7 +171,7 @@ function setUpGame() {
   let $canvas_dirt = document.querySelector("#canvas-dirt");
   let context_c = $canvas_carrot.getContext("2d");
   let context_d = $canvas_dirt.getContext("2d");
-  let resolution = window.devicePixelRatio || 1;
+  let resolution = 1; //window.devicePixelRatio || 1;
   let tl_c, tl_d;
   let vw, vh, cx, cy;
   let animationWidth = 250;
@@ -533,11 +533,13 @@ function setUpGame() {
   function initCarrot() {
     tl_c = gsap.timeline({ onUpdate: updateCarrot, onComplete: carrotFinished })
       .to(carrot, { frame: carrot_frames.length - 1, roundProps: "frame", repeat: 0, ease: "none", duration: 1 }, 0);
+    tl_c.pause();
   }
 
   function initDirt() {
     tl_d = gsap.timeline({ onUpdate: updateDirt, onComplete: dirtFinished })
         .to(dirt, { frame: dirt_frames.length - 1, roundProps: "frame", repeat: 0, ease: "none", duration: 1 }, 0);
+    tl_d.pause();
   }
 
   function updateCarrot() {
