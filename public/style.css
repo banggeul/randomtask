@@ -208,7 +208,7 @@ canvas.animContainer {
       position: absolute;
       left:0;
       top:0;
-      transform: translate(-14%, -12%);
+      transform: translate(-15%, -12%);
 }
 
 .currentCard {
