@@ -343,7 +343,7 @@ function setUpGame() {
     // $gameHUD.style.opacity = 1;
     let r = Math.random();
     let left = r > 0.5 ? 1 : 0;
-    let right = r > 0.5 ? 0 : 0;
+    let right = r > 0.5 ? 0 : 1;
     $leftChoice.setAttribute('data-choice', left);
     $rightChoice.setAttribute('data-choice', right);
     console.log("show the cards to click");
