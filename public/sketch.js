@@ -444,7 +444,7 @@ function setUpGame() {
   function fadeOutShowOptions() {
     gsap.to($gameHUD, {
       duration: 1,
-      delay: delay,
+      delay: 0,
       ease: "power1.inOut",
       opacity: 0,
       onComplete: generateNextOptions
