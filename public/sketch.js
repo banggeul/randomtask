@@ -319,6 +319,11 @@ function setUpGame() {
     $canvas_carrot.style.top = y + "px";
     $canvas_carrot.style.left = x + "px";
     $canvas_carrot.style.visibility = "hidden";
+
+    $canvas_dirt.style.pointerEvents = "none";
+    $canvas_dirt.style.top = y + "px";
+    $canvas_dirt.style.left = x + "px";
+    $canvas_dirt.style.visibility = "hidden";
     // $animContainer.style.transform = "translate(-50%, -50%)";
   }
 
