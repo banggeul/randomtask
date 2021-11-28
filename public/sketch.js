@@ -169,8 +169,8 @@ function setUpGame() {
   // $animation.style.visibility = "hidden";
   let $canvas_carrot = document.querySelector("#canvas-carrot");
   let $canvas_dirt = document.querySelector("#canvas-dirt");
-  let context_c = canvas_carrot.getContext("2d");
-  let context_d = canvas_dirt.getContext("2d");
+  let context_c = $canvas_carrot.getContext("2d");
+  let context_d = $canvas_dirt.getContext("2d");
   let resolution = window.devicePixelRatio || 1;
   let tl_c, tl_d;
   let vw, vh, cx, cy;
