@@ -773,7 +773,7 @@ function fadeOut(elem, hide, delay = 0) {
   });
 }
 
-function fadeOutShowOptions(elem) {
+function fadeOutShowOptions(elem, delay=0) {
   gsap.to(elem, {
     duration: 1,
     delay: delay,
