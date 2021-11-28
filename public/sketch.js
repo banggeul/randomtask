@@ -415,7 +415,7 @@ function setUpGame() {
           yoyo: true,
           repeat:1,
           onComplete: fadeOutButtons,
-          onCompleteParams: e.target
+          onCompleteParams: $gameHUD
         })
         //then fade out the buttons
         //fadeOut($gameHUD, false, 1);
