@@ -208,8 +208,9 @@ canvas.animContainer {
       position: absolute;
       left:0;
       top:0;
-      transform: translate(-16%, -12%);
       z-index: 100;
+      /* this is a hack - not sure why it doesnt line up correctly */
+      transform: translate(-16%, -12%);
 }
 
 .currentCard {

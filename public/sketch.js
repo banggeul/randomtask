@@ -342,10 +342,8 @@ function setUpGame() {
     //show the cards
     // $gameHUD.style.opacity = 1;
     let r = Math.random();
-
     $leftChoice.setAttribute('data-choice', r > 0.5 ? 1 : 0);
     $rightChoice.setAttribute('data-choice', r > 0.5 ? 0 : 1);
-
     //fade in the game hud - where the option buttons are drawn with 2 second delay
     // fadeIn($gameHUD, 2.5, "flex");
   }
@@ -402,8 +400,8 @@ function setUpGame() {
         // console.log("choice: " + choice);
         choices = [...choices, parseInt(choice)];
         //choices.push[choice];
+        console.log("choice has been made");
         moveNext();
-
         //todo///////////////////////////////////
         //make the click feedback animation here
         gsap.fromTo(e.target, 0.3, {y:0},{
@@ -454,6 +452,7 @@ function setUpGame() {
       moveUpBunny();
       //show the buttons
       showOptions();
+      console.log("show the cards to click");
     }
 
   }
