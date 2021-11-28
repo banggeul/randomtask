@@ -338,7 +338,7 @@ function setUpGame() {
     $cards[0].setAttribute('data-env', environment[0]);
   }
 
-  function showOptions() {
+  function generateNextOptions() {
     //show the cards
     // $gameHUD.style.opacity = 1;
     //to do tomorrow!!!!
@@ -434,10 +434,10 @@ function setUpGame() {
   }
 
   function fadeOutButtons(){
-    fadeOut($gameHUD, false);
+    //fadeOut($gameHUD, false);
     if(currentCardNum < totalCards - 1)
     {
-      showOptions();
+      fadeOutShowOptions();
     }
   }
 
@@ -770,6 +770,16 @@ function fadeOut(elem, hide, delay = 0) {
     opacity: 0,
     onComplete: hide ? hideElem : null,
     onCompleteParams: [elem]
+  });
+}
+
+function fadeOutShowOptions(elem) {
+  gsap.to(elem, {
+    duration: 1,
+    delay: delay,
+    ease: "power1.inOut",
+    opacity: 0,
+    onComplete: generateNextOptions
   });
 }
 
