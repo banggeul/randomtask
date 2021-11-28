@@ -397,7 +397,7 @@ function setUpGame() {
 
   //event listeners
   $choiceCards.forEach(function(userItem) {
-    userItem.addEventListener('mousedown', function(e) {
+    userItem.addEventListener('touchstart', function(e) {
       e.preventDefault();
       $gameHUD.style.pointerEvents = "none";
       // console.log("current card number: " + currentCardNum);
