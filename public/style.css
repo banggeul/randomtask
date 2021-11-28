@@ -238,13 +238,13 @@ canvas.animContainer {
 div[data-choice='0'] {
   background-color: red;
   /* this should be the clickable card face */
-  background-image: url(dirtCardStillUntrimmed.png);
+  /* background-image: url(dirtCardStillUntrimmed.png); */
 }
 
 div[data-choice="1"] {
   background-color: green;
   /* this should be the clickable card face */
-  background-image: url(carrotCardStilluntrimmed.png);
+  /* background-image: url(carrotCardStilluntrimmed.png); */
 }
 
 div[data-env="0"]{

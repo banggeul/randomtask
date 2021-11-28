@@ -616,11 +616,11 @@ function setUpGame() {
     if(mode==1) {
       tl_c.restart();
       // canvas_carrot.style.display = "block";
-      canvas_carrot.style.visibility = "visible";
+      $canvas_carrot.style.visibility = "visible";
     } else {
       tl_d.restart();
       // canvas_dirt.style.display = "block";
-      canvas_dirt.style.visibility = "visible";
+      $canvas_dirt.style.visibility = "visible";
     }
   }
 
