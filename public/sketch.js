@@ -359,7 +359,7 @@ function setUpGame() {
       card.classList.remove('currentCard');
     }
 
-    card.innerHTML = options.env;
+    // card.innerHTML = options.env;
     card.style.pointerEvents = "none";
     $gameContainer.append(card);
     card.style.top = options.y + "px";
