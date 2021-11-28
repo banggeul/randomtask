@@ -341,6 +341,8 @@ function setUpGame() {
   function showOptions() {
     //show the cards
     // $gameHUD.style.opacity = 1;
+    //to do tomorrow!!!!
+    //this needs to happen after the cards are completely faded out
     let r = Math.random();
     let left = r > 0.5 ? 1 : 0;
     let right = r > 0.5 ? 0 : 1;
@@ -433,6 +435,10 @@ function setUpGame() {
 
   function fadeOutButtons(){
     fadeOut($gameHUD, false);
+    if(currentCardNum < totalCards - 1)
+    {
+      showOptions();
+    }
   }
 
   function showFeedback() {
@@ -455,7 +461,7 @@ function setUpGame() {
       revealCard();
       moveUpBunny();
       //show the buttons
-      showOptions();
+      // showOptions();
 
     }
 
