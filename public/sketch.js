@@ -414,8 +414,7 @@ function setUpGame() {
           y:10,
           yoyo: true,
           repeat:1,
-          onComplete: fadeOutButtons,
-          onCompleteParams: $gameHUD
+          onComplete: fadeOutShowOptions
         })
         //then fade out the buttons
         //fadeOut($gameHUD, false, 1);
@@ -442,8 +441,8 @@ function setUpGame() {
     }
   }
 
-  function fadeOutShowOptions(elem, delay=0) {
-    gsap.to(elem, {
+  function fadeOutShowOptions() {
+    gsap.to($gameHUD, {
       duration: 1,
       delay: delay,
       ease: "power1.inOut",
