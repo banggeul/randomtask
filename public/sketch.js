@@ -508,8 +508,6 @@ function setUpGame() {
   }
 
 
-
-
   function hideAnimation(elem1, elem2) {
     elem1.style.visibility = "hidden";
     elem2.style.visibility = "visible";

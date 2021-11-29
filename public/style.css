@@ -213,6 +213,7 @@ canvas.animContainer {
       z-index: 100;
       /* this is a hack - not sure why it doesnt line up correctly */
       transform: translate(-50%, -46%);
+      visibility: hidden;
 }
 
 .currentCard {
