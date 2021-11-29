@@ -285,7 +285,7 @@ function setUpGame() {
     let bunnyPosition = $current.getBoundingClientRect();
     // console.log($current);
     let x = bunnyPosition.x + bunnyPosition.width / 2 - bunnyX;
-    let y = bunnyPosition.y + bunnyPosition.height / 2 - bunnyY*1.75;
+    let y = bunnyPosition.y + bunnyPosition.height / 2 - bunnyY*1.6;
     let duration = 1;
     let delay = 2;
     moveBunny({
