@@ -386,9 +386,8 @@ function setUpGame() {
     //make sure the animation has a baked in delay at the beginning to
     //account for the button push time.
     $cards[currentCardNum].style.visibility = "hidden";
-    $cards[currentCardNum].setAttribute('data-env', env);
+    // $cards[currentCardNum].setAttribute('data-env', env);
     //hide the current card
-
     playAnimation(env);
   }
 
@@ -597,10 +596,14 @@ function setUpGame() {
 
   function carrotFinished(){
     console.log("carrot finished");
+    const index = $cards[currentCardNum-1].dataset.index;
+    //get the environment
+    const env = environment[parseInt(index)];
     $canvas_carrot.style.visibility = "hidden";
     if(currentCardNum == 0) {
       $cards[0].style.visibility = "visible";
     } else {
+      $cards[currentCardNum - 1].setAttribute('data-env', env);
       $cards[currentCardNum - 1].style.visibility = "visible";
     }
 
@@ -608,10 +611,14 @@ function setUpGame() {
 
   function dirtFinished(){
     console.log("dirt finished");
+    const index = $cards[currentCardNum-1].dataset.index;
+    //get the environment
+    const env = environment[parseInt(index)];
     $canvas_dirt.style.visibility = "hidden";
     if(currentCardNum == 0) {
       $cards[0].style.visibility = "visible";
     } else {
+      $cards[currentCardNum - 1].setAttribute('data-env', env);
       $cards[currentCardNum - 1].style.visibility = "visible";
     }
   }
