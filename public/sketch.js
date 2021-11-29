@@ -532,7 +532,7 @@ function setUpGame() {
 
   let sprite_c = new Image();
   sprite_c.onload = initCarrot;
-  sprite_c.src = "animations/cards/yellowCarrot_test.png";
+  sprite_c.src = "animations/cards/yellowCarrot.png";
 
   let sprite_d = new Image();
   sprite_d.onload = initDirt;
@@ -542,13 +542,13 @@ function setUpGame() {
 
   function initCarrot() {
     tl_c = gsap.timeline({ onUpdate: updateCarrot, onComplete: carrotFinished, paused:true })
-      .to(carrot, { frame: carrot_frames.length - 1, roundProps: "frame", repeat: 0, ease: "none", duration: 2, delay:0.5 }, 0);
+      .to(carrot, { frame: carrot_frames.length - 1, roundProps: "frame", repeat: 0, ease: "none", duration: 1, delay:0.5 }, 0);
     // tl_c.pause();
   }
 
   function initDirt() {
     tl_d = gsap.timeline({ onUpdate: updateDirt, onComplete: dirtFinished, paused:true })
-        .to(dirt, { frame: dirt_frames.length - 1, roundProps: "frame", repeat: 0, ease: "none", duration: 2, delay:0.5 }, 0);
+        .to(dirt, { frame: dirt_frames.length - 1, roundProps: "frame", repeat: 0, ease: "none", duration: 1, delay:0.5 }, 0);
     // tl_d.pause();
   }
 
@@ -750,7 +750,7 @@ function setUpGame() {
     console.log("data logged");
     //fade in the thank you with half second delay
     fadeIn($thanks, .5);
-    
+
     setTimeout(function() {
       window.location.reload(1);
     }, 3000);
