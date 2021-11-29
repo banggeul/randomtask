@@ -228,14 +228,6 @@ function setUpGame() {
     };
   })
 
-  // setUpGameBoard();
-  // setUpBunny();
-  // showOptions();
-  // $gameView.addEventListener('touchstart', () => {});
-  // $gameView.addEventListener('touchend', () => {});
-  // $gameView.addEventListener('touchcancel', () => {});
-  // $gameView.addEventListener('touchmove', () => {});
-  //gameview clicks
 
   //set up gameboard
   function setUpGameBoard() {
@@ -312,8 +304,8 @@ function setUpGame() {
     let $current = $cards[currentCardNum];
     let animPosition = $current.getBoundingClientRect();
     // console.log($current);
-    let x = animPosition.x + animPosition.width / 2 - bunnyX;
-    let y = animPosition.y + animPosition.height / 2 - bunnyY;
+    let x = animPosition.x + animPosition.width / 2;// - bunnyX;
+    let y = animPosition.y + animPosition.height / 2;// - bunnyY;
 
     $canvas_carrot.style.pointerEvents = "none";
     $canvas_carrot.style.top = y + "px";
@@ -335,9 +327,10 @@ function setUpGame() {
   }
 
   function revealFirstCard() {
-    $cards[0].setAttribute('data-env', environment[0]);
-    $cards[0].style.visibility = "hidden";
     moveAnimation();
+    $cards[0].setAttribute('data-env', environment[0]);
+    $cards[0].innerHTML = "FIRST";
+    // $cards[0].style.visibility = "hidden";
     playAnimation(environment[0]);
   }
 
@@ -402,7 +395,7 @@ function setUpGame() {
 
   //event listeners
   $choiceCards.forEach(function(userItem) {
-    userItem.addEventListener('touchstart', function(e) {
+    userItem.addEventListener('click', function(e) {
       e.preventDefault();
       $gameHUD.style.pointerEvents = "none";
       // console.log("current card number: " + currentCardNum);
