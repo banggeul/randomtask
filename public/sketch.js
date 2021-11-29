@@ -326,7 +326,7 @@ function setUpGame() {
     let animPosition = $current.getBoundingClientRect();
     // console.log($current);
     let x = animPosition.x + animPosition.width / 2 - 83;
-    let y = animPosition.y + animPosition.height / 2 - 110;
+    let y = animPosition.y + animPosition.height / 2 - 90;
 
     $canvas_carrot.style.pointerEvents = "none";
     $canvas_carrot.style.top = y + "px";
@@ -449,8 +449,8 @@ function setUpGame() {
   function fadeInButtons(){
     fadeIn($gameHUD, 0, "flex");
     //draw some border around the card
-    $cards[currentCardNum - 1].classList.remove('currentCard');
-    $cards[currentCardNum].classList.add('currentCard');
+    // $cards[currentCardNum - 1].classList.remove('currentCard');
+    // $cards[currentCardNum].classList.add('currentCard');
   }
 
   function fadeOutButtons(elem){
