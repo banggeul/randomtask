@@ -198,7 +198,7 @@ function setUpGame() {
   setFirstBunny();
   // showOptions();
   fadeIn($bunny, 0.5);
-  // revealFirstCard();
+  revealFirstCard();
 
   //make sure the game view is 100% of the screen height
   // $gameView.style.height = window.innerHeight + "px";
@@ -304,8 +304,8 @@ function setUpGame() {
     let $current = $cards[currentCardNum];
     let animPosition = $current.getBoundingClientRect();
     // console.log($current);
-    let x = animPosition.x + animPosition.width / 2;// - bunnyX;
-    let y = animPosition.y + animPosition.height / 2;// - bunnyY;
+    let x = animPosition.x + animPosition.width / 2 - 83;
+    let y = animPosition.y + animPosition.height / 2 - 110;
 
     $canvas_carrot.style.pointerEvents = "none";
     $canvas_carrot.style.top = y + "px";
@@ -327,9 +327,9 @@ function setUpGame() {
   }
 
   function revealFirstCard() {
+    //move the animation to the right position
     moveAnimation();
     $cards[0].setAttribute('data-env', environment[0]);
-    $cards[0].innerHTML = "FIRST";
     // $cards[0].style.visibility = "hidden";
     playAnimation(environment[0]);
   }
@@ -346,8 +346,8 @@ function setUpGame() {
     $rightChoice.setAttribute('data-choice', right);
     $leftChoice.classList.remove('activeChoiceCard');
     $rightChoice.classList.remove('activeChoiceCard');
-    console.log("show the cards to click");
-    console.log("leftChoice: " + left + ", rightChoice: " + right);
+    // console.log("show the cards to click");
+    // console.log("leftChoice: " + left + ", rightChoice: " + right);
     //fade in the game hud - where the option buttons are drawn with 2 second delay
     // fadeIn($gameHUD, 2.5, "flex");
   }
@@ -361,7 +361,7 @@ function setUpGame() {
       card.classList.remove('currentCard');
     }
 
-    // card.innerHTML = options.env;
+    card.innerHTML = options.env;
     card.style.pointerEvents = "none";
     $gameContainer.append(card);
     card.style.top = options.y + "px";
@@ -498,14 +498,14 @@ function setUpGame() {
       }
     }
 
-    $cards[currentCardNum - 1].setAttribute('data-env', env);
-    //hide the current card
-    $cards[currentCardNum - 1].style.visibility = "hidden";
     //flip animation goes here
     //set up the animation
     //make sure the animation has a baked in delay at the beginning to
     //account for the button push time.
     if(currentCardNum > 1 ) {
+      $cards[currentCardNum - 1].setAttribute('data-env', env);
+      //hide the current card
+      $cards[currentCardNum - 1].style.visibility = "hidden";
       // var revealAnim = gsap.fromTo($animation,1,{autoAlpha:1,x:0},
       //   {
       //     autoAlpha: 1,
