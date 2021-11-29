@@ -83,7 +83,7 @@ input {
   background-color: white;
   cursor: text;
   margin:0;
-  padding: 1px;
+  padding: 2px;
   border-width: 2px;
   border-style: inset;
   border-color: initial;
@@ -97,8 +97,8 @@ input {
 }
 
 select {
-  padding: 1px;
-  font-size: 1.75rem;
+  padding: 5px 5px 5px 2px;
+  font-size: 1.5rem;
 }
 
 input[type="radio"] {
@@ -543,8 +543,12 @@ label {
   /* text-align:right; */
   /* width: 50%; */
   color: #666;
-  font-size: .8em;
+  font-size: 1.2em;
   line-height: 2;
+}
+
+.container h1 {
+  margin-bottom: 1em;
 }
 
 .formRow {
