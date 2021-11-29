@@ -441,7 +441,7 @@ function setUpGame() {
 
   //event listeners
   $choiceCards.forEach(function(userItem) {
-    userItem.addEventListener('click', function(e) {
+    userItem.addEventListener('touchstart', function(e) {
       e.preventDefault();
       $gameHUD.style.pointerEvents = "none";
       // console.log("current card number: " + currentCardNum);
@@ -497,7 +497,7 @@ function setUpGame() {
       duration: 1,
       delay: 0,
       ease: "power1.inOut",
-      opacity: 0,
+      opacity: 0.5,
       onComplete: generateNextOptions
     });
   }
