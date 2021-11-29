@@ -385,9 +385,10 @@ function setUpGame() {
     //set up the animation
     //make sure the animation has a baked in delay at the beginning to
     //account for the button push time.
+    $cards[currentCardNum].style.visibility = "hidden";
     $cards[currentCardNum].setAttribute('data-env', env);
     //hide the current card
-    $cards[currentCardNum].style.visibility = "hidden";
+
     playAnimation(env);
   }
 
