@@ -282,17 +282,40 @@ function setUpGame() {
 
   function moveUpBunny() {
     let $current = $cards[currentCardNum];
-    let bunnyPosition = $current.getBoundingClientRect();
+    let nextBunnyPosition = $current.getBoundingClientRect();
+    let currentBunnyPosition = $bunny.getBoundingClientRect();
     // console.log($current);
-    let x = bunnyPosition.x + bunnyPosition.width / 2 - bunnyX;
-    let y = bunnyPosition.y + bunnyPosition.height / 2 - bunnyY*1.6;
+    let x = nextBunnyPosition.x + nextBunnyPosition.width / 2 - bunnyX;
+    let y = nextBunnyPosition.y + nextBunnyPosition.height / 2 - bunnyY*1.6;
     let duration = 1;
     let delay = 2;
+    let transition = "skipRight";
+    if(nextBunnyPosition.x > currentBunnyPosition.x){
+      transition = "skipRight";
+    } else {
+      transition = "skipLeft";
+    }
     moveBunny({
       x,
       y,
       duration,
-      delay
+      delay,
+      transition
+    });
+  }
+
+  function moveBunny(options) {
+    let onStartFunc = function(){
+      let className = "bunny-" + options.transition;
+      $bunny.classList.add(className);
+    }
+    gsap.to(".bunny", {
+      x: options.x,
+      y: options.y,
+      duration: options.duration,
+      delay: options.delay,
+      onStart: onStartFunc,
+      onComplete: fadeInButtons
     });
   }
 
@@ -413,20 +436,12 @@ function setUpGame() {
     // card.style.transform = "scale(0.6,0.6)"
   }
 
-  function moveBunny(options) {
-    gsap.to(".bunny", {
-      x: options.x,
-      y: options.y,
-      duration: options.duration,
-      delay: options.delay,
-      onComplete: fadeInButtons
-    });
-  }
+
 
 
   //event listeners
   $choiceCards.forEach(function(userItem) {
-    userItem.addEventListener('touchstart', function(e) {
+    userItem.addEventListener('click', function(e) {
       e.preventDefault();
       $gameHUD.style.pointerEvents = "none";
       // console.log("current card number: " + currentCardNum);
@@ -461,6 +476,9 @@ function setUpGame() {
 
   function fadeInButtons(){
     fadeIn($gameHUD, 0, "flex");
+    //put the bunny into the neutral position
+    $bunny.classList.remove("bunny-skipRight");
+    $bunny.classList.remove("bunny-skipLeft");
     //draw some border around the card
     // $cards[currentCardNum - 1].classList.remove('currentCard');
     // $cards[currentCardNum].classList.add('currentCard');

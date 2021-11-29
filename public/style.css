@@ -233,6 +233,22 @@ canvas.animContainer {
   background-position: center;
 }
 
+.bunny-skipRight {
+  background-image: url(animations/rabbit/rightSkip.png);
+}
+
+.bunny-skipLeft {
+  background-image: url(animations/rabbit/leftSkip.png);
+}
+
+.bunny-waitingRight {
+  background-image: url(animations/rabbit/waitingRight.png);
+}
+
+.bunny-waitingLeft {
+  background-image: url(animations/rabbit/waitingLeft.png);
+}
+
 .choice-card {
   width: 340px;
   height: 341px;
