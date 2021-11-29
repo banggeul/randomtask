@@ -1,0 +1,76 @@
+{"frames": [
+
+{
+	"filename": "dancing.png",
+	"frame": {"x":1,"y":1,"w":116,"h":212},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":19,"y":0,"w":116,"h":212},
+	"sourceSize": {"w":166,"h":220}
+},
+{
+	"filename": "leftLean.png",
+	"frame": {"x":832,"y":1,"w":113,"h":190},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":48,"y":22,"w":113,"h":190},
+	"sourceSize": {"w":166,"h":220}
+},
+{
+	"filename": "leftLeap.png",
+	"frame": {"x":431,"y":1,"w":137,"h":206},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":28,"y":8,"w":137,"h":206},
+	"sourceSize": {"w":166,"h":220}
+},
+{
+	"filename": "leftSkip.png",
+	"frame": {"x":570,"y":1,"w":129,"h":203},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":37,"y":10,"w":129,"h":203},
+	"sourceSize": {"w":166,"h":220}
+},
+{
+	"filename": "politePose.png",
+	"frame": {"x":326,"y":1,"w":103,"h":208},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":21,"y":3,"w":103,"h":208},
+	"sourceSize": {"w":166,"h":220}
+},
+{
+	"filename": "rightSkip.png",
+	"frame": {"x":701,"y":1,"w":129,"h":203},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":10,"w":129,"h":203},
+	"sourceSize": {"w":166,"h":220}
+},
+{
+	"filename": "waitingLeft.png",
+	"frame": {"x":222,"y":1,"w":102,"h":209},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":41,"y":11,"w":102,"h":209},
+	"sourceSize": {"w":166,"h":220}
+},
+{
+	"filename": "waitingRight.png",
+	"frame": {"x":119,"y":1,"w":101,"h":211},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":22,"y":9,"w":101,"h":211},
+	"sourceSize": {"w":166,"h":220}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "rabbitA/rabbitA.png",
+	"format": "RGBA8888",
+	"size": {"w":946,"h":214},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:1d80a30abbf4c285857802f9d0f8f734:8b8e1e0265e40d84eb25f4d7632ad670:881efabc9fd02b16105e69dca165e918$"
+}
+}

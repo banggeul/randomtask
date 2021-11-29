@@ -191,14 +191,14 @@ function setUpGame() {
   $thanks.style.display = "none";
   $thanks.style.opacity = 0;
 
-  let bunnyX = 85;
-  let bunnyY = 75;
+  let bunnyX = 460;
+  let bunnyY = 331;
 
   setUpGameBoard();
   setFirstBunny();
   // showOptions();
   fadeIn($bunny, 0.5);
-  revealFirstCard();
+  // revealFirstCard();
 
   //make sure the game view is 100% of the screen height
   // $gameView.style.height = window.innerHeight + "px";
@@ -336,6 +336,9 @@ function setUpGame() {
 
   function revealFirstCard() {
     $cards[0].setAttribute('data-env', environment[0]);
+    $cards[0].style.visibility = "hidden";
+    moveAnimation();
+    playAnimation(environment[0]);
   }
 
   function generateNextOptions() {
