@@ -317,8 +317,8 @@ function setUpGame() {
     $current = $cards[currentCardNum];
     let animPosition = $current.getBoundingClientRect();
     // console.log($current);
-    let x = animPosition.x + animPosition.width / 2 - 83;
-    let y = animPosition.y + animPosition.height / 2 - 95;
+    let x = animPosition.x + animPosition.width / 2;
+    let y = animPosition.y + animPosition.height / 2;
 
     $canvas_carrot.style.pointerEvents = "none";
     $canvas_carrot.style.top = y + "px";
@@ -392,7 +392,7 @@ function setUpGame() {
       card.classList.remove('currentCard');
     }
 
-    card.innerHTML = options.env;
+    // card.innerHTML = options.env;
     card.style.pointerEvents = "none";
     $gameContainer.append(card);
     card.style.top = options.y + "px";
