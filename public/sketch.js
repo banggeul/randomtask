@@ -541,13 +541,13 @@ function setUpGame() {
   // window.addEventListener("resize", resizeCarrot);
 
   function initCarrot() {
-    tl_c = gsap.timeline({ onUpdate: updateCarrot, onComplete: carrotFinished })
+    tl_c = gsap.timeline({ onUpdate: updateCarrot, onComplete: carrotFinished, paused:true })
       .to(carrot, { frame: carrot_frames.length - 1, roundProps: "frame", repeat: 0, ease: "none", duration: 1, delay:0.5 }, 0);
     tl_c.pause();
   }
 
   function initDirt() {
-    tl_d = gsap.timeline({ onUpdate: updateDirt, onComplete: dirtFinished })
+    tl_d = gsap.timeline({ onUpdate: updateDirt, onComplete: dirtFinished, paused:true })
         .to(dirt, { frame: dirt_frames.length - 1, roundProps: "frame", repeat: 0, ease: "none", duration: 1, delay:0.5 }, 0);
     tl_d.pause();
   }
