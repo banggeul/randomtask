@@ -308,6 +308,8 @@ function setUpGame() {
       // setUpBunny();
       if(currentCardNum > 0) {
         revealCard();
+      } else {
+        revealFirstCard();
       }
       moveUpBunny();
       //show the buttons
@@ -326,7 +328,7 @@ function setUpGame() {
     let animPosition = $current.getBoundingClientRect();
     // console.log($current);
     let x = animPosition.x + animPosition.width / 2 - 83;
-    let y = animPosition.y + animPosition.height / 2 - 90;
+    let y = animPosition.y + animPosition.height / 2 - 95;
 
     $canvas_carrot.style.pointerEvents = "none";
     $canvas_carrot.style.top = y + "px";
@@ -347,13 +349,13 @@ function setUpGame() {
     });
   }
 
-  // function revealFirstCard() {
-  //   //move the animation to the right position
-  //   moveAnimation();
-  //   $cards[0].setAttribute('data-env', environment[0]);
-  //   // $cards[0].style.visibility = "hidden";
-  //   playAnimation(environment[0]);
-  // }
+  function revealFirstCard() {
+    //move the animation to the right position
+    // moveAnimation();
+    $cards[0].setAttribute('data-env', environment[0]);
+    $cards[0].style.visibility = "hidden";
+    playAnimation(environment[0]);
+  }
 
   function generateNextOptions() {
     //show the cards
@@ -595,13 +597,22 @@ function setUpGame() {
   function carrotFinished(){
     console.log("carrot finished");
     $canvas_carrot.style.visibility = "hidden";
-    $cards[currentCardNum - 1].style.visibility = "visible";
+    if(currentCardNum == 0) {
+      $cards[0].style.visibility = "visible";
+    } else {
+      $cards[currentCardNum - 1].style.visibility = "visible";
+    }
+
   }
 
   function dirtFinished(){
     console.log("dirt finished");
     $canvas_dirt.style.visibility = "hidden";
-    $cards[currentCardNum - 1].style.visibility = "visible";
+    if(currentCardNum == 0) {
+      $cards[0].style.visibility = "visible";
+    } else {
+      $cards[currentCardNum - 1].style.visibility = "visible";
+    }
   }
 
   function resize(canvas) {
