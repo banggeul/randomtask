@@ -12,7 +12,7 @@ let experiment = {};
 let sessionData = {};
 
 const totalCards = 41;
-let currentCardNum = -1;
+let currentCardNum = 0;
 
 //make array for sequence set
 var environment = [1];
@@ -211,7 +211,9 @@ function setUpGame() {
     $gameUI.style.pointerEvents = "none";
 
     //move the bunny to the next position
-    moveNext();
+    moveUpBunny();
+
+    // moveNext();
 
     //get the clickable area and store it to the variable
     // const clickBound = $clickArea.getBoundingClientRect();
@@ -301,30 +303,18 @@ function setUpGame() {
       moveAnimation();
       finishGame();
     } else {
+      //move the animation to the right position
       moveAnimation();
+      revealCard();
       currentCardNum++;
-      // $cards[currentCardNum - 1].classList.remove('currentCard');
-      // $cards[currentCardNum].classList.add('currentCard');
-      // setUpBunny();
-      if(currentCardNum > 0) {
-        revealCard();
-      } else {
-        revealFirstCard();
-      }
       moveUpBunny();
-      //show the buttons
-      // showOptions();
     }
   }
 
 
   function moveAnimation() {
     let $current;
-    if(currentCardNum < 0){
-      $current = $cards[0];
-    } else {
-      $current = $cards[currentCardNum];
-    }
+    $current = $cards[currentCardNum];
     let animPosition = $current.getBoundingClientRect();
     // console.log($current);
     let x = animPosition.x + animPosition.width / 2 - 83;
@@ -349,12 +339,33 @@ function setUpGame() {
     });
   }
 
-  function revealFirstCard() {
-    //move the animation to the right position
-    // moveAnimation();
-    $cards[0].setAttribute('data-env', environment[0]);
-    $cards[0].style.visibility = "hidden";
-    playAnimation(environment[0]);
+  function revealCard() {
+    const index = $cards[currentCardNum].dataset.index;
+    //get the environment
+    const env = environment[parseInt(index)];
+    const ch = choices[choices.length - 1];
+    // console.log("env: " + env + ", choice: " + ch);
+    if (env == ch) {
+      $feedback.innerHTML = "Correct!";
+      correct = [...correct, 1];
+    } else {
+      correct = [...correct, 0];
+      $feedback.innerHTML = "Oops, there was ";
+      if (env == 0) {
+        $feedback.innerHTML += "no carrot!";
+      } else {
+        $feedback.innerHTML += "a carrot!";
+      }
+    }
+
+    //flip animation goes here
+    //set up the animation
+    //make sure the animation has a baked in delay at the beginning to
+    //account for the button push time.
+    $cards[currentCardNum].setAttribute('data-env', env);
+    //hide the current card
+    $cards[currentCardNum].style.visibility = "hidden";
+    playAnimation(env);
   }
 
   function generateNextOptions() {
@@ -479,36 +490,7 @@ function setUpGame() {
   }
 
 
-  function revealCard() {
-    const index = $cards[currentCardNum - 1].dataset.index;
-    //get the environment
-    const env = environment[parseInt(index)];
-    const ch = choices[choices.length - 1];
-    // console.log("env: " + env + ", choice: " + ch);
-    if (env == ch) {
-      $feedback.innerHTML = "Correct!";
-      correct = [...correct, 1];
-    } else {
-      correct = [...correct, 0];
-      $feedback.innerHTML = "Oops, there was ";
-      if (env == 0) {
-        $feedback.innerHTML += "no carrot!";
-      } else {
-        $feedback.innerHTML += "a carrot!";
-      }
-    }
 
-    //flip animation goes here
-    //set up the animation
-    //make sure the animation has a baked in delay at the beginning to
-    //account for the button push time.
-    if(currentCardNum > 1 ) {
-      $cards[currentCardNum - 1].setAttribute('data-env', env);
-      //hide the current card
-      $cards[currentCardNum - 1].style.visibility = "hidden";
-      playAnimation(env);
-    }
-  }
 
   function hideAnimation(elem1, elem2) {
     elem1.style.visibility = "hidden";
@@ -717,7 +699,7 @@ function setUpGame() {
       // revealAnim.restart();
       playAnimation(env);
     }
-    $cards[currentCardNum - 1].classList.remove('currentCard');
+    // $cards[currentCardNum - 1].classList.remove('currentCard');
     console.log("game finished");
     //package the data
     sessionData = {
