@@ -12,7 +12,7 @@ let experiment = {};
 let sessionData = {};
 
 const totalCards = 41;
-let currentCardNum = 0;
+let currentCardNum = -1;
 
 //make array for sequence set
 var environment = [1];
@@ -191,14 +191,14 @@ function setUpGame() {
   $thanks.style.display = "none";
   $thanks.style.opacity = 0;
 
-  let bunnyX = 460;
+  let bunnyX = 160;
   let bunnyY = 331;
 
   setUpGameBoard();
   setFirstBunny();
   // showOptions();
   fadeIn($bunny, 0.5);
-  revealFirstCard();
+  // revealFirstCard();
 
   //make sure the game view is 100% of the screen height
   // $gameView.style.height = window.innerHeight + "px";
@@ -206,12 +206,6 @@ function setUpGame() {
   //if startbutton is clicked
   $startBtn.addEventListener('click', function(e) {
     e.preventDefault();
-    //play the video
-    // if (video) {
-    //   if (video.paused) {
-    //     video.play();
-    //   }
-    // }
     //fade out the game ui
     fadeOut($gameUI, true);
     $gameUI.style.pointerEvents = "none";
@@ -300,8 +294,35 @@ function setUpGame() {
     });
   }
 
+  function moveNext() {
+    //move the bunny to the next position
+    //change the current $card
+    if (currentCardNum == totalCards - 1) {
+      moveAnimation();
+      finishGame();
+    } else {
+      moveAnimation();
+      currentCardNum++;
+      // $cards[currentCardNum - 1].classList.remove('currentCard');
+      // $cards[currentCardNum].classList.add('currentCard');
+      // setUpBunny();
+      if(currentCardNum > 0) {
+        revealCard();
+      }
+      moveUpBunny();
+      //show the buttons
+      // showOptions();
+    }
+  }
+
+
   function moveAnimation() {
-    let $current = $cards[currentCardNum];
+    let $current;
+    if(currentCardNum < 0){
+      $current = $cards[0];
+    } else {
+      $current = $cards[currentCardNum];
+    }
     let animPosition = $current.getBoundingClientRect();
     // console.log($current);
     let x = animPosition.x + animPosition.width / 2 - 83;
@@ -326,13 +347,13 @@ function setUpGame() {
     });
   }
 
-  function revealFirstCard() {
-    //move the animation to the right position
-    moveAnimation();
-    $cards[0].setAttribute('data-env', environment[0]);
-    // $cards[0].style.visibility = "hidden";
-    playAnimation(environment[0]);
-  }
+  // function revealFirstCard() {
+  //   //move the animation to the right position
+  //   moveAnimation();
+  //   $cards[0].setAttribute('data-env', environment[0]);
+  //   // $cards[0].style.visibility = "hidden";
+  //   playAnimation(environment[0]);
+  // }
 
   function generateNextOptions() {
     //show the cards
@@ -346,10 +367,7 @@ function setUpGame() {
     $rightChoice.setAttribute('data-choice', right);
     $leftChoice.classList.remove('activeChoiceCard');
     $rightChoice.classList.remove('activeChoiceCard');
-    // console.log("show the cards to click");
-    // console.log("leftChoice: " + left + ", rightChoice: " + right);
-    //fade in the game hud - where the option buttons are drawn with 2 second delay
-    // fadeIn($gameHUD, 2.5, "flex");
+
   }
 
   function drawBGCard(options, fadeOut = true, remove = true) {
@@ -458,26 +476,6 @@ function setUpGame() {
     fadeOut($feedback, false, 0.5)
   }
 
-  function moveNext() {
-    //move the bunny to the next position
-    //change the current $card
-    if (currentCardNum == totalCards - 1) {
-      moveAnimation();
-      finishGame();
-    } else {
-      moveAnimation();
-      currentCardNum++;
-      // $cards[currentCardNum - 1].classList.remove('currentCard');
-      // $cards[currentCardNum].classList.add('currentCard');
-      // setUpBunny();
-      revealCard();
-      moveUpBunny();
-      //show the buttons
-      // showOptions();
-
-    }
-
-  }
 
   function revealCard() {
     const index = $cards[currentCardNum - 1].dataset.index;
@@ -506,22 +504,8 @@ function setUpGame() {
       $cards[currentCardNum - 1].setAttribute('data-env', env);
       //hide the current card
       $cards[currentCardNum - 1].style.visibility = "hidden";
-      // var revealAnim = gsap.fromTo($animation,1,{autoAlpha:1,x:0},
-      //   {
-      //     autoAlpha: 1,
-      //     repeat:1,
-      //     x:-2250,
-      //     ease:SteppedEase.config(15),
-      //     onComplete:hideAnimation,
-      //     onCompleteParams:[$animation, $cards[currentCardNum - 1]]
-      //   }
-      // );
-      // // //pause the animation
-      // revealAnim.pause();
-      // revealAnim.restart();
       playAnimation(env);
     }
-
   }
 
   function hideAnimation(elem1, elem2) {
