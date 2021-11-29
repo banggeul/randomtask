@@ -285,7 +285,7 @@ function setUpGame() {
     let bunnyPosition = $current.getBoundingClientRect();
     // console.log($current);
     let x = bunnyPosition.x + bunnyPosition.width / 2 - bunnyX;
-    let y = bunnyPosition.y + bunnyPosition.height / 2 - bunnyY*1.5;
+    let y = bunnyPosition.y + bunnyPosition.height / 2 - bunnyY*1.75;
     let duration = 1;
     let delay = 2;
     moveBunny({
@@ -426,7 +426,7 @@ function setUpGame() {
 
   //event listeners
   $choiceCards.forEach(function(userItem) {
-    userItem.addEventListener('click', function(e) {
+    userItem.addEventListener('touchstart', function(e) {
       e.preventDefault();
       $gameHUD.style.pointerEvents = "none";
       // console.log("current card number: " + currentCardNum);
