@@ -534,7 +534,7 @@ function setUpGame() {
 
   let sprite_c = new Image();
   sprite_c.onload = initCarrot;
-  sprite_c.src = "animations/cards/yellowCarrot.png";
+  sprite_c.src = "animations/cards/yellowCarrot_test.png";
 
   let sprite_d = new Image();
   sprite_d.onload = initDirt;
