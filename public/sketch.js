@@ -386,7 +386,7 @@ function setUpGame() {
     //make sure the animation has a baked in delay at the beginning to
     //account for the button push time.
     $cards[currentCardNum].style.visibility = "hidden";
-    // $cards[currentCardNum].setAttribute('data-env', env);
+    $cards[currentCardNum].setAttribute('data-env', env);
     //hide the current card
     playAnimation(env);
   }
@@ -534,11 +534,11 @@ function setUpGame() {
 
   let sprite_c = new Image();
   sprite_c.onload = initCarrot;
-  sprite_c.src = "animations/carrot.png";
+  sprite_c.src = "animations/cards/yellowCarrot.png";
 
   let sprite_d = new Image();
   sprite_d.onload = initDirt;
-  sprite_d.src = "animations/dirt.png";
+  sprite_d.src = "animations/cards/yellowDirt.png";
 
   // window.addEventListener("resize", resizeCarrot);
 
@@ -596,14 +596,14 @@ function setUpGame() {
 
   function carrotFinished(){
     console.log("carrot finished");
-    const index = $cards[currentCardNum-1].dataset.index;
-    //get the environment
-    const env = environment[parseInt(index)];
+    // const index = $cards[currentCardNum-1].dataset.index;
+    // //get the environment
+    // const env = environment[parseInt(index)];
     $canvas_carrot.style.visibility = "hidden";
     if(currentCardNum == 0) {
       $cards[0].style.visibility = "visible";
     } else {
-      $cards[currentCardNum - 1].setAttribute('data-env', env);
+      // $cards[currentCardNum - 1].setAttribute('data-env', env);
       $cards[currentCardNum - 1].style.visibility = "visible";
     }
 
@@ -611,14 +611,14 @@ function setUpGame() {
 
   function dirtFinished(){
     console.log("dirt finished");
-    const index = $cards[currentCardNum-1].dataset.index;
-    //get the environment
-    const env = environment[parseInt(index)];
+    // const index = $cards[currentCardNum-1].dataset.index;
+    // //get the environment
+    // const env = environment[parseInt(index)];
     $canvas_dirt.style.visibility = "hidden";
     if(currentCardNum == 0) {
       $cards[0].style.visibility = "visible";
     } else {
-      $cards[currentCardNum - 1].setAttribute('data-env', env);
+      // $cards[currentCardNum - 1].setAttribute('data-env', env);
       $cards[currentCardNum - 1].style.visibility = "visible";
     }
   }
