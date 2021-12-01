@@ -221,6 +221,7 @@ function startTheTask(e){
           let subjectObj = newSubjects[i][1][0];
           if(subjectObj.subjectNum == experiment.subjectNum){
             updateCurrentSubject(newSubjects[i]);
+            console.log(currentSubject);
             // location.
              if(e.target.name == "one"){
                location.href = "task1";
