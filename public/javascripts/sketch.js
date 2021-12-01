@@ -8,6 +8,7 @@ const {
 //create an empty object to store the new experiment data
 let experiment = {};
 let sessionData = {};
+let newSubject = false;
 //populate it with some fake data for testing purpose
 // let subjects = [
 //   {
@@ -87,6 +88,7 @@ function generateNewID() {
   }
   document.querySelector('#subjectInfoLabel').innerHTML = "This is a new subject. Please enter the info below."
   $subjectInfoInput.style.display = "block";
+  newSubject = true;
 }
 
 function resetAllInput() {
@@ -118,6 +120,7 @@ function checkSubjectID() {
     let subjectObj = subjects[i][1][0];
     console.log(subjectObj);
     if (subjectObj.subjectNum == subjectNum) {
+      newSubject = false;
       document.querySelector('#subjectInfoLabel').innerHTML = "This is an existing subject. Please make sure the info below is correct."
       document.querySelector('#ageYear').value = subjectObj.age.year;
       document.querySelector('#ageMonth').value = subjectObj.age.month;
@@ -155,6 +158,7 @@ function checkSubjectID() {
     //if nothing has been matched then it means it's new.
     console.log("nothing matching")
     generateNewID();
+    newSubject = true;
     document.querySelector('#subjectInfoLabel').innerHTML = "The subject number did not match our record. So we generated a new one for you. Please enter the info below."
   }
 }
@@ -204,8 +208,9 @@ function addNewSubject() {
 }
 
 function startTheTask(e) {
-  //add the new subject to the database
-  addNewSubject();
+  //add the new subject to the database if this subject is new
+  if(newSubject)
+    addNewSubject();
 
   // location.
   if (e.target.name == "one") {
