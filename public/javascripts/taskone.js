@@ -560,14 +560,15 @@ function setUpGame() {
 
   function carrotFinished(){
     console.log("carrot finished");
-    // const index = $cards[currentCardNum-1].dataset.index;
+    const index = $cards[currentCardNum-1].dataset.index;
     // //get the environment
-    // const env = environment[parseInt(index)];
+    const env = environment[parseInt(index)];
     $canvas_carrot.style.visibility = "hidden";
+
     if(currentCardNum == 0) {
       $cards[0].style.visibility = "visible";
     } else {
-      // $cards[currentCardNum - 1].setAttribute('data-env', env);
+      $cards[currentCardNum - 1].setAttribute('data-env', env);
       $cards[currentCardNum - 1].style.visibility = "visible";
     }
 
@@ -575,14 +576,14 @@ function setUpGame() {
 
   function dirtFinished(){
     console.log("dirt finished");
-    // const index = $cards[currentCardNum-1].dataset.index;
+    const index = $cards[currentCardNum-1].dataset.index;
     // //get the environment
-    // const env = environment[parseInt(index)];
+    const env = environment[parseInt(index)];
     $canvas_dirt.style.visibility = "hidden";
     if(currentCardNum == 0) {
       $cards[0].style.visibility = "visible";
     } else {
-      // $cards[currentCardNum - 1].setAttribute('data-env', env);
+      $cards[currentCardNum - 1].setAttribute('data-env', env);
       $cards[currentCardNum - 1].style.visibility = "visible";
     }
   }
@@ -630,7 +631,6 @@ function setUpGame() {
     // if (timeID)
     //   clearTimeout(timeID);
     isGameOn = false;
-
     currentCardNum++;
     const index = $cards[currentCardNum - 1].dataset.index;
     //get the environment
@@ -656,7 +656,7 @@ function setUpGame() {
     if(currentCardNum > 1 ) {
       playAnimation(env);
     }
-    $cards[currentCardNum - 1].classList.remove('currentCard');
+
     console.log("game finished");
     //update the subject data
     currentSubject.tasks.one = 1;
