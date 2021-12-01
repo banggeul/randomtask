@@ -13,6 +13,7 @@ let currentSubjectID;
 
 const urlParams = new URLSearchParams(window.location.search);
 const subjectNum = urlParams.get('subject');
+// const id = urlParams.get('id');
 let subjects = [];
 let sequenceSet = [];
 //generate some fake sequenceSet for testing purpose
@@ -32,6 +33,15 @@ async function fetchSubject(){
   return await response.json();
 }
 
+// async function fetchSingleSubject(){
+//   let response = await fetch(`/single_subject?id=${encodedURIComponent(id)}`);
+//   if (!response.ok) {
+//     throw new Error(`HTTP error! status: ${response.status}`);
+//   }
+//   return await response.json();
+// }
+
+
 fetchSubject().then((data) => {
   for (let i in data) {
     let innerarray = [];
@@ -40,12 +50,12 @@ fetchSubject().then((data) => {
     }
     subjects.push(innerarray);
   }
-
-  //now do something with it
+  //
+  // //now do something with it
   currentSubject = findSubject(subjectNum);
-  //set the sequence based on the subjectNumber
-  //but for now just set it as the first one
-  //load the page content
+  // //set the sequence based on the subjectNumber
+  // //but for now just set it as the first one
+  // //load the page content
 
   document.querySelector('#doit').addEventListener('click', ()=>{
     currentSubject.tasks.one = 1;
@@ -58,6 +68,11 @@ fetchSubject().then((data) => {
         data: experiment
       }
     });
+
+    setTimeout(()=>{
+      window.location.href = "/"+"?subject="+experiment.subjectNum+"&id="+experiment.id;
+    },3000);
+
   })
 
 })

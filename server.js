@@ -150,10 +150,22 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
         .catch(error => console.error(error));
     })
 
+    app.get('/single_subject',(req,res)=>{
+      console.log(req.body);
+      // let o_id = new mongo.ObjectId(req.body.id);
+      // let collection = db.collection("subjectNumbers");
+      // collection.findOne({_id: o_id})
+      //   .then(results =>{
+      //     res.json(results);
+      //     console.log(results);
+      //   })
+      //   .catch(error=>console.error(error));
+    })
+
     app.put('/update_subject', (req, res)=>{
       res.send('Got a PUT request');
-      console.log(req.body.data.id);
-      console.log(req.body.data.data);
+      // console.log(req.body.data.id);
+      // console.log(req.body.data.data);
       let o_id = new mongo.ObjectId(req.body.data.id);
       let collection = db.collection("subjectNumbers");
       collection.findOneAndUpdate({_id: o_id}, {$set: {data: req.body.data.data}}, {upsert: false}, function(err,doc) {
@@ -163,6 +175,8 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
        }
      });
     })
+
+
 
   })
   .catch(error => console.error(error));

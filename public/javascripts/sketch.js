@@ -9,32 +9,11 @@ const {
 let experiment = {};
 let sessionData = {};
 let newSubject = false;
-//populate it with some fake data for testing purpose
-// let subjects = [
-//   {
-//     id:"12345",
-//     subjectNum:"1",
-//     age: { year: "3", month:"5"},
-//     gender: "female",
-//     lang: "en",
-//     tasks: { one: "1", two: "1", three: "0"}
-//   },
-//   {
-//     id:"22325",
-//     subjectNum:"2",
-//     age: { year: "5", month:"8"},
-//     gender: "male",
-//     lang: "en",
-//     tasks: { one: "1", two: "1", three: "1"}
-//   },
-//   {
-//     id:"32349",
-//     subjectNum:"3",
-//     age: { year: "4", month:"1"},
-//     gender: "female",
-//     lang: "de",
-//     tasks: { one: "1", two: "0", three: "0"}
-//   }];
+
+const urlParams = new URLSearchParams(window.location.search);
+const subjectNum = urlParams.get('subject');
+const id = urlParams.get('id');
+
 let subjects = [];
 //
 // fetch the subjectNumbers collection
@@ -55,6 +34,9 @@ fetch('/subjects')
     console.log("something went wrong");
   });
 
+if(urlParams!=null){
+  console.log("there's url parameters: "+subjectNum +","+id);
+}
 
 
 //get the reference to the HTML elements we need
@@ -230,4 +212,15 @@ function isEmpty(obj) {
     return false;
   }
   return true;
+}
+
+function findSubject(n) {
+  for(let i=0; i < subjects.length; i++){
+    let subjectObj = subjects[i][1][0];
+    if(subjectObj.subjectNum == subjectNum){
+      //found it
+      currentSubjectID = subjects[i][0];
+      return subjectObj;
+    }
+  }
 }
