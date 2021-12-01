@@ -223,13 +223,13 @@ function startTheTask(e){
             updateCurrentSubject(newSubjects[i]);
             console.log(currentSubject);
             // location.
-             // if(e.target.name == "one"){
-             //   location.href = "task1";
-             // } else if(e.target.name == "two"){
-             //   location.href = "task2";
-             // } else if(e.target.name == "three"){
-             //   location.href = "task3";
-             // }
+             if(e.target.name == "one"){
+               location.href = "task1";
+             } else if(e.target.name == "two"){
+               location.href = "task2";
+             } else if(e.target.name == "three"){
+               location.href = "task3";
+             }
             break;
           }
         }
