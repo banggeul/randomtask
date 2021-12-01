@@ -5,7 +5,7 @@
   "version": "0.0.0.1",
   "manifest_version": 1,
   "author": "Bang Geul Han",
-  "start_url": "index.html",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "landscape",
   "theme_color": "#015174",
