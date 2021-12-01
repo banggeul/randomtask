@@ -46,8 +46,7 @@ function findSubject(n) {
     let subjectObj = subjects[i][1][0];
     if(subjectObj.subjectNum == subjectNum){
       //found it
-      console.log(subjects[i]);
-      currentSubjectID = subjects[i]._id
+      currentSubjectID = subjects[i][0];
       return subjectObj;
     }
   }
