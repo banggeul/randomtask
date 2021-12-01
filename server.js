@@ -37,7 +37,8 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
         .then(results =>{
           // res.json(results);
           console.log(results);
-          res.render('index', {title: 'Experiments', subjectNums: results} );
+          var subjectNums = results;
+          res.render('index', {title: 'Experiments', subjectNums: subjectNums} );
         })
       // res.render('index', {title: 'Experiments', subjectNums: results} );
     })
