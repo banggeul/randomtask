@@ -1,3 +1,3 @@
-import {currentSubject} from '/utils/current_subject.js'
+import {getCurrentSubject} from '/utils/current_subject.js'
 
-console.log(currentSubject);
+console.log(getCurrentSubject());

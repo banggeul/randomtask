@@ -1,8 +1,12 @@
-var currentSubject = {};
+var currentSubject;
 function updateCurrentSubject(s){
   currentSubject = s;
 }
+function getCurrentSubject(){
+  return currentSubject;
+}
 export {
   currentSubject,
-  updateCurrentSubject
+  updateCurrentSubject,
+  getCurrentSubject
 };
