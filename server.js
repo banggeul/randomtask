@@ -44,7 +44,11 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
     })
 
     app.get('/task1', (req, res) => {
-      res.render('task1');
+      db.collection('subjectNumbers').find().toArray()
+        .then(results =>{
+          res.render('task1', {title: 'Task One', subjectNums: results} );
+        })
+      // res.render('task1');
     })
 
     app.get('/task2', (req, res) => {
