@@ -92,7 +92,7 @@ fetchSubject().then((data) => {
   //now set up the game
   setUpGame();
   //Fade in the game screen
-  fadeIn($game);
+  fadeIn($game, 1);
 })
 .catch((e) =>
   console.log(e)
@@ -166,7 +166,7 @@ function setUpGame() {
   setUpGameBoard();
   setFirstBunny();
   // showOptions();
-  fadeIn($bunny, 0.5);
+  fadeIn($bunny,1, 0.5);
   // revealFirstCard();
 
   //make sure the game view is 100% of the screen height
@@ -441,7 +441,7 @@ function setUpGame() {
   });
 
   function fadeInButtons(){
-    fadeIn($gameHUD, 0, "flex");
+    fadeIn($gameHUD, 0.3, 0, "flex");
     //put the bunny into the neutral position
     $bunny.classList.remove("bunny-skipRight");
     $bunny.classList.remove("bunny-skipLeft");
@@ -469,7 +469,7 @@ function setUpGame() {
   }
 
   function showFeedback() {
-    fadeIn($feedback);
+    fadeIn($feedback, 1);
     fadeOut($feedback, false, 0.5)
   }
 
@@ -695,7 +695,7 @@ function setUpGame() {
 
     console.log("data logged");
     //fade in the thank you with half second delay
-    fadeIn($thanks, .5);
+    fadeIn($thanks, 1, .5);
 
     setTimeout(function() {
       window.location.href = "/"+"?subject="+currentSubject.subjectNum+"&id="+experiment.id;
@@ -707,11 +707,11 @@ function setUpGame() {
 }
 ////////////
 //some utility functions for fading in and out using Greensock animation library (GSAP)
-function fadeIn(elem, delay, display = "block") {
+function fadeIn(elem, duration, delay, display = "block") {
   elem.style.display = display;
   //elem.style.opacity = 0;
   gsap.to(elem, {
-    duration: 1,
+    duration: duration,
     ease: "power1.inOut",
     opacity: 1,
     delay: delay,
