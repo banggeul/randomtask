@@ -8,6 +8,8 @@ const {
 //create an empty object to store the new experiment data
 let experiment = {};
 let sessionData = {};
+let currentSubject = {};
+let currentSubjectID;
 
 const urlParams = new URLSearchParams(window.location.search);
 const subjectNum = urlParams.get('subject');
@@ -29,9 +31,24 @@ fetchSubject().then((data) => {
     }
     subjects.push(innerarray);
   }
+
+  //now do something with it
+  currentSubject = findSubject(subjectNum);
+  console.log(currentSubjectID)
+  console.log(currentSubject)
 })
 .catch((e) =>
   console.log(e)
 );
 
-console.log(subjects[0]);
+function findSubject(n) {
+  for(let i=0; i < subjects.length; i++){
+    let subjectObj = subjects[i][1][0];
+    if(subjectObj.subjectNum == subjectNum){
+      //found it
+      currentSubjectID = subjects[i]._id
+      return subjectObj;
+    }
+
+  }
+}
