@@ -9,49 +9,49 @@ const {
 let experiment = {};
 let sessionData = {};
 //populate it with some fake data for testing purpose
-let subjects = [
-  {
-    id:"12345",
-    subjectNum:"1",
-    age: { year: "3", month:"5"},
-    gender: "female",
-    lang: "en",
-    tasks: { one: "1", two: "1", three: "0"}
-  },
-  {
-    id:"22325",
-    subjectNum:"2",
-    age: { year: "5", month:"8"},
-    gender: "male",
-    lang: "en",
-    tasks: { one: "1", two: "1", three: "1"}
-  },
-  {
-    id:"32349",
-    subjectNum:"3",
-    age: { year: "4", month:"1"},
-    gender: "female",
-    lang: "de",
-    tasks: { one: "1", two: "0", three: "0"}
-  }];
-
-// fetch the subjectNumbers collection
-fetch('/subjects')
-  .then((response) => {
-    response.json().then((data) => {
-      for (let i in data) {
-        let innerarray = [];
-        for (let j in data[i]) {
-          innerarray.push(data[i][j]);
-        }
-        subjects.push(innerarray);
-      }
-      // console.log(subjects[0]);
-    });
-  })
-  .catch((err) => {
-    console.log("something went wrong");
-  });
+// let subjects = [
+//   {
+//     id:"12345",
+//     subjectNum:"1",
+//     age: { year: "3", month:"5"},
+//     gender: "female",
+//     lang: "en",
+//     tasks: { one: "1", two: "1", three: "0"}
+//   },
+//   {
+//     id:"22325",
+//     subjectNum:"2",
+//     age: { year: "5", month:"8"},
+//     gender: "male",
+//     lang: "en",
+//     tasks: { one: "1", two: "1", three: "1"}
+//   },
+//   {
+//     id:"32349",
+//     subjectNum:"3",
+//     age: { year: "4", month:"1"},
+//     gender: "female",
+//     lang: "de",
+//     tasks: { one: "1", two: "0", three: "0"}
+//   }];
+//
+// // fetch the subjectNumbers collection
+// fetch('/subjects')
+//   .then((response) => {
+//     response.json().then((data) => {
+//       for (let i in data) {
+//         let innerarray = [];
+//         for (let j in data[i]) {
+//           innerarray.push(data[i][j]);
+//         }
+//         subjects.push(innerarray);
+//       }
+//       // console.log(subjects[0]);
+//     });
+//   })
+//   .catch((err) => {
+//     console.log("something went wrong");
+//   });
 
 //get the reference to the HTML elements we need
 const $generateNewID = document.querySelector('#generateNewIDButton');

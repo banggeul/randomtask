@@ -33,7 +33,13 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
     // const collection = db.collection('raindots');
 
     app.get('/', (req, res) => {
-      res.render('index');
+      db.collection('subjectNumbers').find().toArray()
+        .then(results =>{
+          // res.json(results);
+          console.log(results);
+          res.render('index', {title: 'Experiments', subjectNums: results} );
+        })
+      // res.render('index', {title: 'Experiments', subjectNums: results} );
     })
 
     app.get('/task1', (req, res) => {
