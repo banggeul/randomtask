@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
+const mongo = require('mongodb');
 require('dotenv').config();
 
 //make the express app
@@ -153,8 +154,9 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
       res.send('Got a PUT request');
       console.log(req.body.data.id);
       console.log(req.body.data.data);
+      let o_id = new mongo.ObjectId(req.body.data.id);
       let collection = db.collection("subjectNumbers");
-      collection.findOneAndUpdate({_id: req.body.data.id}, {$set: {data: req.body.data.data}}, {upsert: true}, function(err,doc) {
+      collection.findOneAndUpdate({_id: o_id}, {$set: {data: req.body.data.data}}, {upsert: true}, function(err,doc) {
        if (err) { throw err; }
        else {
          console.log("Updated");
