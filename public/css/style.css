@@ -559,6 +559,47 @@ label {
   margin-bottom: 1em;
 }
 
+.formRowFlex {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+
+  margin-bottom: 1em;
+}
+
+.formRowCenter {
+  justify-content: center;
+  align-items: center;
+}
+
+.checkbox {
+  width: 30px;
+  height: 30px;
+  border: seagreen 1px solid;
+  margin-left: 2em;
+}
+
+.checked {
+  background-color: seagreen;
+}
+
+.subjectInfo {
+  display: none;
+}
+
+#tryAgain {
+  display: none;
+}
+
+.subjectInfoInput {
+  display: none;
+}
+
+a#generateNewIDButton {
+  text-decoration: underline;
+  font-style: italic;
+  color: seagreen;
+}
 .timeLimitSwitch {
   flex-direction: row;
   align-items: center;

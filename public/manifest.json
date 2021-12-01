@@ -1,7 +1,7 @@
 {
-  "name": "RabbitTask",
-  "short_name": "RabbitTask",
-  "description": "Experiment Task One",
+  "name": "RandomTask",
+  "short_name": "RandomTask",
+  "description": "Experiments for Children's Randomness",
   "version": "0.0.0.1",
   "manifest_version": 1,
   "author": "Bang Geul Han",
@@ -12,7 +12,7 @@
   "background_color": "#F7F4F3",
   "app": {
     "urls": [
-      "https://rabbittask-experiment.herokuapp.com/"
+      "https://randomtask-experiment.herokuapp.com/"
     ],
     "permissions": [
       "fullscreen"

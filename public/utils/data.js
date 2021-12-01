@@ -11,7 +11,7 @@ export async function postData(url = '', data = {}) {
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
-// Example POST method implementation:
+// Example GET method implementation:
 export async function getData(url = '', data = {}) {
   // Default options are marked with *
   const response = await fetch(url, {
