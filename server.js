@@ -149,8 +149,8 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
         .catch(error => console.error(error));
     })
 
-    app.post('/update_subject', (req, res)=>{
-      res.send('Got a POST request');
+    app.put('/update_subject', (req, res)=>{
+      res.send('Got a PUT request');
       console.log(req.body.data.id);
       console.log(req.body.data.data);
       let collection = db.collection("subjectNumbers");
@@ -161,6 +161,7 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
        }
      });
     })
+
   })
   .catch(error => console.error(error));
 

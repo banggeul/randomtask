@@ -16,11 +16,11 @@ export async function putData(url = '', data = {}) {
   const response = await fetch(url, {
     method: 'PUT', // *GET, POST, PUT, DELETE, etc.
     headers: {
-      "content-type": "application/json",
+      "content-type": "text/html",
     },
-    body: JSON.stringify(data) // body data type must match "Content-Type" header
+    body: data // body data type must match "Content-Type" header
   });
-  return response.json(); // parses JSON response into native JavaScript objects
+  return response; // parses JSON response into native JavaScript objects
 }
 
 // Example GET method implementation:
