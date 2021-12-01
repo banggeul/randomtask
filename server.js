@@ -151,7 +151,8 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
 
     app.post('/update_subject', (req, res)=>{
       res.send('Got a POST request');
-      console.log(req.body);
+      console.log(req.body.data.id);
+      console.log(req.body.data.data);
      //  let collection = db.collection("subjectNumbers");
      //  collection.findOneAndUpdate({_id: req.body.id}, {$set: {data: req.body.data}}, {upsert: true}, function(err,doc) {
      //   if (err) { throw err; }
