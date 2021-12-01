@@ -36,23 +36,23 @@ let sessionData = {};
 //   }];
 let subjects = [];
 //
-// // fetch the subjectNumbers collection
-// fetch('/subjects')
-//   .then((response) => {
-//     response.json().then((data) => {
-//       for (let i in data) {
-//         let innerarray = [];
-//         for (let j in data[i]) {
-//           innerarray.push(data[i][j]);
-//         }
-//         subjects.push(innerarray);
-//       }
-//       // console.log(subjects[0]);
-//     });
-//   })
-//   .catch((err) => {
-//     console.log("something went wrong");
-//   });
+// fetch the subjectNumbers collection
+fetch('/subjects')
+  .then((response) => {
+    response.json().then((data) => {
+      for (let i in data) {
+        let innerarray = [];
+        for (let j in data[i]) {
+          innerarray.push(data[i][j]);
+        }
+        subjects.push(innerarray);
+      }
+      // console.log(subjects[0]);
+    });
+  })
+  .catch((err) => {
+    console.log("something went wrong");
+  });
 
 //get the reference to the HTML elements we need
 const $generateNewID = document.querySelector('#generateNewIDButton');
