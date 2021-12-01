@@ -34,6 +34,7 @@ let sessionData = {};
 //     lang: "de",
 //     tasks: { one: "1", two: "0", three: "0"}
 //   }];
+let subjects = [];
 //
 // // fetch the subjectNumbers collection
 // fetch('/subjects')
