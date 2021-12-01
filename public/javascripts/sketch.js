@@ -11,33 +11,9 @@ let sessionData = {};
 let newSubject = false;
 
 const urlParams = new URLSearchParams(window.location.search);
-const subjectNum = urlParams.get('subject');
+const subjectNumParam = urlParams.get('subject');
 const id = urlParams.get('id');
-
 let subjects = [];
-//
-// fetch the subjectNumbers collection
-fetch('/subjects')
-  .then((response) => {
-    response.json().then((data) => {
-      for (let i in data) {
-        let innerarray = [];
-        for (let j in data[i]) {
-          innerarray.push(data[i][j]);
-        }
-        subjects.push(innerarray);
-      }
-      // console.log(subjects[0]);
-    });
-  })
-  .catch((err) => {
-    console.log("something went wrong");
-  });
-
-if(urlParams!=null){
-  console.log("there's url parameters: "+subjectNum +","+id);
-}
-
 
 //get the reference to the HTML elements we need
 const $generateNewID = document.querySelector('#generateNewIDButton');
@@ -56,6 +32,7 @@ $rainTaskButton.addEventListener('click', startTheTask);
 document.body.addEventListener('touchstart', () => {
   document.activeElement.blur();
 });
+
 //bind the click event listeners to the buttons
 $generateNewID.addEventListener('click', generateNewID);
 
@@ -90,9 +67,40 @@ document.querySelector('#name').addEventListener('change', function() {
     $checkSubjectID.classList.remove('disabled');
   }
 })
+
 //when the checkID button is pressed
 //it checks the id in the database and populate all the inputs
 $checkSubjectID.addEventListener('click', checkSubjectID);
+//
+// fetch the subjectNumbers collection
+fetch('/subjects')
+  .then((response) => {
+    response.json().then((data) => {
+      for (let i in data) {
+        let innerarray = [];
+        for (let j in data[i]) {
+          innerarray.push(data[i][j]);
+        }
+        subjects.push(innerarray);
+      }
+      // console.log(subjects[0]);
+      //do something
+      //first check if this is a redirect or not, if it's a redirect then checkSubjectID
+      if(subjectNumParam!=null){
+        // console.log("there's url parameters: "+subjectNum +","+id);
+        document.querySelector('#name').value = subjectNumParam;
+        checkSubjectID();
+      } else {
+        //if not, this is a new experiment
+
+      }
+
+    });
+  })
+  .catch((err) => {
+    console.log("something went wrong");
+  });
+
 
 function checkSubjectID() {
   resetAllInput();

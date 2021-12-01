@@ -70,7 +70,7 @@ fetchSubject().then((data) => {
     });
 
     setTimeout(()=>{
-      window.location.href = "/"+"?subject="+experiment.subjectNum+"&id="+experiment.id;
+      window.location.href = "/"+"?subject="+currentSubject.subjectNum+"&id="+experiment.id;
     },3000);
 
   })
