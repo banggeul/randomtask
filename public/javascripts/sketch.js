@@ -1,6 +1,5 @@
 //import the data storing script
 import store from '/utils/subject_storage.js'
-import {currentSubject, updateCurrentSubject} from '/utils/current_subject.js'
 
 //get the current data stored, unpack it as object
 const {
@@ -76,13 +75,14 @@ document.body.addEventListener('touchstart', () => {
 });
 //bind the click event listeners to the buttons
 $generateNewID.addEventListener('click', generateNewID);
-function generateNewID(){
+
+function generateNewID() {
   //create a new subject id;
   let newID = subjects.length + 1;
   //put it in the form
   document.querySelector('#name').value = newID;
   resetAllInput();
-  if(!$checkSubjectID.classList.contains('disabled')){
+  if (!$checkSubjectID.classList.contains('disabled')) {
     $checkSubjectID.classList.add('disabled');
   }
   document.querySelector('#subjectInfoLabel').innerHTML = "This is a new subject. Please enter the info below."
@@ -100,48 +100,49 @@ function resetAllInput() {
   document.querySelector('#tryAgain').style.display = "none";
 }
 
-document.querySelector('#name').addEventListener('change',function(){
+document.querySelector('#name').addEventListener('change', function() {
   //if there's something in the subjectID then enable the check button
-  if(this.value > 0 && $checkSubjectID.classList.contains('disabled')){
+  if (this.value > 0 && $checkSubjectID.classList.contains('disabled')) {
     $checkSubjectID.classList.remove('disabled');
   }
 })
 //when the checkID button is pressed
 //it checks the id in the database and populate all the inputs
 $checkSubjectID.addEventListener('click', checkSubjectID);
-function checkSubjectID(){
+
+function checkSubjectID() {
   resetAllInput();
   const subjectNum = document.querySelector('#name').value;
   let match = false;
-  for(let i=0; i < subjects.length; i++){
+  for (let i = 0; i < subjects.length; i++) {
     let subjectObj = subjects[i][1][0];
     console.log(subjectObj);
-    if(subjectObj.subjectNum == subjectNum){
+    if (subjectObj.subjectNum == subjectNum) {
       document.querySelector('#subjectInfoLabel').innerHTML = "This is an existing subject. Please make sure the info below is correct."
       document.querySelector('#ageYear').value = subjectObj.age.year;
       document.querySelector('#ageMonth').value = subjectObj.age.month;
       const genderOptions = document.getElementById('genderOptions');
       genderOptions.options[genderOptions.selectedIndex].value = subjectObj.gender;
       let task = 0;
-      if(subjectObj.tasks.one == 1){
+      if (subjectObj.tasks.one == 1) {
         document.querySelector('#rabbitTaskButton').classList.add("disabled");
         document.querySelector('#rabbitTaskCheckbox').classList.add('checked');
         task++;
       }
-      if(subjectObj.tasks.two == 1){
+      if (subjectObj.tasks.two == 1) {
         document.querySelector('#treeTaskButton').classList.add("disabled");
         document.querySelector('#treeTaskCheckbox').classList.add('checked');
         task++;
       }
-      if(subjectObj.tasks.three == 1){
+      if (subjectObj.tasks.three == 1) {
         document.querySelector('#rainTaskButton').classList.add("disabled");
         document.querySelector('#rainTaskCheckbox').classList.add('checked');
         task++;
       }
-      if(task == 3){
+      if (task == 3) {
         document.querySelector('#tryAgain').style.display = "block";
       }
-      if(subjectObj.lang == "de"){
+      if (subjectObj.lang == "de") {
         document.querySelector('#languageToggleSwitch').checked = true;
       }
       match = true;
@@ -150,7 +151,7 @@ function checkSubjectID(){
     }
   }
 
-  if(!match){
+  if (!match) {
     //if nothing has been matched then it means it's new.
     console.log("nothing matching")
     generateNewID();
@@ -202,47 +203,23 @@ function addNewSubject() {
 
 }
 
-function startTheTask(e){
+function startTheTask(e) {
   //add the new subject to the database
   addNewSubject();
-  let newSubjects = [];
-  fetch('/subjects')
-    .then((response) => {
-      response.json().then((data) => {
-        for (let i in data) {
-          let innerarray = [];
-          for (let j in data[i]) {
-            innerarray.push(data[i][j]);
-          }
-          newSubjects.push(innerarray);
-        }
-        // console.log(subjects[0]);
-        for(let i=0; i < newSubjects.length; i++){
-          let subjectObj = newSubjects[i][1][0];
-          if(subjectObj.subjectNum == experiment.subjectNum){
-            updateCurrentSubject(newSubjects[i]);
-            console.log(currentSubject);
-            // location.
-             if(e.target.name == "one"){
-               location.href = "task1";
-             } else if(e.target.name == "two"){
-               location.href = "task2";
-             } else if(e.target.name == "three"){
-               location.href = "task3";
-             }
-            break;
-          }
-        }
-      });
-    })
-    .catch((err) => {
-      console.log("something went wrong");
-    });
 
-
+  // location.
+  if (e.target.name == "one") {
+    location.href = "task1"+"?subject="+experiment.subjectNum;
+  } else if (e.target.name == "two") {
+    location.href = "task2";
+  } else if (e.target.name == "three") {
+    location.href = "task3";
+  }
 }
 
 function isEmpty(obj) {
-   for (var x in obj) { return false; }
-   return true;
+  for (var x in obj) {
+    return false;
+  }
+  return true;
 }
