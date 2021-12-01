@@ -166,7 +166,7 @@ function checkSubjectID() {
 //bind the click event listener with the submit button
 // $getUserContext.addEventListener('click', getUserContext);
 //when the submit button is clicked do this
-function addNewSubject() {
+function updateSubject() {
   //get all the values from the input elements
   const subjectNum = document.querySelector('#name').value;
   const ageYear = document.querySelector('#ageYear').value;
@@ -197,6 +197,9 @@ function addNewSubject() {
     three: 0
   }
   experiment.gender = gender;
+}
+
+function addNewSubject(){
   //then store it to the storage which will post it to the database
   store.dispatch({
     type: !isEmpty(experiment) ? "ADD_DATA" : "REMOVE_DATA",
@@ -204,11 +207,11 @@ function addNewSubject() {
       data: experiment
     }
   });
-
 }
 
 function startTheTask(e) {
   //add the new subject to the database if this subject is new
+  updateSubject();
   if(newSubject)
     addNewSubject();
 
