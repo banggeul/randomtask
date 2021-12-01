@@ -150,17 +150,12 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
     })
 
     app.post('/update_subject', (req, res)=>{
-      let input = req.body;
-      let id = input.id;
-      let filter = {_id: id};
-      // delete input._id;
-      db.collection('subjectNumbers').findOneAndUpdate(filter, input.data, (err, data) =>{
-        if(!err){
-          console.log("update to db success");
-        }else{
-          console.log("update failed");
-        }
-      })
+      res.send('Got a POST request');
+      let collection = db.collection("subjectNumbers");
+      collection.findOneAndUpdate({_id: req.body.id}, {$set: {data: req.body.data}}, {upsert: true}, function(err,doc) {
+       if (err) { throw err; }
+       else { console.log("Updated"); }
+     });
     })
   })
   .catch(error => console.error(error));
