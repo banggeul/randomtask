@@ -17,6 +17,7 @@ let currentCardNum = 0;
 var environment = [];
 //array to store choices
 var choices = [];
+let choiceMode = 0;
 //array to store if the choice is correct guess or not
 var correct = [];
 //array to store card DOM objects
@@ -79,6 +80,10 @@ fetchSubject().then((data) => {
   // //now do something with it
   currentSubject = findSubject(subjectNum);
   // //set the sequence based on the subjectNumber
+
+  //set the choice cards mode based on the subject number
+  //in this case we are just doing even / odd number
+  choiceMode = subjectNum%2==0 ? 0 : 1;
   // //but for now just set it as the first one
   sequenceSetIndex = 1;
   // pValue = sequence[parseInt(sequenceSet) - 1][41];
@@ -142,7 +147,15 @@ function setUpGame() {
   const $playButton = document.querySelector('#playback');
   // const $appHeader = document.querySelector('#app-header');
   const $gameUI = document.querySelector('#game-ui');
+  const $instruction = document.querySelector('#instruction');
   const $thanks = document.querySelector('.thanks');
+  const $thanksMsg = document.querySelector('#thanks-msg');
+  // set the language based on the language setting
+  if(currentSubject.lang == "de"){
+    $startBtn.innerHTML = "Starte das Spiel.";
+    $thanksMsg.innerHTML = "Vielen Dank für Ihre Teilnahme.";
+    $instruction.innerHTML = 'Wird es eine Karotte geben oder nicht? Du musst raten!';
+  }
   //hide the thank you screen
   $thanks.style.display = "none";
   $thanks.style.opacity = 0;
@@ -341,9 +354,17 @@ function setUpGame() {
     // $gameHUD.style.opacity = 1;
     //to do tomorrow!!!!
     //this needs to happen after the cards are completely faded out
-    let r = Math.random();
-    let left = r > 0.5 ? 1 : 0;
-    let right = r > 0.5 ? 0 : 1;
+    // let r = Math.random();
+    // let left = r > 0.5 ? 1 : 0;
+    // let right = r > 0.5 ? 0 : 1;
+    let left, right;
+    if(choiceMode == 0){
+      left = 0;
+      right = 1;
+    } else {
+      left = 1;
+      right = 0;
+    }
     $leftChoice.setAttribute('data-choice', left);
     $rightChoice.setAttribute('data-choice', right);
     $leftChoice.classList.remove('activeChoiceCard');
@@ -635,7 +656,7 @@ function setUpGame() {
     if(currentCardNum > 1 ) {
       playAnimation(env);
     }
-    // $cards[currentCardNum - 1].classList.remove('currentCard');
+    $cards[currentCardNum - 1].classList.remove('currentCard');
     console.log("game finished");
     //update the subject data
     currentSubject.tasks.one = 1;
@@ -678,7 +699,7 @@ function setUpGame() {
 
     setTimeout(function() {
       window.location.href = "/"+"?subject="+currentSubject.subjectNum+"&id="+experiment.id;
-    }, 5000);
+    }, 10000);
     // gsap.from('.sun', {y:200, duration:2.5, ease:"elastic.out(1, 0.3)", delay:1})
     // gsap.to('.sun',{filter:"blur(0px)", scale:1.2, repeat:-1, yoyo:true, duration:1});
     // gsap.from($gameUI, {opacity:0, duration:1});
