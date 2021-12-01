@@ -649,9 +649,9 @@ function setUpGame() {
         $feedback.innerHTML += "a carrot!";
       }
     }
-    $cards[currentCardNum - 1].setAttribute('data-env', env);
-    //hide the current card
-    $cards[currentCardNum - 1].style.visibility = "hidden";
+    $cards[totalCards-1].setAttribute('data-env', env);
+    //hide the last card
+    $cards[totalCards-1].style.visibility = "hidden";
     //flip animation goes here
     if(currentCardNum > 1 ) {
       playAnimation(env);
