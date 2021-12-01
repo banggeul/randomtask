@@ -153,11 +153,13 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
       res.send('Got a POST request');
       console.log(req.body.data.id);
       console.log(req.body.data.data);
-     //  let collection = db.collection("subjectNumbers");
-     //  collection.findOneAndUpdate({_id: req.body.id}, {$set: {data: req.body.data}}, {upsert: true}, function(err,doc) {
-     //   if (err) { throw err; }
-     //   else { console.log("Updated"); }
-     // });
+      let collection = db.collection("subjectNumbers");
+      collection.findOneAndUpdate({_id: req.body.data.id}, {$set: {data: req.body.data.data}}, {upsert: true}, function(err,doc) {
+       if (err) { throw err; }
+       else {
+         console.log("Updated");
+       }
+     });
     })
   })
   .catch(error => console.error(error));

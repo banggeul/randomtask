@@ -36,7 +36,7 @@ const dataReducer = (state=initialState, action) => {
       const data = action.payload.data;
       postData('./update_subject',{data})
       .then((data) => {
-        console.log("here's the data: " + data); // JSON data parsed by `response.json()` call
+        // console.log("here's the data: " + data); // JSON data parsed by `response.json()` call
       });
       return {data};
     }
