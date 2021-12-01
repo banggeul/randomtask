@@ -1,5 +1,6 @@
 //import the data storing script
 import store from '/utils/subject_storage.js'
+import {currentSubject, updateCurrentSubject} from '/utils/current_subject.js'
 
 //get the current data stored, unpack it as object
 const {
@@ -155,7 +156,6 @@ function checkSubjectID(){
     generateNewID();
     document.querySelector('#subjectInfoLabel').innerHTML = "The subject number did not match our record. So we generated a new one for you. Please enter the info below."
   }
-
 }
 
 //bind the click event listener with the submit button
@@ -203,8 +203,41 @@ function addNewSubject() {
 }
 
 function startTheTask(e){
+  //add the new subject to the database
   addNewSubject();
+  let newSubjects = [];
+  fetch('/subjects')
+    .then((response) => {
+      response.json().then((data) => {
+        for (let i in data) {
+          let innerarray = [];
+          for (let j in data[i]) {
+            innerarray.push(data[i][j]);
+          }
+          newSubjects.push(innerarray);
+        }
+        // console.log(subjects[0]);
+        for(let i=0; i < newSubjects.length; i++){
+          let subjectObj = newSubjects[i][1][0];
+          if(subjectObj.subjectNum == experiment.subjectNum){
+            updateCurrentSubject(newSubjects[i]);
+            break;
+          }
+        }
+      });
+    })
+    .catch((err) => {
+      console.log("something went wrong");
+    });
+
   // location.
+   if(e.target.name == "one"){
+     location.href = "task1";
+   } else if(e.target.name == "two"){
+     location.href = "task2";
+   } else if(e.target.name == "three"){
+     location.href = "task3";
+   }
 }
 
 function isEmpty(obj) {
