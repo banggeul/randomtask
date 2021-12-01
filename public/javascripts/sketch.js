@@ -186,6 +186,11 @@ function addNewSubject() {
     year: ageYear,
     month: ageMonth
   };
+  experiment.tasks = {
+    one: 0,
+    two: 0,
+    three: 0
+  }
   experiment.gender = gender;
   //then store it to the storage which will post it to the database
   store.dispatch({
