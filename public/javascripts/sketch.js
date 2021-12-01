@@ -54,6 +54,8 @@ fetch('/subjects')
     console.log("something went wrong");
   });
 
+
+
 //get the reference to the HTML elements we need
 const $generateNewID = document.querySelector('#generateNewIDButton');
 const $subjectInfoInput = document.querySelector('#subjectInfoInput');
@@ -111,6 +113,7 @@ function checkSubjectID(){
   const subjectNum = document.querySelector('#name').value;
   let match = false;
   for(let i=0; i < subjects.length; i++){
+    console.log(subjects[i]);
     if(subjects[i].subjectNum == subjectNum){
       document.querySelector('#subjectInfoLabel').innerHTML = "This is an existing subject. Please make sure the info below is correct."
       document.querySelector('#ageYear').value = subjects[i].age.year;
