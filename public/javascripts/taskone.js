@@ -88,8 +88,6 @@ fetchSubject().then((data) => {
   setUpGame();
   //Fade in the game screen
   fadeIn($game);
-  })
-
 })
 .catch((e) =>
   console.log(e)
