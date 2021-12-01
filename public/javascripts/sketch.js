@@ -221,6 +221,14 @@ function startTheTask(e){
           let subjectObj = newSubjects[i][1][0];
           if(subjectObj.subjectNum == experiment.subjectNum){
             updateCurrentSubject(newSubjects[i]);
+            // location.
+             if(e.target.name == "one"){
+               location.href = "task1";
+             } else if(e.target.name == "two"){
+               location.href = "task2";
+             } else if(e.target.name == "three"){
+               location.href = "task3";
+             }
             break;
           }
         }
@@ -230,14 +238,7 @@ function startTheTask(e){
       console.log("something went wrong");
     });
 
-  // location.
-   if(e.target.name == "one"){
-     location.href = "task1";
-   } else if(e.target.name == "two"){
-     location.href = "task2";
-   } else if(e.target.name == "three"){
-     location.href = "task3";
-   }
+
 }
 
 function isEmpty(obj) {
