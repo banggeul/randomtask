@@ -16,9 +16,9 @@ export async function putData(url = '', data = {}) {
   const response = await fetch(url, {
     method: 'PUT', // *GET, POST, PUT, DELETE, etc.
     headers: {
-      "content-type": "text/html",
+      "content-type": "application/json",
     },
-    body: data // body data type must match "Content-Type" header
+    body: JSON.stringify(data) // body data type must match "Content-Type" header
   });
   return response; // parses JSON response into native JavaScript objects
 }
