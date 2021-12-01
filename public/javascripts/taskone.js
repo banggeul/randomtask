@@ -18,14 +18,14 @@ async function fetchSubject(){
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
-  return await response.json().blob();
+  return await response.json();
 }
 
-fetchSubject().then((blob) => {
-  for (let i in blob) {
+fetchSubject().then((data) => {
+  for (let i in data) {
     let innerarray = [];
-    for (let j in blob[i]) {
-      innerarray.push(blob[i][j]);
+    for (let j in data[i]) {
+      innerarray.push(data[i][j]);
     }
     subjects.push(innerarray);
   }
