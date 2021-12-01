@@ -1,14 +1,54 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Task One</title>
-  </head>
-  <body>
-    <h1>this is task one.</h1>
-    <div class="app-container" id="app-container">
-      <button id="doit">I did it </button>
+
+<head>
+  <meta charset="utf-8">
+  <title>Task One</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- <meta name="viewport" content="width=device-width, user-scalable=no"> -->
+  <meta name="viewport" content="width=2732, user-scalable=no">
+  <link rel="stylesheet" href="/css/style_task1.css">
+</head>
+
+<body>
+  <div id="app-container">
+    <div class="" id="content">
+      <div onclick="void(0);">
+        <div id="gameView" class="gameView">
+          <div id="game-container">
+            <!-- gameboard gets drawn here -->
+            <div class="bunny" id="bunny"></div>
+            <canvas class="animContainer" id="canvas-carrot"></canvas>
+            <canvas class="animContainer" id="canvas-dirt"></canvas>
+          </div>
+          <div id="game-HUD" class="game-HUD">
+            <!-- carrot or no carrot button goes here -->
+            <div class="choice-card" id="left" data-choice="0"></div>
+            <div class="choice-card" id="right" data-choice="1"></div>
+          </div>
+          <div id="feedback" class="feedback">Hello</div>
+          <!-- <div id="clickArea" class="clickArea"></div>
+        <!--video container used to be here-->
+          <div id="game-ui" class="game-ui">
+            <p class="instruction"> Will there be a carrot or not? You have to guess!</p>
+            <a class="cta start" href="#" id="startBtn"> Start the game</a>
+          </div>
+          <div class="thanks">
+            <h1> Thanks for your participation! </h1>
+            <!-- <span class="sun"></span> -->
+          </div>
+          <!-- <div id="buttons">
+            <a class="cta disabled" href="#" id="submit"> Finish </a>
+            <a class="cta disabled" href="#/game" id="playback"> Play back </a>
+          </div> -->
+        </div>
+      </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/gsap.min.js"></script>
+    <script src='/animations/cards/yellowCarrot.js'></script>
+    <script src='/animations/cards/yellowDirt.js'></script>
+    <script src='/animations/cards/cardPositions.js'></script>
     <script type="module" src="/javascripts/taskone.js"></script>
-  </body>
+</body>
+
 </html>
