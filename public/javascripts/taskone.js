@@ -49,7 +49,7 @@ fetchSubject().then((data) => {
 
   document.querySelector('#doit').addEventListener('click', ()=>{
     currentSubject.tasks.one = 1;
-    experiment._id = currentSubjectID;
+    experiment.id = currentSubjectID;
     experiment.data = [currentSubject];
     //update the database
     store.dispatch({

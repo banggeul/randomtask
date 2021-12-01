@@ -149,9 +149,9 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
         .catch(error => console.error(error));
     })
 
-    app.put('/update_subject', (req, res)=>{
+    app.post('/update_subject', (req, res)=>{
       let input = req.body;
-      let id = input._id;
+      let id = input.id;
       let filter = {_id: id};
       // delete input._id;
       db.collection('subjectNumbers').findOneAndUpdate(filter, input.data, (err, data) =>{
