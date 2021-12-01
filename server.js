@@ -149,7 +149,7 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
         .catch(error => console.error(error));
     })
 
-    app.post('/update_subject', (req, res)=>{
+    app.put('/update_subject', (req, res)=>{
       let input = req.body;
       let id = input._id;
       let filter = {_id: id};
