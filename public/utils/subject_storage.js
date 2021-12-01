@@ -33,7 +33,7 @@ const dataReducer = (state=initialState, action) => {
       }
     case 'UPDATE_DATA':
     {
-      const data = [...state.data, action.payload.data];
+      const data = action.payload.data;
       putData('./update_subject',{data})
       .then((data) => {
         console.log("here's the data: " + data); // JSON data parsed by `response.json()` call
