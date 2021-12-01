@@ -114,6 +114,7 @@ function checkSubjectID(){
   let match = false;
   for(let i=0; i < subjects.length; i++){
     let subjectObj = subjects[i][1][0];
+    console.log(subjectObj);
     if(subjectObj.subjectNum == subjectNum){
       document.querySelector('#subjectInfoLabel').innerHTML = "This is an existing subject. Please make sure the info below is correct."
       document.querySelector('#ageYear').value = subjectObj.age.year;
