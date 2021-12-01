@@ -113,25 +113,25 @@ function checkSubjectID(){
   const subjectNum = document.querySelector('#name').value;
   let match = false;
   for(let i=0; i < subjects.length; i++){
-    console.log(subjects[i][1][0]);
-    if(subjects[i].subjectNum == subjectNum){
+    let subjectObj = subjects[i][1][0];
+    if(subjectObj.subjectNum == subjectNum){
       document.querySelector('#subjectInfoLabel').innerHTML = "This is an existing subject. Please make sure the info below is correct."
-      document.querySelector('#ageYear').value = subjects[i].age.year;
-      document.querySelector('#ageMonth').value = subjects[i].age.month;
+      document.querySelector('#ageYear').value = subjectObj.age.year;
+      document.querySelector('#ageMonth').value = subjectObj.age.month;
       const genderOptions = document.getElementById('genderOptions');
-      genderOptions.options[genderOptions.selectedIndex].value = subjects[i].gender;
+      genderOptions.options[genderOptions.selectedIndex].value = subjectObj.gender;
       let task = 0;
-      if(subjects[i].tasks.one == 1){
+      if(subjectObj.tasks.one == 1){
         document.querySelector('#rabbitTaskButton').classList.add("disabled");
         document.querySelector('#rabbitTaskCheckbox').classList.add('checked');
         task++;
       }
-      if(subjects[i].tasks.two == 1){
+      if(subjectObj.tasks.two == 1){
         document.querySelector('#treeTaskButton').classList.add("disabled");
         document.querySelector('#treeTaskCheckbox').classList.add('checked');
         task++;
       }
-      if(subjects[i].tasks.three == 1){
+      if(subjectObj.tasks.three == 1){
         document.querySelector('#rainTaskButton').classList.add("disabled");
         document.querySelector('#rainTaskCheckbox').classList.add('checked');
         task++;
@@ -139,7 +139,7 @@ function checkSubjectID(){
       if(task == 3){
         document.querySelector('#tryAgain').style.display = "block";
       }
-      if(subjects[i].lang == "de"){
+      if(subjectObj.lang == "de"){
         document.querySelector('#languageToggleSwitch').checked = true;
       }
       match = true;
