@@ -156,7 +156,7 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
       console.log(req.body.data.data);
       let o_id = new mongo.ObjectId(req.body.data.id);
       let collection = db.collection("subjectNumbers");
-      collection.findOneAndUpdate({_id: o_id}, {$set: {data: req.body.data.data}}, {upsert: true}, function(err,doc) {
+      collection.findOneAndUpdate({_id: o_id}, {$set: {data: req.body.data.data}}, {upsert: false}, function(err,doc) {
        if (err) { throw err; }
        else {
          console.log("Updated");
