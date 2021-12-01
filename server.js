@@ -148,6 +148,20 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
         })
         .catch(error => console.error(error));
     })
+
+    app.post('/update_subject', (req, res)=>{
+      let input = req.body;
+      let id = input._id;
+      let filter = {_id: id};
+      delete input._id;
+      collectionSubjects.findOneAndUpdate(filter, input, (err, data) =>{
+        if(!err){
+          console.log("update to db success");
+        }else{
+          console.log("update failed");
+        }
+      })
+    })
   })
   .catch(error => console.error(error));
 

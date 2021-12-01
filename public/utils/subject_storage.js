@@ -1,4 +1,4 @@
-import {postData, getData} from './data.js'
+import {postData, getData, putData} from './data.js'
 
 function createStorage(reducer) {
   let currentState = reducer(undefined, {});
@@ -34,8 +34,7 @@ const dataReducer = (state=initialState, action) => {
     case 'UPDATE_DATA':
     {
       const data = [...state.data, action.payload.data];
-      postData('./subjects',{data})
-      // postData('./raindots',{data})
+      putData('./update_subject',{data})
       .then((data) => {
         console.log("here's the data: " + data); // JSON data parsed by `response.json()` call
       });
