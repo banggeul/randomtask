@@ -29,8 +29,9 @@ fetchSubject().then((data) => {
     }
     subjects.push(innerarray);
   }
-  console.log(subjects[0]);
 })
 .catch((e) =>
   console.log(e)
 );
+
+console.log(subjects[0]);
