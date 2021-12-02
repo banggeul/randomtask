@@ -1,6 +1,6 @@
 //import the data storing script
 import storeSubject from '/utils/subject_storage.js'
-import store from '/utils/storage.js'
+import store from '/utils/rain_storage.js'
 
 //get the current data stored, unpack it as object
 const {
@@ -72,7 +72,7 @@ fetchSubject().then((data) => {
     //now do something with it
     currentSubject = findSubject(subjectNum);
     console.log(currentSubject);
-    
+
     //bind the click event listener with the submit button
     $getUserContext.addEventListener('click', getUserContext);
 
