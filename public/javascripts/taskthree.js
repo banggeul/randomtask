@@ -125,7 +125,7 @@ let myCanvas;
 let gameMode = "menu";
 
 
-function preload() {
+window.preload = function() {
   // preload() runs once
   apple = loadImage("/images/apples/apple.png");
   apple_shadow = loadImage("/images/apples/apple_shadow.png");
