@@ -54,7 +54,7 @@ let myCanvas;
 let gameMode = "menu";
 
 
-function preload() {
+window.preload = function() {
   // preload() runs once
   apple = loadImage("media/apple.png");
   apple_shadow = loadImage("media/apple_shadow.png");
@@ -69,7 +69,7 @@ function preload() {
   bg_menu = loadImage("media/bg_big_sky.png");
 }
 
-function setup() {
+window.setup = function() {
   myCanvas = createCanvas(windowWidth, windowHeight);
   myObjectSize = windowWidth / myObjectNum;
   // bigReset(gameMode);
@@ -77,7 +77,7 @@ function setup() {
   textSize(myObjectSize / 3);
 }
 
-function draw() {
+window.draw = function() {
 
   if (gameMode != 'menu') {
     background(220);
