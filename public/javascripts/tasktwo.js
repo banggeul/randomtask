@@ -71,7 +71,8 @@ fetchSubject().then((data) => {
 
     //now do something with it
     currentSubject = findSubject(subjectNum);
-    //
+    console.log(currentSubject);
+    
     //bind the click event listener with the submit button
     $getUserContext.addEventListener('click', getUserContext);
 
