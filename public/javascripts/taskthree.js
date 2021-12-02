@@ -140,7 +140,7 @@ function preload() {
   bg_menu = loadImage("/images/apples/bg_big_sky.png");
 }
 
-function setup() {
+window.setup = function() {
   myCanvas = createCanvas(windowWidth, windowHeight);
   myObjectSize = windowWidth / myObjectNum;
   // bigReset(gameMode);
@@ -148,7 +148,7 @@ function setup() {
   textSize(myObjectSize / 3);
 }
 
-function draw() {
+window.draw = function() {
   if(gameOn) {
     if (gameMode != 'menu') {
       background(220);
