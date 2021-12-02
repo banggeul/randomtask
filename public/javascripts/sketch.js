@@ -209,9 +209,9 @@ function startTheTask(e) {
   if (e.target.name == "one") {
     location.href = "task1"+"?subject="+experiment.subjectNum;
   } else if (e.target.name == "two") {
-    location.href = "task2";
+    location.href = "task2"+"?subject="+experiment.subjectNum;
   } else if (e.target.name == "three") {
-    location.href = "task3";
+    location.href = "task3"+"?subject="+experiment.subjectNum;
   }
 }
 
