@@ -56,17 +56,17 @@ let gameMode = "menu";
 
 window.preload = function() {
   // preload() runs once
-  apple = loadImage("media/apple.png");
-  apple_shadow = loadImage("media/apple_shadow.png");
+  apple = loadImage("/images/apples/apple.png");
+  apple_shadow = loadImage("/images/apples/apple_shadow.png");
 
-  bg_sky = loadImage("media/bg_sky.png");
-  bg_sun_left = loadImage("media/bg_sun_left.png");
-  bg_sun_right = loadImage("media/bg_sun_right.png");
+  bg_sky = loadImage("/images/apples/bg_sky.png");
+  bg_sun_left = loadImage("/images/apples/bg_sun_left.png");
+  bg_sun_right = loadImage("/images/apples/bg_sun_right.png");
 
-  bird = loadImage("media/bird.png");
-  bird_shadow = loadImage("media/bird_shadow.png");
+  bird = loadImage("/images/apples/bird.png");
+  bird_shadow = loadImage("/images/apples/bird_shadow.png");
 
-  bg_menu = loadImage("media/bg_big_sky.png");
+  bg_menu = loadImage("/images/apples/bg_big_sky.png");
 }
 
 window.setup = function() {
