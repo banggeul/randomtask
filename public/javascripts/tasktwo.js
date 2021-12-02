@@ -219,7 +219,7 @@ function setUpGame() {
   // $gameView.addEventListener('touchcancel', () => {});
   // $gameView.addEventListener('touchmove', () => {});
   //gameview clicks
-  $gameView.addEventListener('touchstart', function(e) {
+  $gameView.addEventListener('click', function(e) {
     //see if the click limit is left, if not, finish game
     if(clickLimit > 0){
       const clickAreaRect = $clickArea.getBoundingClientRect();
