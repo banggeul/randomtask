@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Task Two</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- <meta name="viewport" content="width=device-width, user-scalable=no"> -->
+  <meta name="viewport" content="width=2732, user-scalable=no">
+  <link rel="stylesheet" href="/css/style_task2.css">
+</head>
+
+<body>
+    <div id="app-container">
+      <div class="video-container">
+        <video playsinline muted >
+          <source src="/animations/trees1.mp4" type="video/mp4" poster="/animations/trees.png">
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+      <div class="" id="content">
+
+      </div>
+      <div class="container">
+        <h1>Rain Drops Task Setting</h1>
+        <div id="user-context">
+          <div class="formRow">
+            <label for="clickLimit">Set the click limit</label>
+            <input onClick="this.setSelectionRange(0, this.value.length);" type="number" id="clickLimit" name="" min="10" max="100" value="20">
+          </div>
+          <div class="formRow timeLimitSwitch">
+            <label for="timeLimitOn">Turn on the time limit</label>
+            <div class="switchWrapper">
+              <label class="switch">
+                  <input type="checkbox" id="timeLimitSwitch">
+                  <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+          <div class="formRow" id="timeLimitRow">
+            <label for="timeLimit">Set the time limit (in seconds)</label>
+            <input onClick="this.setSelectionRange(0, this.value.length);" type="number" id="timeLimit" name="" min="20" max="100" value = "20">
+          </div>
+          <a class="cta" href="#" id="collectUserContext">Submit</a>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/gsap.min.js"></script>
+    <script type="module" src="/javascripts/tasktwo.js"></script>
+  </body>
+</html>

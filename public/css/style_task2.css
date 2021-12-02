@@ -147,7 +147,7 @@ input[type="radio"] {
 }
 
 #content {
-  background-color: rgb(246,246,239);
+  background-color: rgb(178, 210, 219);
   height: 100vh;
   overflow: hidden;
   opacity: 0;
@@ -164,8 +164,8 @@ input[type="radio"] {
 .gameView {
   width: 100%;
   height: 100vh;
-  /* background: rgba(0,0,0,0); */
-  background-color: #567a52;
+  background: rgba(0,0,0,0);
+  /* background-color: #567a52; */
   position: relative;
   overflow: hidden;
 }
@@ -196,128 +196,6 @@ input[type="radio"] {
   width: 600px;
   opacity: 0;
   display: none;
-}
-
-.bgCard {
-  width: 250px;
-  height: 218px;
-  /* background: rgba(255,200,200,1); */
-  position: absolute;
-  background-image: url(/animations/cardBackTrimmed.png);
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-canvas.animContainer {
-      width: 250px;
-      height: 218px;
-      overflow: hidden;
-      position: absolute;
-      left:0;
-      top:0;
-      z-index: 100;
-      /* this is a hack - not sure why it doesnt line up correctly */
-      transform: translate(-50%, -46%);
-      visibility: hidden;
-}
-
-.currentCard {
-  /* border: double red 10px; */
-}
-
-.bunny {
-  width: 166px;
-  height: 220px;
-  /* border-radius: 50% 50%; */
-  /* background: #fff; */
-  position: absolute;
-  z-index: 2;
-  opacity: 0;
-  display: none;
-  background-image: url(/animations/rabbit/waitingRight.png);
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.bunny-skipRight {
-  background-image: url(/animations/rabbit/rightSkip.png);
-}
-
-.bunny-skipLeft {
-  background-image: url(/animations/rabbit/leftSkip.png);
-}
-
-.bunny-waitingRight {
-  background-image: url(/animations/rabbit/waitingRight.png);
-}
-
-.bunny-waitingLeft {
-  background-image: url(/animations/rabbit/waitingLeft.png);
-}
-
-.choice-card {
-  width: 340px;
-  height: 341px;
-  /* border-radius: 10px 10px; */
-  /* background: yellow; */
-  /* flex: 1 1 auto; */
-  /* box-shadow: 0 0 50px rgba(0,0,0,1); */
-  z-index: 10;
-  background-image: url(/animations/carrot_button.png);
-  background-repeat: no-repeat;
-  background-position: 0 0;
-}
-
-.choice-card + .choice-card {
-  margin-left: 50px;
-}
-
-.choice-card:active {
-  /* border: 2px red solid; */
-  background-position: 100% 0;
-}
-
-.choice-card:focus {
-  /* border: 2px red solid; */
-  background-position: 100% 0;
-}
-
-.activeChoiceCard {
-  /* border: 2px red solid; */
-  background-position: 100% 0;
-}
-
-.inactiveChoiceCard {
-  /* border: 2px red solid; */
-  background-position: 0 0;
-}
-
-div[data-choice='0'] {
-  /* background-color: red; */
-  /* this should be the clickable card face */
-  /* background-image: url(dirtCardStillUntrimmed.png); */
-  background-image: url(/animations/dirt_button.png);
-}
-
-div[data-choice="1"] {
-  /* background-color: green; */
-  background-image: url(/animations/carrot_button.png);
-  /* this should be the clickable card face */
-  /* background-image: url(carrotCardStilluntrimmed.png); */
-}
-
-div[data-env="0"]{
-  /* background-color: green; */
-  background-image: url(/animations/dirtCardStillTrimmed.png);
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-div[data-env="1"]{
-  /* background-color: orange; */
-  background-image: url(/animations/carrotCardStillTrimmed.png);
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 
