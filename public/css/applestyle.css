@@ -28,7 +28,6 @@ button {
   font-family: sans-serif;
   position: absolute;
   left: 50%;
-  top:0;
   transform: translateX(-50%);
   border-radius: 20px 20px;
 }
