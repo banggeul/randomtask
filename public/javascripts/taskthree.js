@@ -62,10 +62,14 @@ function startTask(){
   document.querySelector('canvas').style.display = "block";
   document.querySelector('#instruction').style.display = "none";
   //decide which side the sun is going to go
-  if(Math.random()>0.5){
-    initGame('sunLeft');
-  }else{
-    initGame('sunRight');
+  if(gameMode == 'sunLeft' || gameMode == 'sunRight'){
+    initGame('birds');
+  } else {
+    if(Math.random()>0.5){
+      initGame('sunLeft');
+    }else{
+      initGame('sunRight');
+    }
   }
 }
 
@@ -136,14 +140,14 @@ window.preload = function() {
   apple = loadImage("/images/apples/apple.png");
   apple_shadow = loadImage("/images/apples/apple_shadow.png");
 
-  bg_sky = loadImage("/images/apples/bg_big_sky.png");
-  bg_sun_left = loadImage("/images/apples/bg_big_sky.png");
-  bg_sun_right = loadImage("/images/apples/bg_big_sky.png");
+  bg_sky = loadImage("/images/apples/tree.png");
+  bg_sun_left = loadImage("/images/apples/tree.png");
+  bg_sun_right = loadImage("/images/apples/tree.png");
 
   bird = loadImage("/images/apples/bird.png");
   bird_shadow = loadImage("/images/apples/bird_shadow.png");
 
-  bg_menu = loadImage("/images/apples/bg_big_sky.png");
+  bg_menu = loadImage("/images/apples/tree.png");
   sun = loadImage("/images/apples/sun.png");
 }
 
@@ -155,7 +159,8 @@ window.setup = function() {
   // setUpStartMenu();
   textSize(myObjectSize / 3);
   //make an instruction screen
-
+  instructionDiv = select('#instruction');
+  instructionMsg = select('#instructionMsg');
 }
 
 window.draw = function() {
@@ -451,6 +456,7 @@ function ruFinished(){
 }
 
 function showInstruction(msg){
+  instructionMsg.html(msg);
   instructionDiv.show();
 }
 
