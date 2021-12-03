@@ -36,6 +36,7 @@ fetchSubject().then((data) => {
 
   //now do something with it
   currentSubject = findSubject(subjectNum);
+  console.log(currentSubject);
   //set the sequence based on the subjectNumber
   //but for now just set it as the first one
   startTask();
@@ -130,7 +131,7 @@ window.preload = function() {
   apple = loadImage("/images/apples/apple.png");
   apple_shadow = loadImage("/images/apples/apple_shadow.png");
 
-  bg_sky = loadImage("/images/apples/bg_sky.png");
+  bg_sky = loadImage("/images/apples/bg_big_sky.png");
   bg_sun_left = loadImage("/images/apples/bg_sun_left.png");
   bg_sun_right = loadImage("/images/apples/bg_sun_right.png");
 
@@ -358,7 +359,6 @@ window.touchStarted = function() {
           hasMoved[j] = false;
           myOrder[j] = orderCounter;
           orderCounter++;
-
         }
       }
     }
@@ -394,7 +394,7 @@ window.touchStarted = function() {
   }
 
   //check if the game is finished
-  if (orderCounter >= myObjectNum - 1 && gameOn) {
+  if (orderCounter == myObjectNum && gameOn) {
     if(gameMode == "birds"){
       for(let i=0; i < myObjectX.length; i++){
         birds[i] = { x: myObjectX[i], y: myObjectY[i]};
@@ -416,16 +416,26 @@ window.touchStarted = function() {
         startTime: dateAndTimeStarted,
         timeTaken: round(timeTaken)
       }
-      //show some text - "the first task is over. next one will start in 5s"
-      showThanks = true;
-      setTimeout(initGame('birds'), 5000);
+      //show a button
+      setTimeout(ruFinished, 3000);
     }
   }
 
   return false;
 }
 
-window.finishGame = function(){
+function ruFinished(){
+  let btn = createButton('Are you finished?');
+  // btn_sunLeft.position(width*.3, height*.2);
+  btn_sunLeft.touchStarted(() => {
+    initGame('birds');
+  });
+  btn_sunLeft.mousePressed(() => {
+    initGame('birds');
+  });
+}
+
+function finishGame() {
   //turn off the game
   gameOn = false;
   //post the sessionData to the database
