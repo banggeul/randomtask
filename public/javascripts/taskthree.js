@@ -39,7 +39,7 @@ fetchSubject().then((data) => {
   console.log(currentSubject);
   //set the sequence based on the subjectNumber
   //but for now just set it as the first one
-  startTask();
+  document.querySelector('#startBtn').addEventListener('touchstart', startTask);
 })
 .catch((e) =>
   console.log(e)
@@ -59,6 +59,7 @@ function findSubject(n) {
 
 function startTask(){
   gameOn = true;
+  document.querySelector('canvas').style.display = "block";
   //decide which side the sun is going to go
   if(Math.random()>0.5){
     initGame('sunLeft');
@@ -99,6 +100,7 @@ let bg_sky;
 let bg_sun_left;
 let bg_sun_right;
 let bg_menu;
+let sun;
 
 let tree;
 let object;
