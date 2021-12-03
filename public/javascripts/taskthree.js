@@ -337,7 +337,7 @@ function checkTouchOver() {
   }
 }
 
-function touchStarted() {
+window.touchStarted = function() {
   console.log("touch started");
   checkTouchOver();
   checkOnTree();
@@ -422,7 +422,7 @@ function touchStarted() {
   return false;
 }
 
-function finishGame(){
+window.finishGame = function(){
   //turn off the game
   gameOn = false;
   //post the sessionData to the database
@@ -452,7 +452,7 @@ function finishGame(){
   }, 5000);
 }
 
-function touchMoved() {
+window.touchMoved = function() {
   for (let i = myObjectNum-1; i >= 0; i--) {
     if (!noMoreMove[i] && isMoving[i]) {
       myObjectX[i] = mouseX - xOffset[i];
@@ -464,7 +464,7 @@ function touchMoved() {
   return false;
 }
 
-function touchEnded() {
+window.touchEnded = function() {
   for (let i = 0; i < myObjectNum; i++) {
     if (isMoving[i]) {
       isMoving[i] = false;
