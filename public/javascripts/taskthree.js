@@ -143,6 +143,7 @@ window.preload = function() {
 window.setup = function() {
   myCanvas = createCanvas(windowWidth, windowHeight);
   myObjectSize = windowWidth / myObjectNum;
+  console.log(myObjectSize);
   // bigReset(gameMode);
   // setUpStartMenu();
   textSize(myObjectSize / 3);
