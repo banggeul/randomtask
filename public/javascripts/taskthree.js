@@ -244,6 +244,7 @@ function bigReset(mode) {
   for (let i = 0; i < myObjectNum; i++) {
     myObjectX[i] = i * myObjectSize;
     myObjectY[i] = windowHeight - myObjectSize * 1.3;
+    console.log("apple "+i+": "+myObjectX[i]+", "+myObjectY[i]);
     overMyObject[i] = false;
     xOffset[i] = 0.0;
     yOffset[i] = 0.0;
