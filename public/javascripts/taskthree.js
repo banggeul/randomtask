@@ -60,6 +60,7 @@ function findSubject(n) {
 function startTask(){
   gameOn = true;
   document.querySelector('canvas').style.display = "block";
+  document.querySelector('#instruction').style.display = "none";
   //decide which side the sun is going to go
   if(Math.random()>0.5){
     initGame('sunLeft');
