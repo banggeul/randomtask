@@ -124,7 +124,9 @@ let myTime = {
 let myCanvas;
 
 let gameMode = "menu";
-
+let instructionDiv;
+let instructionMsg;
+let startBtn;
 
 window.preload = function() {
   // preload() runs once
@@ -139,6 +141,7 @@ window.preload = function() {
   bird_shadow = loadImage("/images/apples/bird_shadow.png");
 
   bg_menu = loadImage("/images/apples/bg_big_sky.png");
+  sun = loadImage("/images/apples/sun.png");
 }
 
 window.setup = function() {
@@ -148,6 +151,13 @@ window.setup = function() {
   // bigReset(gameMode);
   // setUpStartMenu();
   textSize(myObjectSize / 3);
+  //make an instruction screen
+  instructionDiv = createDiv('');
+  instructionMsg = createDiv('This is an instruction for Apples and Trees and such');
+  startBtn = createButton('Start the Game');
+  instructionMsg.parent(instructionDiv);
+  startBtn.parent(instructionDiv);
+  instructionDiv.addClass('instruction');
 }
 
 window.draw = function() {
@@ -155,6 +165,11 @@ window.draw = function() {
     if (gameMode != 'menu') {
       background(220);
       image(tree, 0, 0, width, height);
+      if(gameMode == 'sunLeft'){
+        image(sun, 325, 15);
+      } else if(gameMode == 'sunRight'){
+        image(sun, 880, 15);
+      }
       //check if the mouse is over the object or not
       // checkTouchOver();
       // checkOnTree();
@@ -429,11 +444,16 @@ function ruFinished(){
   btn.addClass('bottom');
   // btn_sunLeft.position(width*.3, height*.2);
   btn.touchStarted(() => {
-    initGame('birds');
+    // initGame('birds');
+    showInstruction("This is some instruction about the bird game.");
   });
   btn.mousePressed(() => {
-    initGame('birds');
+    // initGame('birds');
   });
+}
+
+function showInstruction(msg){
+  instructionDiv.show();
 }
 
 function finishGame() {
