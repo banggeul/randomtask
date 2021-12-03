@@ -129,12 +129,6 @@ let instructionMsg;
 let startBtn;
 
 window.preload = function() {
-  instructionDiv = createDiv('');
-  instructionMsg = createDiv('This is an instruction for Apples and Trees and such');
-  startBtn = createButton('Start the Game');
-  instructionMsg.parent(instructionDiv);
-  startBtn.parent(instructionDiv);
-  instructionDiv.addClass('instruction');
   // preload() runs once
   apple = loadImage("/images/apples/apple.png");
   apple_shadow = loadImage("/images/apples/apple_shadow.png");
