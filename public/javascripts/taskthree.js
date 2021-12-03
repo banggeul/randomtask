@@ -426,6 +426,7 @@ window.touchStarted = function() {
 
 function ruFinished(){
   let btn = createButton('Are you finished?');
+  btn.addClass('bottom');
   // btn_sunLeft.position(width*.3, height*.2);
   btn.touchStarted(() => {
     initGame('birds');
