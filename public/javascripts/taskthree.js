@@ -143,7 +143,7 @@ window.preload = function() {
 window.setup = function() {
   myCanvas = createCanvas(windowWidth, windowHeight);
   myObjectSize = windowWidth / myObjectNum;
-  console.log(myObjectSize);
+  // console.log(myObjectSize);
   // bigReset(gameMode);
   // setUpStartMenu();
   textSize(myObjectSize / 3);
@@ -243,6 +243,7 @@ function bigReset(mode) {
   }
 
   for (let i = 0; i < myObjectNum; i++) {
+    console.log(myObjectSize, windowHeight);
     myObjectX[i] = i * myObjectSize;
     myObjectY[i] = windowHeight - myObjectSize * 1.3;
     console.log("apple "+i+": "+myObjectX[i]+", "+myObjectY[i]);
