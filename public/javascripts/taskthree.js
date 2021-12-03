@@ -70,7 +70,7 @@ function startTask(){
 // let canvasX = canvasY * 0.75;
 
 let myObjectNum = 10;
-let myObjectSize;
+let myObjectSize = 134;
 
 let myObjectX = [];
 let myObjectY = [];
