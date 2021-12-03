@@ -132,8 +132,8 @@ window.preload = function() {
   apple_shadow = loadImage("/images/apples/apple_shadow.png");
 
   bg_sky = loadImage("/images/apples/bg_big_sky.png");
-  bg_sun_left = loadImage("/images/apples/bg_sun_left.png");
-  bg_sun_right = loadImage("/images/apples/bg_sun_right.png");
+  bg_sun_left = loadImage("/images/apples/bg_big_sky.png");
+  bg_sun_right = loadImage("/images/apples/bg_big_sky.png");
 
   bird = loadImage("/images/apples/bird.png");
   bird_shadow = loadImage("/images/apples/bird_shadow.png");
