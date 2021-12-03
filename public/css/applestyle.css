@@ -1,14 +1,16 @@
 html, body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  height: 100vh;
   background: url(/images/apples/bg_big_sky.png);
-  background-position: center;
+  /* background-position: center; */
   background-repeat: no-repeat;
 }
 canvas {
   display: block;
   background: url(/images/apples/bg_big_sky.png);
-  background-position: center;
+  /* background-position: center; */
   background-repeat: no-repeat;
 }
 
