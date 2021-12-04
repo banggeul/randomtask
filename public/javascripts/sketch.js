@@ -167,6 +167,9 @@ fetch('/subjects')
         console.log("fade in the interface");
       }
 
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      console.log(timezone);
+
     });
   })
   .catch((err) => {
@@ -257,6 +260,7 @@ function updateSubject() {
   const language = lang;
   //get the current date and time
   const timestamp = Date.now();
+
   //store it in the variable experiment
   experiment.subjectNum = subjectNum;
   experiment.lang = language;
