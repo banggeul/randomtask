@@ -8,7 +8,7 @@ const germanMsgs = {
   ageLabel: "Alter",
   yearLabel: "Jahre",
   monthLabel: "Monate",
-  enterSubjectNumMsg: "Geben Sie die Betreffnummer ein.",
+  enterSubjectNumMsg: "Betreffnummer",
   checkSubjectID: "Überprüfen Sie die Betreffnummer",
   subjectInfoLabel: "Dies ist ein neues Thema. Bitte wählen Sie das Geschlecht aus.",
   genderLabel: "Geschlecht",
@@ -21,7 +21,7 @@ const englishMsgs = {
   ageLabel: "Age",
   yearLabel: "Year",
   monthLabel: "Month",
-  enterSubjectNumMsg: "Enter Subject Number",
+  enterSubjectNumMsg: "Subject Number",
   checkSubjectID: "Check Subject Number",
   subjectInfoLabel: "This is a new subject. Please select the gender.",
   genderLabel: "Gender",
@@ -95,7 +95,8 @@ function changeHandler(event) {
 function changeLanguage(msgs){
   for(const key in msgs){
     let selector = '#'+ key;
-    console.log(selector, msgs[key]);
+    // console.log(selector, msgs[key]);
+    document.querySelector(selector).innerHTML = msgs[key];
   }
 }
 
