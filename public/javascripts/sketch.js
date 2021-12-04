@@ -45,7 +45,7 @@ function submitLanguageOption(){
       lang = ele[i].value;
   }
   //now hide the button
-  fadeOut($submitLanguage, true);
+  fadeOut($submitLanguage, false);
   //show the next section
   fadeIn($inputAgeSubjectNum);
 }
