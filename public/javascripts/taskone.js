@@ -29,6 +29,7 @@ const subjectNumParam = urlParams.get('subject');
 const ageGroupParam = urlParams.get('age');
 const id = urlParams.get('id');
 let subjects = [];
+let subjectNum;
 
 // let sequenceSets = [];
 let sequenceSetIndex;
