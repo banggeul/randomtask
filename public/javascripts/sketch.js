@@ -160,9 +160,10 @@ fetch('/subjects')
         // console.log("there's url parameters: "+subjectNum +","+id);
         document.querySelector('#name').value = subjectNumParam;
         checkSubjectID();
+        fadeInInterface($interface);
       } else {
         //if not, this is a new experiment
-        fadeIn($interface);
+        fadeInInterface($interface);
         console.log("fade in the interface");
       }
 
@@ -328,6 +329,19 @@ function findSubject(n) {
 //some utility functions for fading in and out using Greensock animation library (GSAP)
 function fadeIn(elem, duration=1, delay=0, display = "block") {
   elem.style.display = display;
+  //elem.style.opacity = 0;
+  gsap.to(elem, {
+    duration: duration,
+    ease: "power1.inOut",
+    opacity: 1,
+    delay: delay,
+    onComplete: enable,
+    onCompleteParams: [elem]
+  });
+}
+
+function fadeInInterface(elem) {
+  elem.style.visibility = "visible";
   //elem.style.opacity = 0;
   gsap.to(elem, {
     duration: duration,
