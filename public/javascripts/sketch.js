@@ -253,7 +253,7 @@ function updateSubject() {
   // console.log(genderOptions.options)
   const gender = genderOptions.options[genderOptions.selectedIndex].value;
   //
-  const germanOn = document.querySelector('#languageToggleSwitch').checked;
+  // const germanOn = document.querySelector('#languageToggleSwitch').checked;
   const lang = lang;
   //get the current date and time
   const timestamp = Date.now();
