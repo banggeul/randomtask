@@ -9,16 +9,19 @@ const {
 let experiment = {};
 let sessionData = {};
 let newSubject = false;
+let lang = "en";
 
 const urlParams = new URLSearchParams(window.location.search);
 const subjectNumParam = urlParams.get('subject');
+const ageGroupParam = urlParams.get('age');
 const id = urlParams.get('id');
 let subjects = [];
 
 //get the reference to the HTML elements we need
 const $generateNewID = document.querySelector('#generateNewIDButton');
-const $subjectInfoInput = document.querySelector('#subjectInfoInput');
-// const $subjectInfo = document.querySelector('#subjectInfo');
+const $inputAgeSubjectNum = document.querySelector('#inputAgeSubjectNum');
+const $inputGender = document.querySelector('#inputGender');
+const $submitLanguage = document.querySelector('#submitLanguage');
 const $checkSubjectID = document.querySelector('#checkSubjectID');
 
 const $rabbitTaskButton = document.querySelector('#rabbitTaskButton');
@@ -34,20 +37,32 @@ document.body.addEventListener('touchstart', () => {
 });
 
 //bind the click event listeners to the buttons
-$generateNewID.addEventListener('click', generateNewID);
-
-function generateNewID() {
-  //create a new subject id;
-  let newID = subjects.length + 1;
-  //put it in the form
-  document.querySelector('#name').value = newID;
-  resetAllInput();
-  if (!$checkSubjectID.classList.contains('disabled')) {
-    $checkSubjectID.classList.add('disabled');
+$submitLanguage.addEventListener('click', submitLanguageOption);
+function submitLanguageOption(){
+  let ele = document.getElementsByName('radio');
+  for(i = 0; i < ele.length; i++) {
+      if(ele[i].checked)
+      lang = ele[i].value;
   }
-  document.querySelector('#subjectInfoLabel').innerHTML = "This is a new subject. Please enter the info below."
-  $subjectInfoInput.style.display = "block";
-  newSubject = true;
+  //now hide the button
+  fadeOut($submitLanguage, true);
+  //show the next section
+  fadeIn($inputAgeSubjectNum);
+}
+
+$generateNewID.addEventListener('click', generateNewID);
+function generateNewID() {
+  // //create a new subject id;
+  // let newID = subjects.length + 1;
+  // //put it in the form
+  // document.querySelector('#name').value = newID;
+  // resetAllInput();
+  // if (!$checkSubjectID.classList.contains('disabled')) {
+  //   $checkSubjectID.classList.add('disabled');
+  // }
+  // document.querySelector('#subjectInfoLabel').innerHTML = "This is a new subject. Please enter the info below."
+  // $subjectInfoInput.style.display = "block";
+  // newSubject = true;
 }
 
 function resetAllInput() {
@@ -57,16 +72,15 @@ function resetAllInput() {
   document.querySelector('#treeTaskCheckbox').classList.remove('checked');
   document.querySelector('#rainTaskButton').classList.remove("disabled");
   document.querySelector('#rainTaskCheckbox').classList.remove('checked');
-  document.querySelector('#languageToggleSwitch').checked = false;
   document.querySelector('#tryAgain').style.display = "none";
 }
 
-document.querySelector('#name').addEventListener('change', function() {
-  //if there's something in the subjectID then enable the check button
-  if (this.value > 0 && $checkSubjectID.classList.contains('disabled')) {
-    $checkSubjectID.classList.remove('disabled');
-  }
-})
+// document.querySelector('#name').addEventListener('change', function() {
+//   //if there's something in the subjectID then enable the check button
+//   if (this.value > 0 && $checkSubjectID.classList.contains('disabled')) {
+//     $checkSubjectID.classList.remove('disabled');
+//   }
+// })
 
 //when the checkID button is pressed
 //it checks the id in the database and populate all the inputs
@@ -86,7 +100,7 @@ fetch('/subjects')
       // console.log(subjects[0]);
       //do something
       //first check if this is a redirect or not, if it's a redirect then checkSubjectID
-      if(subjectNumParam!=null){
+      if(subjectNumParam!=null && ageGroupParam!=null){
         // console.log("there's url parameters: "+subjectNum +","+id);
         document.querySelector('#name').value = subjectNumParam;
         checkSubjectID();
@@ -105,15 +119,23 @@ fetch('/subjects')
 function checkSubjectID() {
   resetAllInput();
   const subjectNum = document.querySelector('#name').value;
+  const ageYearOptions = document.getElementById('ageYearOptions');
+  const ageGroup = ageYearOptions.options[ageYearOptions.selectedIndex].value;
+
   let match = false;
   for (let i = 0; i < subjects.length; i++) {
     let subjectObj = subjects[i][1][0];
     // console.log(subjectObj);
-    if (subjectObj.subjectNum == subjectNum) {
+    if (subjectObj.subjectNum == subjectNum && subjectObj.age.year == ageGroup) {
+      //subject has been found
       newSubject = false;
       document.querySelector('#subjectInfoLabel').innerHTML = "This is an existing subject. Please make sure the info below is correct."
-      document.querySelector('#ageYear').value = subjectObj.age.year;
-      document.querySelector('#ageMonth').value = subjectObj.age.month;
+
+      // const ageYearOptions = document.getElementById('ageYearOptions');
+      // ageYearOptions.options[ageYearOptions.selectedIndex].value = subjectObj.age.year;
+      // const ageMonthOptions = document.getElementById('ageMonthOptions');
+      // ageMonthOptions.options[ageMonthOptions.selectedIndex].value = subjectObj.age.month;
+
       const genderOptions = document.getElementById('genderOptions');
       genderOptions.options[genderOptions.selectedIndex].value = subjectObj.gender;
       let task = 0;
@@ -135,11 +157,13 @@ function checkSubjectID() {
       if (task == 3) {
         document.querySelector('#tryAgain').style.display = "block";
       }
-      if (subjectObj.lang == "de") {
-        document.querySelector('#languageToggleSwitch').checked = true;
-      }
+      // if (subjectObj.lang == "de") {
+      //   document.querySelector('#languageToggleSwitch').checked = true;
+      // }
       match = true;
-      $subjectInfoInput.style.display = "block";
+      // $inputGender.style.display = "block";
+      fadeIn($inputGender);
+      // fadeOut($checkSubjectID, true);
       break;
     }
   }
@@ -159,13 +183,18 @@ function checkSubjectID() {
 function updateSubject() {
   //get all the values from the input elements
   const subjectNum = document.querySelector('#name').value;
-  const ageYear = document.querySelector('#ageYear').value;
-  const ageMonth = document.querySelector('#ageMonth').value;
+  //
+  const ageYearOptions = document.getElementById('ageYearOptions');
+  const ageYear = ageYearOptions.options[ageYearOptions.selectedIndex].value;
+  const ageMonthOptions = document.getElementById('ageMonthOptions');
+  const ageMonth = ageMonthOptions.options[ageMonthOptions.selectedIndex].value;
+  //
   const genderOptions = document.getElementById('genderOptions');
   // console.log(genderOptions.options)
   const gender = genderOptions.options[genderOptions.selectedIndex].value;
+  //
   const germanOn = document.querySelector('#languageToggleSwitch').checked;
-  const lang = germanOn ? "de" : "en";
+  const lang = lang;
   //get the current date and time
   const timestamp = Date.now();
   //store it in the variable experiment
@@ -231,4 +260,46 @@ function findSubject(n) {
       return subjectObj;
     }
   }
+}
+
+////////////
+//some utility functions for fading in and out using Greensock animation library (GSAP)
+function fadeIn(elem, duration=1, delay=0, display = "block") {
+  elem.style.display = display;
+  //elem.style.opacity = 0;
+  gsap.to(elem, {
+    duration: duration,
+    ease: "power1.inOut",
+    opacity: 1,
+    delay: delay,
+    onComplete: enable,
+    onCompleteParams: [elem]
+  });
+}
+
+function fadeOut(elem, hide, delay = 0) {
+  gsap.to(elem, {
+    duration: 1,
+    delay: delay,
+    ease: "power1.inOut",
+    opacity: 0,
+    onComplete: hide ? hideElem : null,
+    onCompleteParams: [elem]
+  });
+}
+
+function hideElem(elem) {
+  elem.style.display = "none";
+}
+
+function enable(elem) {
+  elem.style.pointerEvents = "auto";
+}
+
+function mapRange(num, in_min, in_max, out_min, out_max) {
+  return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
+function timeout(ms) {
+  return new Promise(res => setTimeout(res, ms));
 }

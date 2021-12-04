@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> <%= title %> </title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- <meta name="viewport" content="width=device-width, user-scalable=no"> -->
+    <meta name="viewport" content="width=2732, user-scalable=no">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/images/icon-ipad-retina.png">
+  </head>
+  <body>
+    <div id="app-container">
+      <div class="" id="content"></div>
+      <div class="container">
+        <h1>Welcome to the Experiments</h1>
+        <div id="user-context">
+          <div class="formRow">
+            <div class="formRowFlex">
+              <label for="sessionID">Enter Subject ID</label>
+              <label for="generateNew"><a href="#" id="generateNewIDButton"> Generate New Instead?</a></label>
+            </div>
+
+            <input onClick="this.setSelectionRange(0, this.value.length);" type="text" name="name" id="name" value="">
+          </div>
+          <a class="cta disabled" href="#" id="checkSubjectID">Check the Subject ID</a>
+          <div class="subjectInfoInput" id="subjectInfoInput">
+            <div class="formRow" id="age">
+              <label id="subjectInfoLabel">This is a new subject. Please enter the info below.</label>
+              <label for="age">Age:</label>
+              <div class="ageInputRow">
+                <div class="ageInputCol">
+                  <label for="year"> Year </label> <input onClick="this.setSelectionRange(0, this.value.length);" type="tel" name="" value="5" min="1" max="100" id="ageYear">
+                </div>
+                <div class="ageInputCol">
+                  <label for="month"> Months </label> <input onClick="this.setSelectionRange(0, this.value.length);" type="tel" name="" value="0" min="0" max="11" id="ageMonth">
+                </div>
+              </div>
+            </div>
+            <div class="formRow" id="genderOptionRow">
+              <label for="gender">Gender</label>
+              <select id="genderOptions" name="genderOptions">
+                <option value="female">F</option>
+                <option value="male">M</option>
+                <option value="nonbinary">X</option>
+              </select>
+            </div>
+            <div class="formRow languageToggleSwitch">
+              <label for="toggleLanguage">Play in German</label>
+              <div class="switchWrapper">
+                <label class="switch">
+                    <input type="checkbox" id="languageToggleSwitch">
+                    <span class="slider round"></span>
+                </label>
+              </div>
+            </div>
+            <div class="formRowFlex formRowCenter">
+              <a class="cta" href="#" id="rabbitTaskButton" name="one">Task 1</a>
+              <div class="checkbox" id="rabbitTaskCheckbox"></div>
+            </div>
+            <div class="formRowFlex formRowCenter">
+              <a class="cta" href="#" id="treeTaskButton" name="two">Task 2</a>
+              <div class="checkbox" id="treeTaskCheckbox" ></div>
+            </div>
+            <div class="formRowFlex formRowCenter">
+              <a class="cta" href="#" id="rainTaskButton" name="three">Task 3</a>
+              <div class="checkbox" id="rainTaskCheckbox"></div>
+            </div>
+            <label id="tryAgain">This subject has finished all tasks. Check the number and try again.</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/gsap.min.js"></script>
+    <script> console.log( "<%= myVar %>");  </script>
+    <script type="module" src="/javascripts/sketch.js"></script>
+  </body>
+</html>
