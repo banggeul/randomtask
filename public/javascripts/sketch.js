@@ -254,12 +254,12 @@ function updateSubject() {
   const gender = genderOptions.options[genderOptions.selectedIndex].value;
   //
   // const germanOn = document.querySelector('#languageToggleSwitch').checked;
-  const lang = lang;
+  const language = lang;
   //get the current date and time
   const timestamp = Date.now();
   //store it in the variable experiment
   experiment.subjectNum = subjectNum;
-  experiment.lang = lang;
+  experiment.lang = language;
   // experiment.timeLimit = timeLimit;
   experiment.timestamp = timestamp;
   experiment.windowSize = {
