@@ -30,6 +30,7 @@ const ageGroupParam = urlParams.get('age');
 const id = urlParams.get('id');
 let subjects = [];
 let subjectNum;
+let ageGroup;
 
 // let sequenceSets = [];
 let sequenceSetIndex;
@@ -82,6 +83,7 @@ fetchSubject().then((data) => {
   }
   if(subjectNumParam!=null){
     subjectNum = parseInt(subjectNumParam);
+    ageGroup = parseInt(ageGroupParam);
     // //now do something with it
     currentSubject = findSubject(subjectNum);
     // //set the sequence based on the subjectNumber
