@@ -40,7 +40,7 @@ document.body.addEventListener('touchstart', () => {
 $submitLanguage.addEventListener('click', submitLanguageOption);
 function submitLanguageOption(){
   let ele = document.getElementsByName('radio');
-  for(i = 0; i < ele.length; i++) {
+  for(let i = 0; i < ele.length; i++) {
       if(ele[i].checked)
       lang = ele[i].value;
   }
