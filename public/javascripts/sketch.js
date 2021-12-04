@@ -48,7 +48,7 @@ let subjects = [];
 const $generateNewID = document.querySelector('#generateNewIDButton');
 const $inputAgeSubjectNum = document.querySelector('#inputAgeSubjectNum');
 const $inputGender = document.querySelector('#inputGender');
-const $submitLanguage = document.querySelector('#submitLanguage');
+// const $submitLanguage = document.querySelector('#submitLanguage');
 const $checkSubjectID = document.querySelector('#checkSubjectID');
 
 const $rabbitTaskButton = document.querySelector('#rabbitTaskButton');
@@ -64,18 +64,18 @@ document.body.addEventListener('touchstart', () => {
 });
 
 //bind the click event listeners to the buttons
-$submitLanguage.addEventListener('click', submitLanguageOption);
-function submitLanguageOption(){
-  let ele = document.getElementsByName('radio');
-  for(let i = 0; i < ele.length; i++) {
-      if(ele[i].checked)
-      lang = ele[i].value;
-  }
-  //now hide the button
-  fadeOut($submitLanguage, false);
-  //show the next section
-  fadeIn($inputAgeSubjectNum);
-}
+// $submitLanguage.addEventListener('click', submitLanguageOption);
+// function submitLanguageOption(){
+//   let ele = document.getElementsByName('radio');
+//   for(let i = 0; i < ele.length; i++) {
+//       if(ele[i].checked)
+//       lang = ele[i].value;
+//   }
+//   //now hide the button
+//   fadeOut($submitLanguage, false);
+//   //show the next section
+//   fadeIn($inputAgeSubjectNum);
+// }
 
 var radios = document.querySelectorAll('input[type=radio][name="radio"]');
 
