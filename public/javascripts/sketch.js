@@ -342,7 +342,7 @@ function fadeIn(elem, duration=1, delay=0, display = "block") {
 
 function fadeInInterface(elem) {
   elem.style.visibility = "visible";
-  //elem.style.opacity = 0;
+  elem.style.opacity = 0;
   gsap.to(elem, {
     duration: 1,
     ease: "power1.inOut",
