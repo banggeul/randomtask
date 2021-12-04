@@ -55,7 +55,7 @@ var radios = document.querySelectorAll('input[type=radio][name="radio"]');
 function changeHandler(event) {
    if ( this.value === 'en' ) {
      console.log("english")
-   } else if ( this.value === 'transfer' ) {
+   } else if ( this.value === 'de' ) {
       console.log("Deutsch");
    }
 }
