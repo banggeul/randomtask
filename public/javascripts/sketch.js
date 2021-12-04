@@ -95,9 +95,9 @@ function changeHandler(event) {
 function changeLanguage(msgs){
   for(const key in msgs){
     let selector = '#'+ key;
-    console.log(selector, msgs[key]);
-    // document.querySelector(selector).innerHTML = msgs[key];
-    console.log(document.querySelector(selector));
+    // console.log(selector, msgs[key]);
+    document.querySelector(selector).innerHTML = msgs[key];
+    // console.log(document.querySelector(selector));
   }
 }
 
