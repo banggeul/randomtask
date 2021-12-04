@@ -6,6 +6,7 @@ import store from '/utils/storage.js'
 const {
   data
 } = store.getState();
+
 //create an empty object to store the new experiment data
 let experiment = {};
 let sessionData = {};
@@ -24,21 +25,23 @@ var correct = [];
 var $cards = [];
 
 const urlParams = new URLSearchParams(window.location.search);
-const subjectNum = urlParams.get('subject');
-// const id = urlParams.get('id');
+const subjectNumParam = urlParams.get('subject');
+const ageGroupParam = urlParams.get('age');
+const id = urlParams.get('id');
 let subjects = [];
-let sequenceSets = [];
+
+// let sequenceSets = [];
 let sequenceSetIndex;
 let pValue;
 
 //generate some fake sequenceSet for testing purpose
-for(let i=0; i < 50; i++){
-  let sequence = [];
-  for(let j=0; j < 41; j++){
-    sequence.push(Math.random() > 0.5 ? 1 : 0);
-  }
-  sequenceSets.push(sequence);
-}
+// for(let i=0; i < 50; i++){
+//   let sequence = [];
+//   for(let j=0; j < 41; j++){
+//     sequence.push(Math.random() > 0.5 ? 1 : 0);
+//   }
+//   sequenceSets.push(sequence);
+// }
 
 const $game = document.querySelector('#content');
 //make sure the game view is all hidden
@@ -76,23 +79,25 @@ fetchSubject().then((data) => {
     }
     subjects.push(innerarray);
   }
-  //
-  // //now do something with it
-  currentSubject = findSubject(subjectNum);
-  // //set the sequence based on the subjectNumber
+  if(subjectNumParam!=null){
+    subjectNum = parseInt(subjectNumParam);
+    // //now do something with it
+    currentSubject = findSubject(subjectNum);
+    // //set the sequence based on the subjectNumber
 
-  //set the choice cards mode based on the subject number
-  //in this case we are just doing even / odd number
-  choiceMode = subjectNum%2==0 ? 0 : 1;
-  // //but for now just set it as the first one
-  sequenceSetIndex = 1;
-  // pValue = sequence[parseInt(sequenceSet) - 1][41];
-  pValue = 1;
-  // //load the page content
-  //now set up the game
-  setUpGame();
-  //Fade in the game screen
-  fadeIn($game, 1);
+    //set the choice cards mode based on the subject number
+    //in this case we are just doing even / odd number
+    choiceMode = subjectNum%2==0 ? 0 : 1;
+    // //but for now just set it as the first one
+    sequenceSetIndex = subjectNum;
+    // pValue = sequence[parseInt(sequenceSet) - 1][41];
+    pValue = 1;
+    // //load the page content
+    //now set up the game
+    setUpGame();
+    //Fade in the game screen
+    fadeIn($game, 1);
+  }
 })
 .catch((e) =>
   console.log(e)
@@ -101,7 +106,7 @@ fetchSubject().then((data) => {
 function findSubject(n) {
   for(let i=0; i < subjects.length; i++){
     let subjectObj = subjects[i][1][0];
-    if(subjectObj.subjectNum == subjectNum){
+    if(subjectObj.subjectNum == subjectNum && subjectObj.age.year == ageGroup){
       //found it
       currentSubjectID = subjects[i][0];
       return subjectObj;
@@ -192,7 +197,7 @@ function setUpGame() {
     //load the sequence to the environment variable
     for (let i = 0; i < totalCards; i++) {
       //get the sequence from the sequence set
-      let env = sequenceSets[parseInt(sequenceSetIndex) - 1][i]
+      let env = sequenceSets[sequenceSetIndex - 1][i]
       environment.push(env);
     }
 

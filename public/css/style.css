@@ -51,6 +51,11 @@ a:visited {
   background-color: rgba(246,246,239,1);
 }
 
+#interfaceContainer {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 button {
   font-family: monospace;
   font-size: 10pt;

@@ -45,6 +45,7 @@ const id = urlParams.get('id');
 let subjects = [];
 
 //get the reference to the HTML elements we need
+const $interface = document.querySelector("#interfaceContainer");
 const $generateNewID = document.querySelector('#generateNewIDButton');
 const $inputAgeSubjectNum = document.querySelector('#inputAgeSubjectNum');
 const $inputGender = document.querySelector('#inputGender');
@@ -130,12 +131,12 @@ function resetAllInput() {
   document.querySelector('#tryAgain').style.display = "none";
 }
 
-// document.querySelector('#name').addEventListener('change', function() {
-//   //if there's something in the subjectID then enable the check button
-//   if (this.value > 0 && $checkSubjectID.classList.contains('disabled')) {
-//     $checkSubjectID.classList.remove('disabled');
-//   }
-// })
+document.querySelector('#name').addEventListener('change', function() {
+  //if there's something in the subjectID then enable the check button
+  if (this.value > 0 && $checkSubjectID.classList.contains('disabled')) {
+    $checkSubjectID.classList.remove('disabled');
+  }
+})
 
 //when the checkID button is pressed
 //it checks the id in the database and populate all the inputs
@@ -161,7 +162,7 @@ fetch('/subjects')
         checkSubjectID();
       } else {
         //if not, this is a new experiment
-
+        fadeIn($interface);
       }
 
     });
@@ -293,11 +294,14 @@ function startTheTask(e) {
 
   // location.
   if (e.target.name == "one") {
-    location.href = "task1"+"?subject="+experiment.subjectNum;
+    fadeOutInterface($interface, "task1");
+    // location.href = "task1"+"?subject="+experiment.subjectNum;
   } else if (e.target.name == "two") {
-    location.href = "task2"+"?subject="+experiment.subjectNum;
+    fadeOutInterface($interface, "task2");
+    // location.href = "task2"+"?subject="+experiment.subjectNum;
   } else if (e.target.name == "three") {
-    location.href = "task3"+"?subject="+experiment.subjectNum;
+    fadeOutInterface($interface, "task3");
+    // location.href = "task3"+"?subject="+experiment.subjectNum;
   }
 }
 
@@ -343,6 +347,21 @@ function fadeOut(elem, hide, delay = 0) {
     onComplete: hide ? hideElem : null,
     onCompleteParams: [elem]
   });
+}
+
+function fadeOutInterface(elem, onCompleteParam, delay = 0){
+  gsap.to(elem, {
+    duration: 1,
+    delay: delay,
+    ease: "power1.inOut",
+    opacity: 0,
+    onComplete: redirect,
+    onCompleteParams: [onCompleteParam]
+  });
+}
+
+function redirect(param) {
+  location.href = param+"?subject="+experiment.subjectNum+"&age="+experiment.age.year;
 }
 
 function hideElem(elem) {
