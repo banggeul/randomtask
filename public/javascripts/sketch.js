@@ -1,6 +1,33 @@
 //import the data storing script
 import store from '/utils/subject_storage.js'
 
+//german
+const germanMsgs = {
+  welcomeMsg : "Willkommen beim Experiment",
+  enterAgeSubjectMsg: "Bitte geben Sie das Alter und die Fächernummer ein.",
+  ageLabel: "Alter",
+  yearLabel: "Jahre",
+  monthLabel: "Monate",
+  enterSubjectNumMsg: "Geben Sie die Betreffnummer ein.",
+  checkSubjectID: "Überprüfen Sie die Betreffnummer",
+  subjectInfoLabel: "Dies ist ein neues Thema. Bitte wählen Sie das Geschlecht aus.",
+  genderLabel: "Geschlecht",
+  tryAgain: "Dieses Thema hat alle Aufgaben abgeschlossen. Überprüfen Sie die Nummer und versuchen Sie es erneut."
+}
+
+const englishMsgs = {
+  welcomeMsg : "Welcome to the experiment",
+  enterAgeSubjectMsg: "Please enter the age and subject number.",
+  ageLabel: "Age",
+  yearLabel: "Year",
+  monthLabel: "Month",
+  enterSubjectNumMsg: "Enter Subject Number",
+  checkSubjectID: "Check Subject Number",
+  subjectInfoLabel: "This is a new subject. Please select the gender.",
+  genderLabel: "Gender",
+  tryAgain: "This subject has finished all tasks. Check the number and try again."
+}
+
 //get the current data stored, unpack it as object
 const {
   data
@@ -54,10 +81,22 @@ var radios = document.querySelectorAll('input[type=radio][name="radio"]');
 
 function changeHandler(event) {
    if ( this.value === 'en' ) {
-     console.log("english")
+     console.log("english");
+     lang = "en";
+     changeLanguage(englishMsgs);
    } else if ( this.value === 'de' ) {
       console.log("Deutsch");
+      lang = "de";
+      changeLanguage(germanMsgs);
    }
+
+}
+
+function changeLanguage(msgs){
+  for(const key in msgs){
+    let selector = '#'+ key;
+    console.log(selector, msgs[key]);
+  }
 }
 
 Array.prototype.forEach.call(radios, function(radio) {

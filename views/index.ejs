@@ -19,7 +19,7 @@
   <div id="app-container">
     <div class="" id="content"></div>
     <div class="container">
-      <h1>Welcome! Choose your lanuage. </h1>
+      <h1 id="welcomMsg">Welcome to the experiment </h1>
       <div id="user-context">
         <div class="formRow">
           <div class="formRowFlex">
@@ -33,13 +33,14 @@
             </label>
           </div>
         </div>
-        <a class="cta" href="#" id="submitLanguage">Next</a>
+        <!-- <a class="cta" href="#" id="submitLanguage">Next</a> -->
         <div class="inputAgeSubjectNum" id="inputAgeSubjectNum">
+          <label id="enterAgeSubjectMsg">Please enter the age and subject number.</label>
           <div class="formRow" id="age">
-            <label for="age">Age:</label>
+            <label for="age" id="ageLabel">Age:</label>
             <div class="ageInputRow">
               <div class="ageInputCol">
-                <label for="year"> Year </label>
+                <label for="year" id="yearLabel"> Year </label>
                 <select id="ageYearOptions" name="ageYearOptions">
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -54,7 +55,7 @@
                 </select>
               </div>
               <div class="ageInputCol">
-                <label for="month"> Months </label>
+                <label for="month" id="monthLabel"> Months </label>
                 <select id="ageMonthOptions" name="ageMonthOptions">
                   <option value="0">0</option>
                   <option value="1">1</option>
@@ -74,19 +75,18 @@
           </div>
           <div class="formRow">
             <div class="formRowFlex">
-              <label for="sessionID">Enter Subject Number</label>
+              <label for="sessionID" id="enterSubjectNumMsg">Enter Subject Number</label>
               <label for="generateNew"><a href="#" id="generateNewIDButton"> Generate New Instead?</a></label>
             </div>
             <input onClick="this.setSelectionRange(0, this.value.length);" type="text" name="name" id="name" value="">
           </div>
-          <a class="cta" href="#" id="checkSubjectID">Next</a>
+          <a class="cta" href="#" id="checkSubjectID">Check Subject Number</a>
         </div>
-
 
         <div class="inputGender" id="inputGender">
           <div class="formRow" id="genderOptionRow">
             <label id="subjectInfoLabel">This is a new subject. Please select the gender.</label>
-            <label for="gender">Gender</label>
+            <label for="gender" id="genderLabel">Gender</label>
             <select id="genderOptions" name="genderOptions">
               <option value="female">F</option>
               <option value="male">M</option>
