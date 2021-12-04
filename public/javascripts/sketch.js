@@ -344,10 +344,10 @@ function fadeInInterface(elem) {
   elem.style.visibility = "visible";
   //elem.style.opacity = 0;
   gsap.to(elem, {
-    duration: duration,
+    duration: 1,
     ease: "power1.inOut",
     opacity: 1,
-    delay: delay,
+    delay: 0.5,
     onComplete: enable,
     onCompleteParams: [elem]
   });
