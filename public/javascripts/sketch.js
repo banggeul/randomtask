@@ -171,9 +171,11 @@ function checkSubjectID() {
   if (!match) {
     //if nothing has been matched then it means it's new.
     console.log("nothing matching")
-    generateNewID();
+    // generateNewID();
     newSubject = true;
-    document.querySelector('#subjectInfoLabel').innerHTML = "The subject number did not match our record. So we generated a new one for you. Please enter the info below."
+    // document.querySelector('#subjectInfoLabel').innerHTML = "The subject number did not match our record. So we generated a new one for you. Please enter the info below.";
+    document.querySelector('#subjectInfoLabel').innerHTML = "This is a new subject. Please select their gender."
+    fadeIn($inputGender);
   }
 }
 
