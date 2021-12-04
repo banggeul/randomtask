@@ -163,6 +163,7 @@ fetch('/subjects')
       } else {
         //if not, this is a new experiment
         fadeIn($interface);
+        console.log("fade in the interface");
       }
 
     });
