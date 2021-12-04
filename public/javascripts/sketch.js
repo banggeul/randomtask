@@ -50,6 +50,20 @@ function submitLanguageOption(){
   fadeIn($inputAgeSubjectNum);
 }
 
+var radios = document.querySelectorAll('input[type=radio][name="radio"]');
+
+function changeHandler(event) {
+   if ( this.value === 'en' ) {
+     console.log("english")
+   } else if ( this.value === 'transfer' ) {
+      console.log("Deutsch");
+   }
+}
+
+Array.prototype.forEach.call(radios, function(radio) {
+   radio.addEventListener('change', changeHandler);
+});
+
 $generateNewID.addEventListener('click', generateNewID);
 function generateNewID() {
   // //create a new subject id;
