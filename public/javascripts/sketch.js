@@ -64,6 +64,21 @@ document.body.addEventListener('touchstart', () => {
   document.activeElement.blur();
 });
 
+//check time zone;
+const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+console.log(timezone);
+let startIndex;
+if(timezone == "America/New_York"){
+  //if it's new york
+  startIndex = 0;
+} else {
+  //in germany
+  startIndex = 51;
+}
+//generate the subject num options
+for(let i = startIndex; i < startIndex+50; i++){
+  document.querySelector('#subjectNumOptions').innerHTML += `<option value="${i}">${i}</option>`
+}
 //bind the click event listeners to the buttons
 // $submitLanguage.addEventListener('click', submitLanguageOption);
 // function submitLanguageOption(){
@@ -131,9 +146,16 @@ function resetAllInput() {
   document.querySelector('#tryAgain').style.display = "none";
 }
 
-document.querySelector('#name').addEventListener('change', function() {
+// document.querySelector('#name').addEventListener('change', function() {
+//   //if there's something in the subjectID then enable the check button
+//   if (this.value > 0 && $checkSubjectID.classList.contains('disabled')) {
+//     $checkSubjectID.classList.remove('disabled');
+//   }
+// })
+
+document.querySelector('#subjectNumOptions').addEventListener('change', function() {
   //if there's something in the subjectID then enable the check button
-  if (this.value > 0 && $checkSubjectID.classList.contains('disabled')) {
+  if (this.options[subjectNumOptions.selectedIndex].value != null && $checkSubjectID.classList.contains('disabled')) {
     $checkSubjectID.classList.remove('disabled');
   }
 })
@@ -158,7 +180,9 @@ fetch('/subjects')
       //first check if this is a redirect or not, if it's a redirect then checkSubjectID
       if(subjectNumParam!=null && ageGroupParam!=null){
         // console.log("there's url parameters: "+subjectNum +","+id);
-        document.querySelector('#name').value = subjectNumParam;
+        //document.querySelector('#name').value = subjectNumParam;
+        const subjectNumOptions = document.getElementById('subjectNumOptions');
+        subjectNumOptions.value = subjectNumParam;
         checkSubjectID();
         fadeInInterface($interface);
       } else {
@@ -167,8 +191,7 @@ fetch('/subjects')
         console.log("fade in the interface");
       }
 
-      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      console.log(timezone);
+
 
     });
   })
@@ -179,7 +202,8 @@ fetch('/subjects')
 
 function checkSubjectID() {
   resetAllInput();
-  const subjectNum = document.querySelector('#name').value;
+  // const subjectNum = document.querySelector('#name').value;
+  const subjectNum = document.getElementById('subjectNumOptions').value;
   const ageYearOptions = document.getElementById('ageYearOptions');
   const ageGroup = ageYearOptions.options[ageYearOptions.selectedIndex].value;
 
@@ -245,7 +269,8 @@ function checkSubjectID() {
 //when the submit button is clicked do this
 function updateSubject() {
   //get all the values from the input elements
-  const subjectNum = document.querySelector('#name').value;
+  // const subjectNum = document.querySelector('#name').value;
+  const subjectNum = document.querySelector('#subjectNumOptions').value;
   //
   const ageYearOptions = document.getElementById('ageYearOptions');
   const ageYear = ageYearOptions.options[ageYearOptions.selectedIndex].value;
