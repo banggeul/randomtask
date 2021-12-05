@@ -123,7 +123,7 @@ function changeLanguage(msgs){
     } else {
       msg = "Dies ist ein bestehendes Thema. Bitte stellen Sie sicher, dass die folgenden Informationen korrekt sind."
     }
-    document.querySelector(#subjectInfoLabel).innerHTML = msg;
+    document.querySelector("#subjectInfoLabel").innerHTML = msg;
   }
 }
 
