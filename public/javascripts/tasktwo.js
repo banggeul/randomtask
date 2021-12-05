@@ -15,7 +15,7 @@ let currentSubject = {};
 let currentSubjectID;
 
 const urlParams = new URLSearchParams(window.location.search);
-const subjectNum = urlParams.get('subject');
+const subjectNumParam = urlParams.get('subject');
 const ageGroupParam = urlParams.get('age');
 const id = urlParams.get('id');
 let subjects = [];
