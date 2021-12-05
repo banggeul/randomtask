@@ -340,12 +340,12 @@ div[data-env="1"]{
   text-align: center;
   width: 60%;
   margin: auto;
-  top: 80%;
+  top: 60%;
   transform: translate(0, -50%);
   left: 0;
   right: 0;
   z-index: 2;
-  font-size: 1.3em;
+  font-size: 1.5em;
   letter-spacing: 2px;
   /* background: #333; */
 

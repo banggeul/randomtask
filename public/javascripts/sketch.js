@@ -46,7 +46,7 @@ let subjects = [];
 
 //get the reference to the HTML elements we need
 const $interface = document.querySelector("#interfaceContainer");
-const $generateNewID = document.querySelector('#generateNewIDButton');
+// const $generateNewID = document.querySelector('#generateNewIDButton');
 const $inputAgeSubjectNum = document.querySelector('#inputAgeSubjectNum');
 const $inputGender = document.querySelector('#inputGender');
 // const $submitLanguage = document.querySelector('#submitLanguage');
@@ -131,8 +131,8 @@ Array.prototype.forEach.call(radios, function(radio) {
    radio.addEventListener('change', changeHandler);
 });
 
-$generateNewID.addEventListener('click', generateNewID);
-function generateNewID() {
+// $generateNewID.addEventListener('click', generateNewID);
+// function generateNewID() {
   // //create a new subject id;
   // let newID = subjects.length + 1;
   // //put it in the form
@@ -144,7 +144,7 @@ function generateNewID() {
   // document.querySelector('#subjectInfoLabel').innerHTML = "This is a new subject. Please enter the info below."
   // $subjectInfoInput.style.display = "block";
   // newSubject = true;
-}
+// }
 
 function resetAllInput() {
   document.querySelector('#rabbitTaskButton').classList.remove("disabled");
@@ -219,6 +219,7 @@ function checkSubjectID() {
   // const ageGroup = ageYearOptions.options[ageYearOptions.selectedIndex].value;
   const ageGroup = document.getElementById('ageYearOptions').value;
 
+
   let match = false;
   for (let i = 0; i < subjects.length; i++) {
     let subjectObj = subjects[i][1][0];
@@ -272,6 +273,7 @@ function checkSubjectID() {
     console.log("nothing matching")
     // generateNewID();
     newSubject = true;
+    // const ageGroup = ageYearOptions.options[ageYearOptions.selectedIndex].value;
     // document.querySelector('#subjectInfoLabel').innerHTML = "The subject number did not match our record. So we generated a new one for you. Please enter the info below.";
     document.querySelector('#subjectInfoLabel').innerHTML = "This is a new subject. Please select their gender."
     fadeIn($inputGender);
@@ -304,6 +306,7 @@ function updateSubject() {
   experiment.subjectNum = subjectNum;
   experiment.lang = language;
   // experiment.timeLimit = timeLimit;
+  experiment.timezone = timezone;
   experiment.timestamp = timestamp;
   experiment.windowSize = {
     width: window.innerWidth,
