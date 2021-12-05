@@ -279,23 +279,23 @@ function checkSubjectID() {
     document.querySelector('#subjectInfoLabel').innerHTML = "This is an existing subject. Please make sure the info below is correct.";
     const ageMonthOptions = document.getElementById('ageMonthOptions');
     // ageMonthOptions.options[ageMonthOptions.selectedIndex].value = subjectObj.age.month;
-    ageMonthOptions.value = subjectObj.age.month;
+    ageMonthOptions.value = subject.age.month;
 
     const genderOptions = document.getElementById('genderOptions');
     // genderOptions.options[genderOptions.selectedIndex].value = subjectObj.gender;
-    genderOptions.value = subjectObj.gender;
+    genderOptions.value = subject.gender;
     let task = 0;
-    if (subjectObj.tasks.one == 1) {
+    if (subject.tasks.one == 1) {
       document.querySelector('#rabbitTaskButton').classList.add("disabled");
       document.querySelector('#rabbitTaskCheckbox').classList.add('checked');
       task++;
     }
-    if (subjectObj.tasks.two == 1) {
+    if (subject.tasks.two == 1) {
       document.querySelector('#treeTaskButton').classList.add("disabled");
       document.querySelector('#treeTaskCheckbox').classList.add('checked');
       task++;
     }
-    if (subjectObj.tasks.three == 1) {
+    if (subject.tasks.three == 1) {
       document.querySelector('#rainTaskButton').classList.add("disabled");
       document.querySelector('#rainTaskCheckbox').classList.add('checked');
       task++;
