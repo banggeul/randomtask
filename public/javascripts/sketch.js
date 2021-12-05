@@ -43,6 +43,11 @@ const subjectNumParam = urlParams.get('subject');
 const ageGroupParam = urlParams.get('age');
 const id = urlParams.get('id');
 let subjects = [];
+let ageSortedSubjects = [];
+
+for(let i=0; i < 10; i++){
+  ageSortedSubjects.push([]);
+}
 
 //get the reference to the HTML elements we need
 const $interface = document.querySelector("#interfaceContainer");
@@ -191,8 +196,11 @@ fetch('/subjects')
           innerarray.push(data[i][j]);
         }
         subjects.push(innerarray);
-        console.log(innerarray[1][0]);
+        const thisSubject = innerarray[1][0];
+        const ageGroupIndex = parseInt(thisSubject.age.year) - 1;
+        ageSortedSubjects[ageGroupIndex].push(thisSubject);
       }
+      console.log(ageSortedSubjects);
       // console.log(subjects[0]);
       //do something
       //first check if this is a redirect or not, if it's a redirect then checkSubjectID
