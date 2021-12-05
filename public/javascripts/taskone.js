@@ -709,7 +709,7 @@ function setUpGame() {
     fadeIn($thanks, 1, .5);
 
     setTimeout(function() {
-      window.location.href = "/"+"?subject="+currentSubject.subjectNum+"&id="+experiment.id+"&age="+experiment.age.year;
+      window.location.href = "/"+"?subject="+currentSubject.subjectNum+"&id="+experiment.id+"&age="+currentSubject.age.year;
     }, 5000);
     // gsap.from('.sun', {y:200, duration:2.5, ease:"elastic.out(1, 0.3)", delay:1})
     // gsap.to('.sun',{filter:"blur(0px)", scale:1.2, repeat:-1, yoyo:true, duration:1});
