@@ -191,6 +191,7 @@ fetch('/subjects')
           innerarray.push(data[i][j]);
         }
         subjects.push(innerarray);
+        console.log(innerArray[1][0]);
       }
       // console.log(subjects[0]);
       //do something
@@ -217,6 +218,17 @@ fetch('/subjects')
     console.log("something went wrong");
   });
 
+
+function findSubject(n) {
+  for(let i=0; i < subjects.length; i++){
+      let subjectObj = subjects[i][1][0];
+      if(subjectObj.subjectNum == subjectNum){
+        //found it
+        currentSubjectID = subjects[i][0];
+        return subjectObj;
+      }
+  }
+}
 
 function checkSubjectID() {
   resetAllInput();
@@ -367,16 +379,7 @@ function isEmpty(obj) {
   return true;
 }
 
-function findSubject(n) {
-  for(let i=0; i < subjects.length; i++){
-    let subjectObj = subjects[i][1][0];
-    if(subjectObj.subjectNum == subjectNum){
-      //found it
-      currentSubjectID = subjects[i][0];
-      return subjectObj;
-    }
-  }
-}
+
 
 ////////////
 //some utility functions for fading in and out using Greensock animation library (GSAP)
