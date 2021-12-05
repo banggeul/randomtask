@@ -115,6 +115,16 @@ function changeLanguage(msgs){
     document.querySelector(selector).innerHTML = msgs[key];
     // console.log(document.querySelector(selector));
   }
+
+  if(!newSubject) {
+    let msg;
+    if(lang == "en"){
+      msg = "This is an existing subject. Please make sure the info below is correct.";
+    } else {
+      msg = "Dies ist ein bestehendes Thema. Bitte stellen Sie sicher, dass die folgenden Informationen korrekt sind."
+    }
+    document.querySelector(#subjectInfoLabel).innerHTML = msg;
+  }
 }
 
 Array.prototype.forEach.call(radios, function(radio) {
