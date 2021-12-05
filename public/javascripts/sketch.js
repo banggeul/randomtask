@@ -191,7 +191,7 @@ fetch('/subjects')
           innerarray.push(data[i][j]);
         }
         subjects.push(innerarray);
-        console.log(innerArray[1][0]);
+        console.log(innerarray[1][0]);
       }
       // console.log(subjects[0]);
       //do something
