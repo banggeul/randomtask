@@ -220,8 +220,8 @@ function checkSubjectID() {
 
       // const ageYearOptions = document.getElementById('ageYearOptions');
       // ageYearOptions.options[ageYearOptions.selectedIndex].value = subjectObj.age.year;
-      // const ageMonthOptions = document.getElementById('ageMonthOptions');
-      // ageMonthOptions.options[ageMonthOptions.selectedIndex].value = subjectObj.age.month;
+      const ageMonthOptions = document.getElementById('ageMonthOptions');
+      ageMonthOptions.options[ageMonthOptions.selectedIndex].value = subjectObj.age.month;
 
       const genderOptions = document.getElementById('genderOptions');
       genderOptions.options[genderOptions.selectedIndex].value = subjectObj.gender;
