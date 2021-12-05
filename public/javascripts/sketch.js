@@ -165,9 +165,16 @@ function resetAllInput() {
 
 document.querySelector('#subjectNumOptions').addEventListener('change', function() {
   //if there's something in the subjectID then enable the check button
-  if (this.options[subjectNumOptions.selectedIndex].value != null && $checkSubjectID.classList.contains('disabled')) {
-    $checkSubjectID.classList.remove('disabled');
+  if (this.options[subjectNumOptions.selectedIndex].value != null) {
+    if($checkSubjectID.classList.contains('disabled')){
+      $checkSubjectID.classList.remove('disabled');
+    }
+  } else {
+    if(!$checkSubjectID.classList.contains('disabled')){
+      $checkSubjectID.classList.add('disabled');
+    }
   }
+
 })
 
 //when the checkID button is pressed
