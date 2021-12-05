@@ -101,8 +101,8 @@ fetchSubject().then((data) => {
     }
     document.querySelector("#left").setAttribute('data-choice', left);
     document.querySelector("#right").setAttribute('data-choice', right);
-    $leftChoice.classList.remove('activeChoiceCard');
-    $rightChoice.classList.remove('activeChoiceCard');
+    document.querySelector("#left").classList.remove('activeChoiceCard');
+    document.querySelector("#right").classList.remove('activeChoiceCard');
     document.querySelector('#game-HUD').style.display = "flex";
     document.querySelector('#game-HUD').style.opacity = "1";
     // //but for now just set it as the first one
