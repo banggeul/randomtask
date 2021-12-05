@@ -221,10 +221,12 @@ function checkSubjectID() {
       // const ageYearOptions = document.getElementById('ageYearOptions');
       // ageYearOptions.options[ageYearOptions.selectedIndex].value = subjectObj.age.year;
       const ageMonthOptions = document.getElementById('ageMonthOptions');
-      ageMonthOptions.options[ageMonthOptions.selectedIndex].value = subjectObj.age.month;
+      // ageMonthOptions.options[ageMonthOptions.selectedIndex].value = subjectObj.age.month;
+      ageMonthOptions.value = subjectObj.age.month;
 
       const genderOptions = document.getElementById('genderOptions');
-      genderOptions.options[genderOptions.selectedIndex].value = subjectObj.gender;
+      // genderOptions.options[genderOptions.selectedIndex].value = subjectObj.gender;
+      genderOptions.value = subjectObj.gender;
       let task = 0;
       if (subjectObj.tasks.one == 1) {
         document.querySelector('#rabbitTaskButton').classList.add("disabled");
