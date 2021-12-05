@@ -70,7 +70,7 @@ console.log(timezone);
 let startIndex;
 if(timezone == "America/New_York"){
   //if it's new york
-  startIndex = 0;
+  startIndex = 1;
 } else {
   //in germany
   startIndex = 51;
