@@ -183,6 +183,7 @@ fetch('/subjects')
         //document.querySelector('#name').value = subjectNumParam;
         const subjectNumOptions = document.getElementById('subjectNumOptions');
         subjectNumOptions.value = subjectNumParam;
+        document.getElementById('ageYearOptions').value = ageGroupParam;
         checkSubjectID();
         fadeInInterface($interface);
       } else {
@@ -204,8 +205,9 @@ function checkSubjectID() {
   resetAllInput();
   // const subjectNum = document.querySelector('#name').value;
   const subjectNum = document.getElementById('subjectNumOptions').value;
-  const ageYearOptions = document.getElementById('ageYearOptions');
-  const ageGroup = ageYearOptions.options[ageYearOptions.selectedIndex].value;
+  // const ageYearOptions = document.getElementById('ageYearOptions');
+  // const ageGroup = ageYearOptions.options[ageYearOptions.selectedIndex].value;
+  const ageGroup = document.getElementById('ageYearOptions').value;
 
   let match = false;
   for (let i = 0; i < subjects.length; i++) {
