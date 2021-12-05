@@ -468,10 +468,10 @@ function setUpGame() {
 
   function fadeOutShowOptions() {
     gsap.to($gameHUD, {
-      duration: 1,
-      delay: 0,
+      duration: 0.5,
+      delay: 1,
       ease: "power1.inOut",
-      opacity: 0.5,
+      opacity: 0.0,
       onComplete: generateNextOptions
     });
   }
