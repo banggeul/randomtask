@@ -13,7 +13,11 @@ let currentSubjectID;
 
 const urlParams = new URLSearchParams(window.location.search);
 const subjectNum = urlParams.get('subject');
+const ageGroupParam = urlParams.get('age');
+const id = urlParams.get('id');
 let subjects = [];
+let subjectNum;
+let ageGroup;
 let gameOn = false;
 
 // fetch the subjectNumbers collection
@@ -35,6 +39,8 @@ fetchSubject().then((data) => {
   }
 
   //now do something with it
+  subjectNum = parseInt(subjectNumParam);
+  ageGroup = parseInt(ageGroupParam);
   currentSubject = findSubject(subjectNum);
   console.log(currentSubject);
   //set the sequence based on the subjectNumber
@@ -49,7 +55,7 @@ fetchSubject().then((data) => {
 function findSubject(n) {
   for(let i=0; i < subjects.length; i++){
     let subjectObj = subjects[i][1][0];
-    if(subjectObj.subjectNum == subjectNum){
+    if(subjectObj.subjectNum == subjectNum && subjectObj.age.year == ageGroup){
       //found it
       currentSubjectID = subjects[i][0];
       return subjectObj;
@@ -486,7 +492,7 @@ function finishGame() {
   });
 
   setTimeout(function() {
-    window.location.href = "/"+"?subject="+currentSubject.subjectNum+"&id="+experiment.id;
+    window.location.href = "/"+"?subject="+currentSubject.subjectNum+"&id="+experiment.id+"&age="+currentSubject.age.year;
   }, 5000);
 }
 

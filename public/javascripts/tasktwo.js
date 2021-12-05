@@ -16,7 +16,11 @@ let currentSubjectID;
 
 const urlParams = new URLSearchParams(window.location.search);
 const subjectNum = urlParams.get('subject');
+const ageGroupParam = urlParams.get('age');
+const id = urlParams.get('id');
 let subjects = [];
+let subjectNum;
+let ageGroup;
 
 //get the reference to the HTML elements we need
 const $getUserContext = document.querySelector('#collectUserContext');
@@ -70,8 +74,10 @@ fetchSubject().then((data) => {
     }
 
     //now do something with it
+    subjectNum = parseInt(subjectNumParam);
+    ageGroup = parseInt(ageGroupParam);
     currentSubject = findSubject(subjectNum);
-    console.log(currentSubject);
+    // console.log(currentSubject);
 
     //bind the click event listener with the submit button
     $getUserContext.addEventListener('click', getUserContext);
@@ -315,8 +321,8 @@ function setUpGame() {
     fadeIn($thanks,.5);
 
     setTimeout(function() {
-      window.location.href = "/"+"?subject="+currentSubject.subjectNum+"&id="+experiment.id;
-    }, 5000);
+      window.location.href = "/"+"?subject="+currentSubject.subjectNum+"&id="+experiment.id+"&age="+currentSubject.age.year;
+    }, 3000);
     // gsap.from('.sun', {y:200, duration:2.5, ease:"elastic.out(1, 0.3)", delay:1})
     // gsap.to('.sun',{filter:"blur(0px)", scale:1.2, repeat:-1, yoyo:true, duration:1});
     // gsap.from($gameUI, {opacity:0, duration:1});
@@ -436,7 +442,7 @@ async function replay(data, $gameView) {
 function findSubject(n) {
   for (let i = 0; i < subjects.length; i++) {
     let subjectObj = subjects[i][1][0];
-    if (subjectObj.subjectNum == subjectNum) {
+    if (subjectObj.subjectNum == subjectNum && subjectObj.age.year == ageGroup) {
       //found it
       currentSubjectID = subjects[i][0];
       return subjectObj;
