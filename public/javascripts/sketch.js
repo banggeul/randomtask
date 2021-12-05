@@ -242,10 +242,9 @@ function findSubjectByAge(n, age) {
   console.log(n, age);
   const ageGroupArray = ageSortedSubjects[age-1];
 
-  for(let i=0; i < ageGroupArray; i++){
+  for(let i=0; i < ageGroupArray.length; i++){
     let subjectObj = ageGroupArray[i];
-    console.log(subjectObj.subjectNum);
-    if(parseInt(subjectObj.subjectNum) == n){
+    if(subjectObj.subjectNum == n){
       //we found it
       return subjectObj;
     }
