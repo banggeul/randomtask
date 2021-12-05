@@ -260,14 +260,13 @@ function findSubjectByAge(n, age) {
 function checkSubjectID() {
   resetAllInput();
   // const subjectNum = document.querySelector('#name').value;
-  const subjectNum = document.getElementById('subjectNumOptions').value;
+  const subjectNum = parseInt(document.getElementById('subjectNumOptions').value);
   // const ageGroup = ageYearOptions.options[ageYearOptions.selectedIndex].value;
-  const ageGroup = document.getElementById('ageYearOptions').value;
+  const ageGroup = parseInt(document.getElementById('ageYearOptions').value);
 
   let match = false;
 
-  //now find the subject with age and subject number
-  ageGroup = parseInt(ageGroup);
+  //now find the subject with age and subject numbe
   const subject = findSubjectByAge(subjectNum, ageGroup);
 
   if(subject != null){
