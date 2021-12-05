@@ -91,6 +91,20 @@ fetchSubject().then((data) => {
     //set the choice cards mode based on the subject number
     //in this case we are just doing even / odd number
     choiceMode = subjectNum%2==0 ? 0 : 1;
+    let left, right;
+    if(choiceMode == 0){
+      left = 0;
+      right = 1;
+    } else {
+      left = 1;
+      right = 0;
+    }
+    document.querySelector("#left").setAttribute('data-choice', left);
+    document.querySelector("#right").setAttribute('data-choice', right);
+    $leftChoice.classList.remove('activeChoiceCard');
+    $rightChoice.classList.remove('activeChoiceCard');
+    document.querySelector('#game-HUD').style.display = "flex";
+    document.querySelector('#game-HUD').style.opacity = "1";
     // //but for now just set it as the first one
     sequenceSetIndex = subjectNum;
     // pValue = sequence[parseInt(sequenceSet) - 1][41];
