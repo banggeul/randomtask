@@ -197,16 +197,18 @@ fetch('/subjects')
         }
         subjects.push(innerarray);
         const thisSubject = innerarray[1][0];
+        const thisSubjectId = innerarray[0];
+        console.log(thisSubjectId);
         const ageGroupIndex = parseInt(thisSubject.age.year) - 1;
         ageSortedSubjects[ageGroupIndex].push(thisSubject);
       }
-      console.log(ageSortedSubjects);
+      // console.log(ageSortedSubjects);
       // console.log(subjects[0]);
       //do something
       //first check if this is a redirect or not, if it's a redirect then checkSubjectID
       if(subjectNumParam!=null && ageGroupParam!=null){
-        // console.log("there's url parameters: "+subjectNum +","+id);
-        //document.querySelector('#name').value = subjectNumParam;
+        //if this is a redirect, then it must have the subject number param and age
+        //check and update the form.
         const subjectNumOptions = document.getElementById('subjectNumOptions');
         subjectNumOptions.value = subjectNumParam;
         document.getElementById('ageYearOptions').value = ageGroupParam;
@@ -215,11 +217,8 @@ fetch('/subjects')
       } else {
         //if not, this is a new experiment
         fadeInInterface($interface);
-        console.log("fade in the interface");
+        // console.log("fade in the interface");
       }
-
-
-
     });
   })
   .catch((err) => {
@@ -238,73 +237,141 @@ function findSubject(n) {
   }
 }
 
+function findSubjectByAge(n, age) {
+  const ageGroupArray = ageSortedSubjects[age-1];
+  for(let i=0; i < ageGroupArray; i++){
+    let subjectObj = ageGroupArray[i];
+    if(subjectObj.subjectNum == n){
+      //we found it
+      return subjectObj;
+    }
+  }
+
+  // for(let i=0; i < subjects.length; i++){
+  //     let subjectObj = subjects[i][1][0];
+  //     if(subjectObj.subjectNum == subjectNum){
+  //       //found it
+  //       currentSubjectID = subjects[i][0];
+  //       return subjectObj;
+  //     }
+  // }
+}
+
 function checkSubjectID() {
   resetAllInput();
   // const subjectNum = document.querySelector('#name').value;
   const subjectNum = document.getElementById('subjectNumOptions').value;
-  // const ageYearOptions = document.getElementById('ageYearOptions');
   // const ageGroup = ageYearOptions.options[ageYearOptions.selectedIndex].value;
   const ageGroup = document.getElementById('ageYearOptions').value;
 
-
   let match = false;
-  for (let i = 0; i < subjects.length; i++) {
-    let subjectObj = subjects[i][1][0];
-    // console.log(subjectObj);
-    if (subjectObj.subjectNum == subjectNum && subjectObj.age.year == ageGroup) {
-      //subject has been found
-      newSubject = false;
-      document.querySelector('#subjectInfoLabel').innerHTML = "This is an existing subject. Please make sure the info below is correct."
 
-      // const ageYearOptions = document.getElementById('ageYearOptions');
-      // ageYearOptions.options[ageYearOptions.selectedIndex].value = subjectObj.age.year;
-      const ageMonthOptions = document.getElementById('ageMonthOptions');
-      // ageMonthOptions.options[ageMonthOptions.selectedIndex].value = subjectObj.age.month;
-      ageMonthOptions.value = subjectObj.age.month;
+  //now find the subject with age and subject number
+  ageGroup = parseInt(ageGroup);
+  const subject = findSubjectByAge(subjectNum, ageGroup);
 
-      const genderOptions = document.getElementById('genderOptions');
-      // genderOptions.options[genderOptions.selectedIndex].value = subjectObj.gender;
-      genderOptions.value = subjectObj.gender;
-      let task = 0;
-      if (subjectObj.tasks.one == 1) {
-        document.querySelector('#rabbitTaskButton').classList.add("disabled");
-        document.querySelector('#rabbitTaskCheckbox').classList.add('checked');
-        task++;
-      }
-      if (subjectObj.tasks.two == 1) {
-        document.querySelector('#treeTaskButton').classList.add("disabled");
-        document.querySelector('#treeTaskCheckbox').classList.add('checked');
-        task++;
-      }
-      if (subjectObj.tasks.three == 1) {
-        document.querySelector('#rainTaskButton').classList.add("disabled");
-        document.querySelector('#rainTaskCheckbox').classList.add('checked');
-        task++;
-      }
-      if (task == 3) {
-        document.querySelector('#tryAgain').style.display = "block";
-      }
-      // if (subjectObj.lang == "de") {
-      //   document.querySelector('#languageToggleSwitch').checked = true;
-      // }
-      match = true;
-      // $inputGender.style.display = "block";
-      fadeIn($inputGender);
-      // fadeOut($checkSubjectID, true);
-      break;
+  if(subject != null){
+    //this is not a new subject
+    newSubject = false;
+    document.getElementById('subjectNumOptions').disabled = true;
+    document.querySelector('#subjectInfoLabel').innerHTML = "This is an existing subject. Please make sure the info below is correct.";
+    const ageMonthOptions = document.getElementById('ageMonthOptions');
+    // ageMonthOptions.options[ageMonthOptions.selectedIndex].value = subjectObj.age.month;
+    ageMonthOptions.value = subjectObj.age.month;
+
+    const genderOptions = document.getElementById('genderOptions');
+    // genderOptions.options[genderOptions.selectedIndex].value = subjectObj.gender;
+    genderOptions.value = subjectObj.gender;
+    let task = 0;
+    if (subjectObj.tasks.one == 1) {
+      document.querySelector('#rabbitTaskButton').classList.add("disabled");
+      document.querySelector('#rabbitTaskCheckbox').classList.add('checked');
+      task++;
     }
-  }
-
-  if (!match) {
-    //if nothing has been matched then it means it's new.
-    console.log("nothing matching")
-    // generateNewID();
+    if (subjectObj.tasks.two == 1) {
+      document.querySelector('#treeTaskButton').classList.add("disabled");
+      document.querySelector('#treeTaskCheckbox').classList.add('checked');
+      task++;
+    }
+    if (subjectObj.tasks.three == 1) {
+      document.querySelector('#rainTaskButton').classList.add("disabled");
+      document.querySelector('#rainTaskCheckbox').classList.add('checked');
+      task++;
+    }
+    if (task == 3) {
+      document.querySelector('#tryAgain').style.display = "block";
+    }
+    // if (subjectObj.lang == "de") {
+    //   document.querySelector('#languageToggleSwitch').checked = true;
+    // }
+    match = true;
+    // $inputGender.style.display = "block";
+    fadeIn($inputGender);
+  }else {
+    //this is a new subject
     newSubject = true;
-    // const ageGroup = ageYearOptions.options[ageYearOptions.selectedIndex].value;
-    // document.querySelector('#subjectInfoLabel').innerHTML = "The subject number did not match our record. So we generated a new one for you. Please enter the info below.";
+    console.log("nothing matching");
     document.querySelector('#subjectInfoLabel').innerHTML = "This is a new subject. Please select their gender."
     fadeIn($inputGender);
   }
+
+  // for (let i = 0; i < subjects.length; i++) {
+  //   let subjectObj = subjects[i][1][0];
+  //   // console.log(subjectObj);
+  //   if (subjectObj.subjectNum == subjectNum && subjectObj.age.year == ageGroup) {
+  //     //subject has been found
+  //     newSubject = false;
+  //     document.querySelector('#subjectInfoLabel').innerHTML = "This is an existing subject. Please make sure the info below is correct."
+  //
+  //     // const ageYearOptions = document.getElementById('ageYearOptions');
+  //     // ageYearOptions.options[ageYearOptions.selectedIndex].value = subjectObj.age.year;
+  //     const ageMonthOptions = document.getElementById('ageMonthOptions');
+  //     // ageMonthOptions.options[ageMonthOptions.selectedIndex].value = subjectObj.age.month;
+  //     ageMonthOptions.value = subjectObj.age.month;
+  //
+  //     const genderOptions = document.getElementById('genderOptions');
+  //     // genderOptions.options[genderOptions.selectedIndex].value = subjectObj.gender;
+  //     genderOptions.value = subjectObj.gender;
+  //     let task = 0;
+  //     if (subjectObj.tasks.one == 1) {
+  //       document.querySelector('#rabbitTaskButton').classList.add("disabled");
+  //       document.querySelector('#rabbitTaskCheckbox').classList.add('checked');
+  //       task++;
+  //     }
+  //     if (subjectObj.tasks.two == 1) {
+  //       document.querySelector('#treeTaskButton').classList.add("disabled");
+  //       document.querySelector('#treeTaskCheckbox').classList.add('checked');
+  //       task++;
+  //     }
+  //     if (subjectObj.tasks.three == 1) {
+  //       document.querySelector('#rainTaskButton').classList.add("disabled");
+  //       document.querySelector('#rainTaskCheckbox').classList.add('checked');
+  //       task++;
+  //     }
+  //     if (task == 3) {
+  //       document.querySelector('#tryAgain').style.display = "block";
+  //     }
+  //     // if (subjectObj.lang == "de") {
+  //     //   document.querySelector('#languageToggleSwitch').checked = true;
+  //     // }
+  //     match = true;
+  //     // $inputGender.style.display = "block";
+  //     fadeIn($inputGender);
+  //     // fadeOut($checkSubjectID, true);
+  //     break;
+  //   }
+  // }
+  //
+  // if (!match) {
+  //   //if nothing has been matched then it means it's new.
+  //   console.log("nothing matching")
+  //   // generateNewID();
+  //   newSubject = true;
+  //   // const ageGroup = ageYearOptions.options[ageYearOptions.selectedIndex].value;
+  //   // document.querySelector('#subjectInfoLabel').innerHTML = "The subject number did not match our record. So we generated a new one for you. Please enter the info below.";
+  //   document.querySelector('#subjectInfoLabel').innerHTML = "This is a new subject. Please select their gender."
+  //   fadeIn($inputGender);
+  // }
 }
 
 //bind the click event listener with the submit button
