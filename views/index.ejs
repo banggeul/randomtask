@@ -43,6 +43,7 @@
               <div class="ageInputCol">
                 <label for="year" id="yearLabel"> Year </label>
                 <select id="ageYearOptions" name="ageYearOptions">
+                  <option disabled selected>0</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -77,7 +78,7 @@
           <div class="formRow">
             <div class="formRowFlex">
               <label for="sessionID" id="enterSubjectNumMsg">Subject Number</label>
-              <!-- <label for="generateNew"><a href="#" id="generateNewIDButton"> Generate New Instead?</a></label> -->
+              <label for="generateNew"><a href="#" id="generateNewIDButton" class="disabled"> Generate New Instead?</a></label>
             </div>
             <!-- <input onClick="this.setSelectionRange(0, this.value.length);" type="text" name="name" id="name" value=""> -->
             <select id="subjectNumOptions" name="subjectNumOptions">

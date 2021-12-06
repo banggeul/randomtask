@@ -1,10 +1,14 @@
 //import the data storing script
-import {postData, getData, putData} from '/utils/data.js'
-import store from '/utils/subject_storage.js'
+import {
+  postData,
+  getData,
+  putData
+} from '/utils/data.js'
+// import store from '/utils/subject_storage.js'
 
 //german
 const germanMsgs = {
-  welcomeMsg : "Willkommen beim Experiment",
+  welcomeMsg: "Willkommen beim Experiment",
   enterAgeSubjectMsg: "Bitte geben Sie das Alter und die Fächernummer ein.",
   ageLabel: "Alter",
   yearLabel: "Jahre",
@@ -17,7 +21,7 @@ const germanMsgs = {
 }
 
 const englishMsgs = {
-  welcomeMsg : "Welcome to the experiment",
+  welcomeMsg: "Welcome to the experiment",
   enterAgeSubjectMsg: "Please enter the age and subject number.",
   ageLabel: "Age",
   yearLabel: "Year",
@@ -30,9 +34,9 @@ const englishMsgs = {
 }
 
 //get the current data stored, unpack it as object
-const {
-  data
-} = store.getState();
+// const {
+//   data
+// } = store.getState();
 //create an empty object to store the new experiment data
 let experiment = {};
 let sessionData = {};
@@ -47,8 +51,9 @@ let subjects = [];
 let ageSortedSubjects = [];
 let sortedSubjectIds = [];
 let newId;
+let age;
 
-for(let i=0; i < 10; i++){
+for (let i = 0; i < 10; i++) {
   ageSortedSubjects.push([]);
   sortedSubjectIds.push([]);
 }
@@ -77,7 +82,7 @@ document.body.addEventListener('touchstart', () => {
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 console.log(timezone);
 let startIndex;
-if(timezone == "America/New_York"){
+if (timezone == "America/New_York") {
   //if it's new york
   startIndex = 1;
 } else {
@@ -85,7 +90,7 @@ if(timezone == "America/New_York"){
   startIndex = 51;
 }
 //generate the subject num options
-for(let i = startIndex; i < startIndex+50; i++){
+for (let i = startIndex; i < startIndex + 50; i++) {
   document.querySelector('#subjectNumOptions').innerHTML += `<option value="${i}">${i}</option>`
 }
 //bind the click event listeners to the buttons
@@ -105,29 +110,29 @@ for(let i = startIndex; i < startIndex+50; i++){
 var radios = document.querySelectorAll('input[type=radio][name="radio"]');
 
 function changeHandler(event) {
-   if ( this.value === 'en' ) {
-     console.log("english");
-     lang = "en";
-     changeLanguage(englishMsgs);
-   } else if ( this.value === 'de' ) {
-      console.log("Deutsch");
-      lang = "de";
-      changeLanguage(germanMsgs);
-   }
+  if (this.value === 'en') {
+    console.log("english");
+    lang = "en";
+    changeLanguage(englishMsgs);
+  } else if (this.value === 'de') {
+    console.log("Deutsch");
+    lang = "de";
+    changeLanguage(germanMsgs);
+  }
 
 }
 
-function changeLanguage(msgs){
-  for(const key in msgs){
-    let selector = '#'+ key;
+function changeLanguage(msgs) {
+  for (const key in msgs) {
+    let selector = '#' + key;
     // console.log(selector, msgs[key]);
     document.querySelector(selector).innerHTML = msgs[key];
     // console.log(document.querySelector(selector));
   }
 
-  if(!newSubject) {
+  if (!newSubject) {
     let msg;
-    if(lang == "en"){
+    if (lang == "en") {
       msg = "This is an existing subject. Please make sure the info below is correct.";
     } else {
       msg = "Dies ist ein bestehendes Thema. Bitte stellen Sie sicher, dass die folgenden Informationen korrekt sind."
@@ -137,23 +142,29 @@ function changeLanguage(msgs){
 }
 
 Array.prototype.forEach.call(radios, function(radio) {
-   radio.addEventListener('change', changeHandler);
+  radio.addEventListener('change', changeHandler);
 });
 
-// $generateNewID.addEventListener('click', generateNewID);
-// function generateNewID() {
-  // //create a new subject id;
-  // let newID = subjects.length + 1;
-  // //put it in the form
-  // document.querySelector('#name').value = newID;
-  // resetAllInput();
-  // if (!$checkSubjectID.classList.contains('disabled')) {
-  //   $checkSubjectID.classList.add('disabled');
-  // }
-  // document.querySelector('#subjectInfoLabel').innerHTML = "This is a new subject. Please enter the info below."
-  // $subjectInfoInput.style.display = "block";
-  // newSubject = true;
-// }
+$generateNewID.addEventListener('click', generateNewID);
+
+function generateNewID() {
+  //create a new subject id;
+  //get the age
+  const ageGroup = parseInt(document.getElementById('ageYearOptions').value);
+
+  const ageGroupArray = ageSortedSubjects[ageGroup-1];
+  let newId = ageGroupArray.length + 1;
+  
+  document.querySelector('#subjectNumOptions').value = newID;
+  resetAllInput();
+
+  if (!$checkSubjectID.classList.contains('disabled')) {
+    $checkSubjectID.classList.add('disabled');
+  }
+  document.querySelector('#subjectInfoLabel').innerHTML = "This is a new subject. Please enter the info below."
+  fadeIn($inputGender);
+  newSubject = true;
+}
 
 function resetAllInput() {
   document.querySelector('#rabbitTaskButton').classList.remove("disabled");
@@ -172,14 +183,20 @@ function resetAllInput() {
 //   }
 // })
 
+document.querySelector("#ageYearOptions").addEventListener('change', ()=>{
+  if(this.value > 0){
+    $generateNewID.classList.remove('disabled');
+  }
+})
+
 document.querySelector('#subjectNumOptions').addEventListener('change', function() {
   //if there's something in the subjectID then enable the check button
   if (this.options[subjectNumOptions.selectedIndex].value != null) {
-    if($checkSubjectID.classList.contains('disabled')){
+    if ($checkSubjectID.classList.contains('disabled')) {
       $checkSubjectID.classList.remove('disabled');
     }
   } else {
-    if(!$checkSubjectID.classList.contains('disabled')){
+    if (!$checkSubjectID.classList.contains('disabled')) {
       $checkSubjectID.classList.add('disabled');
     }
   }
@@ -204,7 +221,7 @@ fetch('/subjects')
         let thisSubject = innerarray[1];
         const thisSubjectId = innerarray[0];
         // console.log(thisSubjectId);
-        if(thisSubject.uniqueId == null){
+        if (thisSubject.uniqueId == null) {
           thisSubject.uniqueId = thisSubjectId;
         }
         const ageGroupIndex = parseInt(thisSubject.age.year) - 1;
@@ -215,7 +232,7 @@ fetch('/subjects')
       // console.log(subjects[0]);
       //do something
       //first check if this is a redirect or not, if it's a redirect then checkSubjectID
-      if(subjectNumParam!=null && ageGroupParam!=null){
+      if (subjectNumParam != null && ageGroupParam != null) {
         //if this is a redirect, then it must have the subject number param and age
         //check and update the form.
         const subjectNumOptions = document.getElementById('subjectNumOptions');
@@ -234,39 +251,30 @@ fetch('/subjects')
     console.log("something went wrong");
   });
 
-
+//no longer used//
 function findSubject(n) {
-  for(let i=0; i < subjects.length; i++){
-      let subjectObj = subjects[i][1][0];
-      if(subjectObj.subjectNum == subjectNum){
-        //found it
-        // currentSubjectID = subjects[i][0];
-        return subjectObj;
-      }
+  for (let i = 0; i < subjects.length; i++) {
+    let subjectObj = subjects[i][1][0];
+    if (subjectObj.subjectNum == subjectNum) {
+      //found it
+      // currentSubjectID = subjects[i][0];
+      return subjectObj;
+    }
   }
 }
-
+//////
 function findSubjectByAge(n, age) {
 
   // console.log(n, age);
-  const ageGroupArray = ageSortedSubjects[age-1];
+  const ageGroupArray = ageSortedSubjects[age - 1];
 
-  for(let i=0; i < ageGroupArray.length; i++){
+  for (let i = 0; i < ageGroupArray.length; i++) {
     let subjectObj = ageGroupArray[i];
-    if(subjectObj.subjectNum == n){
+    if (subjectObj.subjectNum == n) {
       //we found it
       return subjectObj;
     }
   }
-
-  // for(let i=0; i < subjects.length; i++){
-  //     let subjectObj = subjects[i][1][0];
-  //     if(subjectObj.subjectNum == subjectNum){
-  //       //found it
-  //       currentSubjectID = subjects[i][0];
-  //       return subjectObj;
-  //     }
-  // }
 }
 
 function checkSubjectID() {
@@ -281,7 +289,7 @@ function checkSubjectID() {
   //now find the subject with age and subject numbe
   const subject = findSubjectByAge(subjectNum, ageGroup);
 
-  if(subject != null){
+  if (subject != null) {
     //this is not a new subject
     newSubject = false;
     experiment.uniqueId = subject.uniqueId;
@@ -313,81 +321,16 @@ function checkSubjectID() {
     if (task == 3) {
       document.querySelector('#tryAgain').style.display = "block";
     }
-
-    // if(subject.uniqueId!=null){
-    //   experiment.uniqueId = subject.uniqueId;
-    // }
-    // if (subjectObj.lang == "de") {
-    //   document.querySelector('#languageToggleSwitch').checked = true;
-    // }
     match = true;
     // $inputGender.style.display = "block";
     fadeIn($inputGender);
-  }else {
+  } else {
     //this is a new subject
     newSubject = true;
     console.log("nothing matching");
     document.querySelector('#subjectInfoLabel').innerHTML = "This is a new subject. Please select their gender."
     fadeIn($inputGender);
   }
-
-  // for (let i = 0; i < subjects.length; i++) {
-  //   let subjectObj = subjects[i][1][0];
-  //   // console.log(subjectObj);
-  //   if (subjectObj.subjectNum == subjectNum && subjectObj.age.year == ageGroup) {
-  //     //subject has been found
-  //     newSubject = false;
-  //     document.querySelector('#subjectInfoLabel').innerHTML = "This is an existing subject. Please make sure the info below is correct."
-  //
-  //     // const ageYearOptions = document.getElementById('ageYearOptions');
-  //     // ageYearOptions.options[ageYearOptions.selectedIndex].value = subjectObj.age.year;
-  //     const ageMonthOptions = document.getElementById('ageMonthOptions');
-  //     // ageMonthOptions.options[ageMonthOptions.selectedIndex].value = subjectObj.age.month;
-  //     ageMonthOptions.value = subjectObj.age.month;
-  //
-  //     const genderOptions = document.getElementById('genderOptions');
-  //     // genderOptions.options[genderOptions.selectedIndex].value = subjectObj.gender;
-  //     genderOptions.value = subjectObj.gender;
-  //     let task = 0;
-  //     if (subjectObj.tasks.one == 1) {
-  //       document.querySelector('#rabbitTaskButton').classList.add("disabled");
-  //       document.querySelector('#rabbitTaskCheckbox').classList.add('checked');
-  //       task++;
-  //     }
-  //     if (subjectObj.tasks.two == 1) {
-  //       document.querySelector('#treeTaskButton').classList.add("disabled");
-  //       document.querySelector('#treeTaskCheckbox').classList.add('checked');
-  //       task++;
-  //     }
-  //     if (subjectObj.tasks.three == 1) {
-  //       document.querySelector('#rainTaskButton').classList.add("disabled");
-  //       document.querySelector('#rainTaskCheckbox').classList.add('checked');
-  //       task++;
-  //     }
-  //     if (task == 3) {
-  //       document.querySelector('#tryAgain').style.display = "block";
-  //     }
-  //     // if (subjectObj.lang == "de") {
-  //     //   document.querySelector('#languageToggleSwitch').checked = true;
-  //     // }
-  //     match = true;
-  //     // $inputGender.style.display = "block";
-  //     fadeIn($inputGender);
-  //     // fadeOut($checkSubjectID, true);
-  //     break;
-  //   }
-  // }
-  //
-  // if (!match) {
-  //   //if nothing has been matched then it means it's new.
-  //   console.log("nothing matching")
-  //   // generateNewID();
-  //   newSubject = true;
-  //   // const ageGroup = ageYearOptions.options[ageYearOptions.selectedIndex].value;
-  //   // document.querySelector('#subjectInfoLabel').innerHTML = "The subject number did not match our record. So we generated a new one for you. Please enter the info below.";
-  //   document.querySelector('#subjectInfoLabel').innerHTML = "This is a new subject. Please select their gender."
-  //   fadeIn($inputGender);
-  // }
 }
 
 //bind the click event listener with the submit button
@@ -434,39 +377,34 @@ function updateSubject() {
   experiment.gender = gender;
 }
 
-function addNewSubject(e){
-  //then store it to the storage which will post it to the database
-  // const newData = store.dispatch({
-  //   type: !isEmpty(experiment) ? "ADD_DATA" : "REMOVE_DATA",
-  //   payload: {
-  //     data: experiment
-  //   }
-  // });
+function addNewSubject(e) {
 
-  postData('./subjects',{experiment})
-  // postData('./raindots',{data})
-  .then((pdata) => {
-    // console.log("here's the pdata: " + pdata.insertedId); // JSON data parsed by `response.json()` call
-    //get the newly inserted id to pass as with the url
-    experiment.uniqueId = pdata.insertedId;
-    if (e.target.name == "one") {
-      fadeOutInterface($interface, "task1");
-      // location.href = "task1"+"?subject="+experiment.subjectNum;
-    } else if (e.target.name == "two") {
-      fadeOutInterface($interface, "task2");
-      // location.href = "task2"+"?subject="+experiment.subjectNum;
-    } else if (e.target.name == "three") {
-      fadeOutInterface($interface, "task3");
-      // location.href = "task3"+"?subject="+experiment.subjectNum;
-    }
-  });
+  postData('./subjects', {
+      experiment
+    })
+    // postData('./raindots',{data})
+    .then((pdata) => {
+      // console.log("here's the pdata: " + pdata.insertedId); // JSON data parsed by `response.json()` call
+      //get the newly inserted id to pass as with the url
+      experiment.uniqueId = pdata.insertedId;
+      if (e.target.name == "one") {
+        fadeOutInterface($interface, "task1");
+        // location.href = "task1"+"?subject="+experiment.subjectNum;
+      } else if (e.target.name == "two") {
+        fadeOutInterface($interface, "task2");
+        // location.href = "task2"+"?subject="+experiment.subjectNum;
+      } else if (e.target.name == "three") {
+        fadeOutInterface($interface, "task3");
+        // location.href = "task3"+"?subject="+experiment.subjectNum;
+      }
+    });
 }
 
 function startTheTask(e) {
   //add the new subject to the database if this subject is new
   updateSubject();
 
-  if(newSubject) {
+  if (newSubject) {
     addNewSubject(e);
   } else {
     // location.
@@ -494,7 +432,7 @@ function isEmpty(obj) {
 
 ////////////
 //some utility functions for fading in and out using Greensock animation library (GSAP)
-function fadeIn(elem, duration=1, delay=0, display = "block") {
+function fadeIn(elem, duration = 1, delay = 0, display = "block") {
   elem.style.display = display;
   //elem.style.opacity = 0;
   gsap.to(elem, {
@@ -531,7 +469,7 @@ function fadeOut(elem, hide, delay = 0) {
   });
 }
 
-function fadeOutInterface(elem, onCompleteParam, delay = 0){
+function fadeOutInterface(elem, onCompleteParam, delay = 0) {
   gsap.to(elem, {
     duration: 1,
     delay: delay,
@@ -543,7 +481,7 @@ function fadeOutInterface(elem, onCompleteParam, delay = 0){
 }
 
 function redirect(param) {
-  console.log(param+"?subject="+experiment.subjectNum+"&age="+experiment.age.year+"&id="+experiment.uniqueId);
+  console.log(param + "?subject=" + experiment.subjectNum + "&age=" + experiment.age.year + "&id=" + experiment.uniqueId);
   // location.href = param+"?subject="+experiment.subjectNum+"&age="+experiment.age.year+"&id="+experiment.uniqueId;
 }
 
