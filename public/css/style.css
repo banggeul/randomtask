@@ -679,7 +679,7 @@ a#generateNewIDButton {
 a#generateNewIDButton.disabled {
   color: #ccc;
   pointer-events: none;
-  background-color: none;
+  background-color: #fff;
 }
 
 .timeLimitSwitch {
