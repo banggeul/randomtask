@@ -1,6 +1,12 @@
 //import the data storing script
 import storeSubject from '/utils/subject_storage.js'
 import store from '/utils/storage.js'
+//import the data storing script
+import {
+  postData,
+  getData,
+  putData
+} from '/utils/data.js'
 
 //get the current data stored, unpack it as object
 const {
@@ -64,13 +70,20 @@ async function fetchSubject(){
   return await response.json();
 }
 
-// async function fetchSingleSubject(){
-//   let response = await fetch(`/single_subject?id=${encodedURIComponent(id)}`);
+// async function fetchSubjectById(o_id){
+//   let response = await fetch(`/single_subject?id=${encodedURIComponent(o_id)}`);
 //   if (!response.ok) {
 //     throw new Error(`HTTP error! status: ${response.status}`);
 //   }
 //   return await response.json();
 // }
+
+getData('/single_subject', {
+    id
+  })
+  .then((data) => {
+    console.log(data);
+  });
 
 
 fetchSubject().then((data) => {
