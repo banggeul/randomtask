@@ -27,12 +27,13 @@ const dataReducer = (state=initialState, action) => {
         // });
         // return {data};
 
-        const response = await postData('./subjects',{data})
+        postData('./subjects',{data})
         // postData('./raindots',{data})
         .then((pdata) => {
-          console.log("here's the pdata: " + pdata.insertedId); // JSON data parsed by `response.json()` call
+          // console.log("here's the pdata: " + pdata.insertedId); // JSON data parsed by `response.json()` call
+          // insertedId = pdata.insertedId;
         });
-        return response;
+        return {data};
       }
     case 'REMOVE_DATA':
       {

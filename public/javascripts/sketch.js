@@ -1,4 +1,5 @@
 //import the data storing script
+import {postData, getData, putData} from './data.js'
 import store from '/utils/subject_storage.js'
 
 //german
@@ -44,6 +45,7 @@ const ageGroupParam = urlParams.get('age');
 const id = urlParams.get('id');
 let subjects = [];
 let ageSortedSubjects = [];
+let newId;
 
 for(let i=0; i < 10; i++){
   ageSortedSubjects.push([]);
@@ -199,6 +201,7 @@ fetch('/subjects')
         const thisSubject = innerarray[1][0];
         const thisSubjectId = innerarray[0];
         console.log(thisSubjectId);
+        thisSubject.uniqueId = thisSubjectId;
         const ageGroupIndex = parseInt(thisSubject.age.year) - 1;
         ageSortedSubjects[ageGroupIndex].push(thisSubject);
       }
@@ -231,7 +234,7 @@ function findSubject(n) {
       let subjectObj = subjects[i][1][0];
       if(subjectObj.subjectNum == subjectNum){
         //found it
-        currentSubjectID = subjects[i][0];
+        // currentSubjectID = subjects[i][0];
         return subjectObj;
       }
   }
@@ -239,7 +242,7 @@ function findSubject(n) {
 
 function findSubjectByAge(n, age) {
 
-  console.log(n, age);
+  // console.log(n, age);
   const ageGroupArray = ageSortedSubjects[age-1];
 
   for(let i=0; i < ageGroupArray.length; i++){
@@ -302,6 +305,10 @@ function checkSubjectID() {
     }
     if (task == 3) {
       document.querySelector('#tryAgain').style.display = "block";
+    }
+
+    if(subject.uniqueId!=null){
+      experiment.uniqueId = subject.uniqueId;
     }
     // if (subjectObj.lang == "de") {
     //   document.querySelector('#languageToggleSwitch').checked = true;
@@ -422,35 +429,51 @@ function updateSubject() {
 
 function addNewSubject(){
   //then store it to the storage which will post it to the database
-  const newData = store.dispatch({
-    type: !isEmpty(experiment) ? "ADD_DATA" : "REMOVE_DATA",
-    payload: {
-      data: experiment
+  // const newData = store.dispatch({
+  //   type: !isEmpty(experiment) ? "ADD_DATA" : "REMOVE_DATA",
+  //   payload: {
+  //     data: experiment
+  //   }
+  // });
+
+  postData('./subjects',{experiment})
+  // postData('./raindots',{data})
+  .then((pdata) => {
+    // console.log("here's the pdata: " + pdata.insertedId); // JSON data parsed by `response.json()` call
+    //get the newly inserted id to pass as with the url
+    experiment.uniqueId = pdata.insertedId;
+    if (e.target.name == "one") {
+      fadeOutInterface($interface, "task1");
+      // location.href = "task1"+"?subject="+experiment.subjectNum;
+    } else if (e.target.name == "two") {
+      fadeOutInterface($interface, "task2");
+      // location.href = "task2"+"?subject="+experiment.subjectNum;
+    } else if (e.target.name == "three") {
+      fadeOutInterface($interface, "task3");
+      // location.href = "task3"+"?subject="+experiment.subjectNum;
     }
   });
-
-  console.log("new data:");
-  console.log(newData);
-  console.log(store.getState());
 }
 
 function startTheTask(e) {
   //add the new subject to the database if this subject is new
   updateSubject();
-  if(newSubject)
-    addNewSubject();
 
-  // // location.
-  // if (e.target.name == "one") {
-  //   fadeOutInterface($interface, "task1");
-  //   // location.href = "task1"+"?subject="+experiment.subjectNum;
-  // } else if (e.target.name == "two") {
-  //   fadeOutInterface($interface, "task2");
-  //   // location.href = "task2"+"?subject="+experiment.subjectNum;
-  // } else if (e.target.name == "three") {
-  //   fadeOutInterface($interface, "task3");
-  //   // location.href = "task3"+"?subject="+experiment.subjectNum;
-  // }
+  if(newSubject) {
+    addNewSubject();
+  } else {
+    // location.
+    if (e.target.name == "one") {
+      fadeOutInterface($interface, "task1");
+      // location.href = "task1"+"?subject="+experiment.subjectNum;
+    } else if (e.target.name == "two") {
+      fadeOutInterface($interface, "task2");
+      // location.href = "task2"+"?subject="+experiment.subjectNum;
+    } else if (e.target.name == "three") {
+      fadeOutInterface($interface, "task3");
+      // location.href = "task3"+"?subject="+experiment.subjectNum;
+    }
+  }
 }
 
 function isEmpty(obj) {
@@ -513,7 +536,8 @@ function fadeOutInterface(elem, onCompleteParam, delay = 0){
 }
 
 function redirect(param) {
-  location.href = param+"?subject="+experiment.subjectNum+"&age="+experiment.age.year;
+  console.log(param+"?subject="+experiment.subjectNum+"&age="+experiment.age.year+"&id="+experiment.uniqueId);
+  // location.href = param+"?subject="+experiment.subjectNum+"&age="+experiment.age.year+"&id="+experiment.uniqueId;
 }
 
 function hideElem(elem) {
