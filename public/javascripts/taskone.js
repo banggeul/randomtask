@@ -680,7 +680,6 @@ function setUpGame() {
     canvas.style.height = vh + "px";
 
     canvas.getContext("2d").scale(resolution, resolution);
-
     // console.log(resolution)
   }
 
@@ -776,7 +775,7 @@ function setUpGame() {
 
     console.log("data logged");
     //fade in the thank you with half second delay
-    fadeIn($thanks, 1, .5);
+    fadeIn($thanks, 1, 1.5);
 
     setTimeout(function() {
       window.location.href = "/"+"?subject="+currentSubject.subjectNum+"&id="+experiment.id+"&age="+currentSubject.age.year;

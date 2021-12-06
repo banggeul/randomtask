@@ -1,7 +1,12 @@
 //import the data storing script
 import storeSubject from '/utils/subject_storage.js'
 import store from '/utils/rain_storage.js'
-
+//import the data storing script
+import {
+  postData,
+  getData,
+  putData
+} from '/utils/data.js'
 //get the current data stored, unpack it as object
 const {
   data
@@ -64,21 +69,20 @@ async function fetchSubject() {
   return await response.json();
 }
 
-fetchSubject().then((data) => {
-    for (let i in data) {
-      let innerarray = [];
-      for (let j in data[i]) {
-        innerarray.push(data[i][j]);
-      }
-      subjects.push(innerarray);
-    }
+async function fetchSubjectById(){
+  let response = await fetch('/single_subject/'+id);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return await response.json();
+}
 
+fetchSubjectById().then((data) => {
     //now do something with it
     subjectNum = parseInt(subjectNumParam);
     ageGroup = parseInt(ageGroupParam);
-    currentSubject = findSubject(subjectNum);
+    currentSubject = data.experiment;
     // console.log(currentSubject);
-
     //bind the click event listener with the submit button
     $getUserContext.addEventListener('click', getUserContext);
 
@@ -295,7 +299,7 @@ function setUpGame() {
     //update the subject data
     currentSubject.tasks.two = 1;
     experiment.id = currentSubjectID;
-    experiment.data = [currentSubject];
+    experiment.experiment = currentSubject;
     //update the database
     storeSubject.dispatch({
         type: "UPDATE_DATA",

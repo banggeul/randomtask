@@ -264,7 +264,6 @@ function findSubject(n) {
 }
 //////
 function findSubjectByAge(n, age) {
-
   // console.log(n, age);
   const ageGroupArray = ageSortedSubjects[age - 1];
 
