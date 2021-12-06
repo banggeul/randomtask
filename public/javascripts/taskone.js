@@ -85,31 +85,20 @@ async function fetchSubjectById(){
   return await response.json();
 }
 
+//fetch the subject by the id then start
 fetchSubjectById().then((data) => {
   console.log(data);
-}).catch((e) =>
-  console.log(e)
-);
-
-
-fetchSubject().then((data) => {
-  for (let i in data) {
-    let innerarray = [];
-    for (let j in data[i]) {
-      innerarray.push(data[i][j]);
-    }
-    subjects.push(innerarray);
-  }
   if(subjectNumParam!=null){
     subjectNum = parseInt(subjectNumParam);
     ageGroup = parseInt(ageGroupParam);
     // //now do something with it
-    currentSubject = findSubject(subjectNum);
-    // //set the sequence based on the subjectNumber
-
+    currentSubject = data.experiment;
+    //set the sequence based on the subjectNumber
+    sequenceSetIndex = subjectNum-1;
     //set the choice cards mode based on the subject number
     //in this case we are just doing even / odd number
     choiceMode = subjectNum%2==0 ? 0 : 1;
+    //set the choice card
     let left, right;
     if(choiceMode == 0){
       left = 0;
@@ -118,37 +107,86 @@ fetchSubject().then((data) => {
       left = 1;
       right = 0;
     }
+    //show the choice cards but they are not clickable yet
     document.querySelector("#left").setAttribute('data-choice', left);
     document.querySelector("#right").setAttribute('data-choice', right);
     document.querySelector("#left").classList.remove('activeChoiceCard');
     document.querySelector("#right").classList.remove('activeChoiceCard');
     document.querySelector('#game-HUD').style.display = "flex";
     document.querySelector('#game-HUD').style.opacity = "1";
-    // //but for now just set it as the first one
-    sequenceSetIndex = subjectNum;
+
     // pValue = sequence[parseInt(sequenceSet) - 1][41];
     pValue = 1;
     // //load the page content
     //now set up the game
     setUpGame();
+    //fade in the instruction screen
+    // fadeIn($instruction, 1);
     //Fade in the game screen
     fadeIn($game, 1);
   }
-})
-.catch((e) =>
+}).catch((e) =>
   console.log(e)
 );
 
-function findSubject(n) {
-  for(let i=0; i < subjects.length; i++){
-    let subjectObj = subjects[i][1][0];
-    if(subjectObj.subjectNum == subjectNum && subjectObj.age.year == ageGroup){
-      //found it
-      currentSubjectID = subjects[i][0];
-      return subjectObj;
-    }
-  }
-}
+
+// fetchSubject().then((data) => {
+//   for (let i in data) {
+//     let innerarray = [];
+//     for (let j in data[i]) {
+//       innerarray.push(data[i][j]);
+//     }
+//     subjects.push(innerarray);
+//   }
+//   if(subjectNumParam!=null){
+//     subjectNum = parseInt(subjectNumParam);
+//     ageGroup = parseInt(ageGroupParam);
+//     // //now do something with it
+//     currentSubject = findSubject(subjectNum);
+//     // //set the sequence based on the subjectNumber
+//
+//     //set the choice cards mode based on the subject number
+//     //in this case we are just doing even / odd number
+//     choiceMode = subjectNum%2==0 ? 0 : 1;
+//     let left, right;
+//     if(choiceMode == 0){
+//       left = 0;
+//       right = 1;
+//     } else {
+//       left = 1;
+//       right = 0;
+//     }
+//     document.querySelector("#left").setAttribute('data-choice', left);
+//     document.querySelector("#right").setAttribute('data-choice', right);
+//     document.querySelector("#left").classList.remove('activeChoiceCard');
+//     document.querySelector("#right").classList.remove('activeChoiceCard');
+//     document.querySelector('#game-HUD').style.display = "flex";
+//     document.querySelector('#game-HUD').style.opacity = "1";
+//     // //but for now just set it as the first one
+//     sequenceSetIndex = subjectNum;
+//     // pValue = sequence[parseInt(sequenceSet) - 1][41];
+//     pValue = 1;
+//     // //load the page content
+//     //now set up the game
+//     setUpGame();
+//     //Fade in the game screen
+//     fadeIn($game, 1);
+//   }
+// })
+// .catch((e) =>
+//   console.log(e)
+// );
+
+// function findSubject(n) {
+//   for(let i=0; i < subjects.length; i++){
+//     let subjectObj = subjects[i][1][0];
+//     if(subjectObj.subjectNum == subjectNum && subjectObj.age.year == ageGroup){
+//       //found it
+//       currentSubjectID = subjects[i][0];
+//       return subjectObj;
+//     }
+//   }
+// }
 
 function setUpGame() {
   // let timeID;
@@ -219,6 +257,8 @@ function setUpGame() {
     //fade out the game ui
     fadeOut($gameUI, true);
     $gameUI.style.pointerEvents = "none";
+    //make sure the gameHUD is clickable
+    $gameHUD.style.pointerEvents = "auto";
     //move the bunny to the next position
     moveUpBunny();
   })
@@ -442,9 +482,6 @@ function setUpGame() {
     // card.style.opacity = 0.6;
     // card.style.transform = "scale(0.6,0.6)"
   }
-
-
-
 
   //event listeners
   $choiceCards.forEach(function(userItem) {
@@ -704,8 +741,8 @@ function setUpGame() {
     console.log("game finished");
     //update the subject data
     currentSubject.tasks.one = 1;
-    experiment.id = currentSubjectID;
-    experiment.data = [currentSubject];
+    experiment.id = id;
+    experiment.experiment = currentSubject;
     //update the database
     storeSubject.dispatch({
         type: "UPDATE_DATA",
