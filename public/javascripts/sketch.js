@@ -197,14 +197,14 @@ fetch('/subjects')
         for (let j in data[i]) {
           innerarray.push(data[i][j]);
         }
-        console.log(innerarray);
-        subjects.push(innerarray);
-        // const thisSubject = innerarray[1][0];
-        // // const thisSubjectId = innerarray[0];
-        // // console.log(thisSubjectId);
-        // // thisSubject.uniqueId = thisSubjectId;
-        // const ageGroupIndex = parseInt(thisSubject.age.year) - 1;
-        // ageSortedSubjects[ageGroupIndex].push(thisSubject);
+        // console.log(innerarray);
+        // subjects.push(innerarray[1]);
+        const thisSubject = innerarray[1];
+        // const thisSubjectId = innerarray[0];
+        // console.log(thisSubjectId);
+        // thisSubject.uniqueId = thisSubjectId;
+        const ageGroupIndex = parseInt(thisSubject.age.year) - 1;
+        ageSortedSubjects[ageGroupIndex].push(thisSubject);
       }
       // console.log(ageSortedSubjects);
       // console.log(subjects[0]);
