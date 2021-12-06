@@ -70,18 +70,27 @@ async function fetchSubject(){
   return await response.json();
 }
 
-// async function fetchSubjectById(o_id){
-//   let response = await fetch(`/single_subject?id=${encodedURIComponent(o_id)}`);
-//   if (!response.ok) {
-//     throw new Error(`HTTP error! status: ${response.status}`);
-//   }
-//   return await response.json();
-// }
+//fetch the subject from collection by its id
+// getData('/single_subject/'+id)
+//   .then((data) => {
+//     console.log(data);
+//     //let's do something with it.
+//   });
 
-getData('/single_subject/'+id)
-  .then((data) => {
-    console.log(data);
-  });
+async function fetchSubjectById(){
+  let response = await fetch('/single_subject/'+id);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return await response.json();
+}
+
+fetchSubjectById().then((data) => {
+  console.log(data);
+}).catch((e) =>
+  console.log(e)
+);
+
 
 fetchSubject().then((data) => {
   for (let i in data) {
