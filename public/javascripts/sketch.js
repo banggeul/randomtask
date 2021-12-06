@@ -151,9 +151,8 @@ function generateNewID() {
   //create a new subject id;
   //get the age
   const ageGroup = parseInt(document.getElementById('ageYearOptions').value);
-
   const ageGroupArray = ageSortedSubjects[ageGroup-1];
-  let newId = ageGroupArray.length + 1;
+  let newId = ageGroupArray.length + startIndex;
 
   document.querySelector('#subjectNumOptions').value = newId;
   resetAllInput();
@@ -186,6 +185,7 @@ function resetAllInput() {
 document.querySelector("#ageYearOptions").addEventListener('change', function() {
   if(this.value > 0){
     $generateNewID.classList.remove('disabled');
+    document.querySelector('#subjectNumOptions').disabled = false;
   }
 })
 
