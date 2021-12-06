@@ -298,7 +298,7 @@ function setUpGame() {
     isGameOn = false;
     //update the subject data
     currentSubject.tasks.two = 1;
-    experiment.id = currentSubjectID;
+    experiment.id = id;
     experiment.experiment = currentSubject;
     //update the database
     storeSubject.dispatch({
