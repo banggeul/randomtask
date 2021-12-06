@@ -154,12 +154,13 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
     })
 
     app.post('/single_subject',(req,res)=>{
-      console.log(req.body);
+      console.log("object id: "+req.body.id);
       let o_id = new mongo.ObjectId(req.body.id);
       let collection = db.collection("subjectNumbers");
       collection.findOne({"_id": o_id})
       .then(result=>{
         // res.send(result);
+        res.json(result);
       })
       .catch(error => console.error(error));
     })
