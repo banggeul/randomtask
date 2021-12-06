@@ -15,18 +15,24 @@ const initialState = {
   data: []
 }
 
-const dataReducer = (state=initialState, action) => {
+const dataReducer = async (state=initialState, action) => {
   switch(action.type) {
     case 'ADD_DATA':
       {
         const data = [...state.data, action.payload.data];
-        postData('./subjects',{data})
+        // postData('./subjects',{data})
+        // // postData('./raindots',{data})
+        // .then((pdata) => {
+        //   console.log("here's the pdata: " + pdata.insertedId); // JSON data parsed by `response.json()` call
+        // });
+        // return {data};
+
+        const response = await postData('./subjects',{data})
         // postData('./raindots',{data})
         .then((pdata) => {
           console.log("here's the pdata: " + pdata.insertedId); // JSON data parsed by `response.json()` call
         });
-        console.log("which one happens first?");
-        return {data};
+        return response;
       }
     case 'REMOVE_DATA':
       {
