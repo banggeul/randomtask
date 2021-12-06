@@ -15,7 +15,7 @@ const initialState = {
   data: []
 }
 
-const dataReducer = async (state=initialState, action) => {
+const dataReducer = (state=initialState, action) => {
   switch(action.type) {
     case 'ADD_DATA':
       {
