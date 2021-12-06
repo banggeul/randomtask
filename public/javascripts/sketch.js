@@ -45,10 +45,12 @@ const ageGroupParam = urlParams.get('age');
 const id = urlParams.get('id');
 let subjects = [];
 let ageSortedSubjects = [];
+let sortedSubjectIds = [];
 let newId;
 
 for(let i=0; i < 10; i++){
   ageSortedSubjects.push([]);
+  sortedSubjectIds.push([]);
 }
 
 //get the reference to the HTML elements we need
@@ -199,12 +201,15 @@ fetch('/subjects')
         }
         // console.log(innerarray);
         // subjects.push(innerarray[1]);
-        const thisSubject = innerarray[1];
-        // const thisSubjectId = innerarray[0];
+        let thisSubject = innerarray[1];
+        const thisSubjectId = innerarray[0];
         // console.log(thisSubjectId);
-        // thisSubject.uniqueId = thisSubjectId;
+        if(thisSubject.uniqueId == null){
+          thisSubject.uniqueId = thisSubjectId;
+        }
         const ageGroupIndex = parseInt(thisSubject.age.year) - 1;
         ageSortedSubjects[ageGroupIndex].push(thisSubject);
+        // sortedSubjectIds[ageGroupIndex].push(thisSubjectId);
       }
       // console.log(ageSortedSubjects);
       // console.log(subjects[0]);
@@ -279,6 +284,7 @@ function checkSubjectID() {
   if(subject != null){
     //this is not a new subject
     newSubject = false;
+    experiment.uniqueId = subject.uniqueId;
     // document.getElementById('subjectNumOptions').disabled = true;
     document.querySelector('#subjectInfoLabel').innerHTML = "This is an existing subject. Please make sure the info below is correct.";
     const ageMonthOptions = document.getElementById('ageMonthOptions');
