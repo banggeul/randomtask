@@ -183,7 +183,7 @@ function resetAllInput() {
 //   }
 // })
 
-document.querySelector("#ageYearOptions").addEventListener('change', ()=>{
+document.querySelector("#ageYearOptions").addEventListener('change', function() {
   if(this.value > 0){
     $generateNewID.classList.remove('disabled');
   }
