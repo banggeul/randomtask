@@ -60,7 +60,7 @@ for (let i = 0; i < 10; i++) {
 
 //get the reference to the HTML elements we need
 const $interface = document.querySelector("#interfaceContainer");
-// const $generateNewID = document.querySelector('#generateNewIDButton');
+const $generateNewID = document.querySelector('#generateNewIDButton');
 const $inputAgeSubjectNum = document.querySelector('#inputAgeSubjectNum');
 const $inputGender = document.querySelector('#inputGender');
 // const $submitLanguage = document.querySelector('#submitLanguage');
@@ -154,7 +154,7 @@ function generateNewID() {
 
   const ageGroupArray = ageSortedSubjects[ageGroup-1];
   let newId = ageGroupArray.length + 1;
-  
+
   document.querySelector('#subjectNumOptions').value = newID;
   resetAllInput();
 
