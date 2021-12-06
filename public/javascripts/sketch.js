@@ -199,9 +199,9 @@ fetch('/subjects')
         }
         subjects.push(innerarray);
         const thisSubject = innerarray[1][0];
-        const thisSubjectId = innerarray[0];
-        console.log(thisSubjectId);
-        thisSubject.uniqueId = thisSubjectId;
+        // const thisSubjectId = innerarray[0];
+        // console.log(thisSubjectId);
+        // thisSubject.uniqueId = thisSubjectId;
         const ageGroupIndex = parseInt(thisSubject.age.year) - 1;
         ageSortedSubjects[ageGroupIndex].push(thisSubject);
       }
@@ -307,9 +307,9 @@ function checkSubjectID() {
       document.querySelector('#tryAgain').style.display = "block";
     }
 
-    if(subject.uniqueId!=null){
-      experiment.uniqueId = subject.uniqueId;
-    }
+    // if(subject.uniqueId!=null){
+    //   experiment.uniqueId = subject.uniqueId;
+    // }
     // if (subjectObj.lang == "de") {
     //   document.querySelector('#languageToggleSwitch').checked = true;
     // }
