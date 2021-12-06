@@ -163,12 +163,9 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
         .catch(error => console.error(error));
     })
 
-
-
-
     app.put('/update_subject', (req, res)=>{
       res.send('Got a PUT request');
-      // console.log(req.body.data.id);
+      console.log(req.body);
       // console.log(req.body.data.data);
       let o_id = new mongo.ObjectId(req.body.data.id);
       let collection = db.collection("subjectNumbers");
