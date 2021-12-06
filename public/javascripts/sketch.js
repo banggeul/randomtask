@@ -422,14 +422,15 @@ function updateSubject() {
 
 function addNewSubject(){
   //then store it to the storage which will post it to the database
-  store.dispatch({
+  const newData = store.dispatch({
     type: !isEmpty(experiment) ? "ADD_DATA" : "REMOVE_DATA",
     payload: {
       data: experiment
     }
   });
 
-  
+  console.log(newData);
+
 
 }
 
