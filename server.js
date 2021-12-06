@@ -155,20 +155,13 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
 
     app.post('/single_subject',(req,res)=>{
       console.log(req.body);
-      let o_id = new mongo.ObjectId(req.body.data.id);
+      let o_id = new mongo.ObjectId(req.body.id);
       let collection = db.collection("subjectNumbers");
       collection.findOne({"_id": o_id})
       .then(result=>{
         // res.send(result);
       })
       .catch(error => console.error(error));
-
-     //  collection.findOne({_id: o_id}, function(err,doc) {
-     //   if (err) { throw err; }
-     //   else {
-     //     console.log("Updated");
-     //   }
-     // });
     })
 
 
