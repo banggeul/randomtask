@@ -429,9 +429,8 @@ function addNewSubject(){
     }
   });
 
+  console.log("new data:");
   console.log(newData);
-
-
 }
 
 function startTheTask(e) {
@@ -440,17 +439,17 @@ function startTheTask(e) {
   if(newSubject)
     addNewSubject();
 
-  // location.
-  if (e.target.name == "one") {
-    fadeOutInterface($interface, "task1");
-    // location.href = "task1"+"?subject="+experiment.subjectNum;
-  } else if (e.target.name == "two") {
-    fadeOutInterface($interface, "task2");
-    // location.href = "task2"+"?subject="+experiment.subjectNum;
-  } else if (e.target.name == "three") {
-    fadeOutInterface($interface, "task3");
-    // location.href = "task3"+"?subject="+experiment.subjectNum;
-  }
+  // // location.
+  // if (e.target.name == "one") {
+  //   fadeOutInterface($interface, "task1");
+  //   // location.href = "task1"+"?subject="+experiment.subjectNum;
+  // } else if (e.target.name == "two") {
+  //   fadeOutInterface($interface, "task2");
+  //   // location.href = "task2"+"?subject="+experiment.subjectNum;
+  // } else if (e.target.name == "three") {
+  //   fadeOutInterface($interface, "task3");
+  //   // location.href = "task3"+"?subject="+experiment.subjectNum;
+  // }
 }
 
 function isEmpty(obj) {
