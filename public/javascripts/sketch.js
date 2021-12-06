@@ -427,7 +427,7 @@ function updateSubject() {
   experiment.gender = gender;
 }
 
-function addNewSubject(){
+function addNewSubject(e){
   //then store it to the storage which will post it to the database
   // const newData = store.dispatch({
   //   type: !isEmpty(experiment) ? "ADD_DATA" : "REMOVE_DATA",
@@ -460,7 +460,7 @@ function startTheTask(e) {
   updateSubject();
 
   if(newSubject) {
-    addNewSubject();
+    addNewSubject(e);
   } else {
     // location.
     if (e.target.name == "one") {
