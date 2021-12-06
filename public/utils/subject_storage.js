@@ -6,6 +6,7 @@ function createStorage(reducer) {
     getState:()=>currentState,
     dispatch:action => {
       currentState = reducer(currentState, action);
+      return currentState;
     }
   }
 }
