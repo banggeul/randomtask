@@ -675,6 +675,13 @@ a#generateNewIDButton {
   font-style: italic;
   color: seagreen;
 }
+
+a#generateNewIDButton.disabled {
+  color: #ccc;
+  pointer-events: none;
+  background-color: none;
+}
+
 .timeLimitSwitch {
   flex-direction: row;
   align-items: center;
