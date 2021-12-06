@@ -23,7 +23,7 @@ const dataReducer = (state=initialState, action) => {
         postData('./subjects',{data})
         // postData('./raindots',{data})
         .then((pdata) => {
-          console.log("here's the pdata: " + {pdata}); // JSON data parsed by `response.json()` call
+          console.log("here's the pdata: " + JSON.stringify(pdata)); // JSON data parsed by `response.json()` call
         });
         return {data};
       }
