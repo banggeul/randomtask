@@ -155,7 +155,7 @@ function generateNewID() {
   const ageGroupArray = ageSortedSubjects[ageGroup-1];
   let newId = ageGroupArray.length + 1;
 
-  document.querySelector('#subjectNumOptions').value = newID;
+  document.querySelector('#subjectNumOptions').value = newId;
   resetAllInput();
 
   if (!$checkSubjectID.classList.contains('disabled')) {
