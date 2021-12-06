@@ -31,7 +31,6 @@ export async function getData(url = '', data = {}) {
     headers: {
       "content-type": "application/json",
     },
-    body: JSON.stringify(data)
   });
   return response.json(); // parses JSON response into native JavaScript objects
 }

@@ -78,7 +78,7 @@ async function fetchSubject(){
 //   return await response.json();
 // }
 
-getData('/single_subject', {
+postData('/single_subject', {
     id
   })
   .then((data) => {

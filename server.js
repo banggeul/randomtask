@@ -105,7 +105,7 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
         .catch(error=>console.error(error));
     })
 
-    app.get('/single_subject',(req,res)=>{
+    app.post('/single_subject',(req,res)=>{
       console.log(req.body);
       let o_id = new mongo.ObjectId(req.body.data.id);
       let collection = db.collection("subjectNumbers");
