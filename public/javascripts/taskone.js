@@ -4,7 +4,6 @@ import store from '/utils/storage.js'
 //import the data storing script
 import {
   postData,
-  postOneData,
   getData,
   putData
 } from '/utils/data.js'
@@ -79,13 +78,10 @@ async function fetchSubject(){
 //   return await response.json();
 // }
 
-postOneData('/single_subject', {
-    id
-  })
+getData('/single_subject/'+id)
   .then((data) => {
     console.log(data);
   });
-
 
 fetchSubject().then((data) => {
   for (let i in data) {

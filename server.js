@@ -105,7 +105,17 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
         .catch(error=>console.error(error));
     })
 
-
+    app.get('/single_subject/:id',(req,res)=>{
+      console.log("object id: "+req.params.id);
+      let o_id = new mongo.ObjectId(req.params.id);
+      let collection = db.collection("subjectNumbers");
+      collection.findOne({"_id": o_id})
+      .then(result=>{
+        // res.send(result);
+        res.json(result);
+      })
+      .catch(error => console.error(error));
+    })
 
 
     //POST
@@ -153,17 +163,7 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
         .catch(error => console.error(error));
     })
 
-    app.post('/single_subject',(req,res)=>{
-      console.log("object id: "+req.body.id);
-      let o_id = new mongo.ObjectId(req.body.id);
-      let collection = db.collection("subjectNumbers");
-      collection.findOne({"_id": o_id})
-      .then(result=>{
-        // res.send(result);
-        res.json(result);
-      })
-      .catch(error => console.error(error));
-    })
+
 
 
     app.put('/update_subject', (req, res)=>{
