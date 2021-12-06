@@ -100,7 +100,7 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
       db.collection('subjectNumbers').find().toArray()
         .then(results =>{
           res.json(results);
-          console.log(results);
+          // console.log(results);
         })
         .catch(error=>console.error(error));
     })
@@ -169,7 +169,7 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
       // console.log(req.body.data.data);
       let o_id = new mongo.ObjectId(req.body.data.id);
       let collection = db.collection("subjectNumbers");
-      collection.findOneAndUpdate({_id: o_id}, {$set: {data: req.body.data.data}}, {upsert: false}, function(err,doc) {
+      collection.findOneAndUpdate({_id: o_id}, {$set: {experiment: req.body.data.experiment}}, {upsert: false}, function(err,doc) {
        if (err) { throw err; }
        else {
          console.log("Updated");
