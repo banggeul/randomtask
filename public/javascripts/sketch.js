@@ -431,6 +431,7 @@ function addNewSubject(){
 
   console.log("new data:");
   console.log(newData);
+  console.log(store.getState());
 }
 
 function startTheTask(e) {

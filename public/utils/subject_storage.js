@@ -22,8 +22,8 @@ const dataReducer = (state=initialState, action) => {
         const data = [...state.data, action.payload.data];
         postData('./subjects',{data})
         // postData('./raindots',{data})
-        .then((data) => {
-          console.log("here's the data: " + data); // JSON data parsed by `response.json()` call
+        .then((pdata) => {
+          console.log("here's the pdata: " + pdata); // JSON data parsed by `response.json()` call
         });
         return {data};
       }
