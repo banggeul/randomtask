@@ -1,5 +1,5 @@
 //import the data storing script
-import {postData, getData, putData} from './data.js'
+import {postData, getData, putData} from '/utils/data.js'
 import store from '/utils/subject_storage.js'
 
 //german
