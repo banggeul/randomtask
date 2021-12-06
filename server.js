@@ -143,7 +143,7 @@ MongoClient.connect(dbConnectionString,{ useNewUrlParser: true, useUnifiedTopolo
       console.log(req.body);
       collectionSubjects.insertOne(req.body)
         .then(result=>{
-          console.log("you posted something on the subject collection. " + result);
+          console.log("you posted something on the subject collection. " + result.insertedId);
           res.json(result);
           // res.redirect('/')
         })
