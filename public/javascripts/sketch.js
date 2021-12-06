@@ -481,8 +481,8 @@ function fadeOutInterface(elem, onCompleteParam, delay = 0) {
 }
 
 function redirect(param) {
-  console.log(param + "?subject=" + experiment.subjectNum + "&age=" + experiment.age.year + "&id=" + experiment.uniqueId);
-  // location.href = param+"?subject="+experiment.subjectNum+"&age="+experiment.age.year+"&id="+experiment.uniqueId;
+  // console.log(param + "?subject=" + experiment.subjectNum + "&age=" + experiment.age.year + "&id=" + experiment.uniqueId);
+  location.href = param+"?subject="+experiment.subjectNum+"&age="+experiment.age.year+"&id="+experiment.uniqueId;
 }
 
 function hideElem(elem) {
