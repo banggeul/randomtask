@@ -1,6 +1,11 @@
 import storeSubject from '/utils/subject_storage.js'
 import store from '/utils/apple_storage.js'
-
+//import the data storing script
+import {
+  postData,
+  getData,
+  putData
+} from '/utils/data.js'
 //get the current data stored, unpack it as object
 const {
   data
@@ -29,21 +34,19 @@ async function fetchSubject(){
   return await response.json();
 }
 
-fetchSubject().then((data) => {
-  for (let i in data) {
-    let innerarray = [];
-    for (let j in data[i]) {
-      innerarray.push(data[i][j]);
-    }
-    subjects.push(innerarray);
+async function fetchSubjectById(){
+  let response = await fetch('/single_subject/'+id);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
+  return await response.json();
+}
 
+fetchSubjectById().then((data) => {
   //now do something with it
   subjectNum = parseInt(subjectNumParam);
   ageGroup = parseInt(ageGroupParam);
-  currentSubject = findSubject(subjectNum);
-  console.log(currentSubject);
-  //set the sequence based on the subjectNumber
+  currentSubject = data.experiment;
   //but for now just set it as the first one
   document.querySelector('#startBtn').addEventListener('touchstart', startTask);
 })
@@ -78,9 +81,6 @@ function startTask(){
     }
   }
 }
-
-// let canvasY = 1024;
-// let canvasX = canvasY * 0.75;
 
 let myObjectNum = 10;
 let myObjectSize = 134;
@@ -472,8 +472,8 @@ function finishGame() {
   //post the sessionData to the database
   //update the subject data
   currentSubject.tasks.three = 1;
-  experiment.id = currentSubjectID;
-  experiment.data = [currentSubject];
+  experiment.id = id;
+  experiment.experiment = currentSubject;
   //update the database
   storeSubject.dispatch({
       type: "UPDATE_DATA",
