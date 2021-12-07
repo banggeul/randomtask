@@ -264,7 +264,7 @@ canvas.animContainer {
   /* flex: 1 1 auto; */
   /* box-shadow: 0 0 50px rgba(0,0,0,1); */
   z-index: 10;
-  background-image: url(/animations/carrot_button.png);
+  background-image: url(/animations/carrot_button_3.png);
   background-repeat: no-repeat;
   background-position: 0 0;
 }
@@ -293,16 +293,20 @@ canvas.animContainer {
   background-position: 0 0;
 }
 
+.disabledChoiceCard {
+  background-position: 200% 0;
+}
+
 div[data-choice='0'] {
   /* background-color: red; */
   /* this should be the clickable card face */
   /* background-image: url(dirtCardStillUntrimmed.png); */
-  background-image: url(/animations/dirt_button.png);
+  background-image: url(/animations/dirt_button_3.png);
 }
 
 div[data-choice="1"] {
   /* background-color: green; */
-  background-image: url(/animations/carrot_button.png);
+  background-image: url(/animations/carrot_button_3.png);
   /* this should be the clickable card face */
   /* background-image: url(carrotCardStilluntrimmed.png); */
 }

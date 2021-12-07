@@ -450,6 +450,8 @@ function setUpGame() {
     $rightChoice.setAttribute('data-choice', right);
     $leftChoice.classList.remove('activeChoiceCard');
     $rightChoice.classList.remove('activeChoiceCard');
+    $leftChoice.classList.remove('disabledChoiceCard');
+    $rightChoice.classList.remove('disabledChoiceCard');
 
   }
 
@@ -518,14 +520,35 @@ function setUpGame() {
     })
   });
 
-  function fadeInButtons(){
-    fadeIn($gameHUD, 0.3, 0, "flex");
+  function choiceCard(){
+    // fadeIn($gameHUD, 0.3, 0, "flex");
+    fadeInGameHUD();
     //put the bunny into the neutral position
     $bunny.classList.remove("bunny-skipRight");
     $bunny.classList.remove("bunny-skipLeft");
     //draw some border around the card
     // $cards[currentCardNum - 1].classList.remove('currentCard');
     // $cards[currentCardNum].classList.add('currentCard');
+  }
+
+  function fadeInGameHUD(){
+    $gameHUD.style.display = flex;
+    //elem.style.opacity = 0;
+    gsap.to($gameHUD, {
+      duration: duration,
+      ease: "power1.inOut",
+      opacity: 1,
+      delay: delay,
+      onComplete: enableChoiceButtons
+    });
+  }
+
+  function enableChoiceButtons(){
+    $gameHUD.style.pointerEvents = "auto";
+    $leftChoice.classList.remove('activeChoiceCard');
+    $rightChoice.classList.remove('activeChoiceCard');
+    $leftChoice.classList.remove('disabledChoiceCard');
+    $rightChoice.classList.remove('disabledChoiceCard');
   }
 
   function fadeOutButtons(elem){
@@ -537,11 +560,17 @@ function setUpGame() {
   }
 
   function fadeOutShowOptions() {
+    //instead of fading it out
+    // make it look disabled
+    document.querySelector("#left").classList.remove('activeChoiceCard');
+    document.querySelector("#right").classList.remove('activeChoiceCard');
+    document.querySelector("#left").classList.add('disabledChoiceCard');
+    document.querySelector("#right").classList.add('disabledChoiceCard');
     gsap.to($gameHUD, {
       duration: 0.5,
       delay: 1.5,
       ease: "power1.inOut",
-      opacity: 0.0,
+      opacity: 1.0,
       onComplete: generateNextOptions
     });
   }
