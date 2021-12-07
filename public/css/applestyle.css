@@ -27,10 +27,22 @@ button {
   cursor: pointer;
   font-family: sans-serif;
   position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: 20px 20px;
+}
+
+.ruFinishedBtn {
+  background-color: yellow;
+  color: black;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 20px 20px;
+  border-radius: 10px 10px;
+  z-index: 100;
+}
+
+.hidden {
+  display: none;
 }
 
 .top {

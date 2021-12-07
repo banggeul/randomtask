@@ -24,6 +24,9 @@ let subjects = [];
 let subjectNum;
 let ageGroup;
 let gameOn = false;
+let gameOrder = [];
+let gameIndex = 0;
+const $instructionMsg = document.querySelector("#instructionMsg");
 
 // fetch the subjectNumbers collection
 async function fetchSubject(){
@@ -47,6 +50,14 @@ fetchSubjectById().then((data) => {
   subjectNum = parseInt(subjectNumParam);
   ageGroup = parseInt(ageGroupParam);
   currentSubject = data.experiment;
+  //set the game order based on the subjecNum
+  if(subjectNum%2==0){
+    gameOrder = ["apple","birds"];
+    $instructionMsg.innerHTML = "This is the instruction for the apple game";
+  } else {
+    gameOrder = ["birds","apple"];
+    $instructionMsg.innerHTML = "This is the instruction for the birds game";
+  }
   //but for now just set it as the first one
   document.querySelector('#startBtn').addEventListener('touchstart', startTask);
 })
@@ -54,24 +65,13 @@ fetchSubjectById().then((data) => {
   console.log(e)
 );
 
-
-// function findSubject(n) {
-//   for(let i=0; i < subjects.length; i++){
-//     let subjectObj = subjects[i][1][0];
-//     if(subjectObj.subjectNum == subjectNum && subjectObj.age.year == ageGroup){
-//       //found it
-//       currentSubjectID = subjects[i][0];
-//       return subjectObj;
-//     }
-//   }
-// }
-
 function startTask(){
   gameOn = true;
   document.querySelector('canvas').style.display = "block";
   document.querySelector('#instruction').style.display = "none";
-  //decide which side the sun is going to go
-  if(gameMode == 'sunLeft' || gameMode == 'sunRight'){
+  //decide which game to present
+  gameMode = gameOrder[gameIndex];
+  if(gameMode == 'birds'){
     initGame('birds');
   } else {
     if(Math.random()>0.5){
@@ -157,31 +157,32 @@ window.preload = function() {
   sun = loadImage("/images/apples/sun.png");
 }
 
+let ruFinishedBtn;
+
 window.setup = function() {
   myCanvas = createCanvas(windowWidth, windowHeight);
   myObjectSize = windowWidth / myObjectNum;
-  // console.log(myObjectSize);
-  // bigReset(gameMode);
-  // setUpStartMenu();
   textSize(myObjectSize / 3);
   //make an instruction screen
   instructionDiv = select('#instruction');
   instructionMsg = select('#instructionMsg');
+  ruFinishedBtn = createButton('Are you finished?');
+  ruFinishedBtn.addClass('ruFinishedBtn');
+  ruFinishedBtn.addClass('hidden');
 }
 
 window.draw = function() {
   if(gameOn) {
     if (gameMode != 'menu') {
       background(220);
+      //draw the background
       image(tree, 0, 0, width, height);
+      //if the game mode is one of the apples then draw the sun
       if(gameMode == 'sunLeft'){
         image(sun, 325, 15);
       } else if(gameMode == 'sunRight'){
         image(sun, 880, 15);
       }
-      //check if the mouse is over the object or not
-      // checkTouchOver();
-      // checkOnTree();
       drawObjects();
       if (showOrderNumbers) {
         fill(230);
@@ -191,50 +192,46 @@ window.draw = function() {
         ellipse(width - myObjectSize, height - myObjectSize, myObjectSize / 2, myObjectSize / 2);
       }
     }
-    //Visualize cut off point for onTree
-    //stroke(0);
-    //strokeWeight(10);
-    //line(0, height * .57, width, height * .57);
   }
 }
 
-function setUpStartMenu() {
-  image(bg_menu, 0, 0, width, height);
-  gameMode = "menu";
-  let btn_sunLeft = createButton('Sun Left');
-  // btn_sunLeft.position(width*.3, height*.2);
-  btn_sunLeft.touchStarted(() => {
-    initGame('sunLeft');
-  });
-  btn_sunLeft.mousePressed(() => {
-    initGame('sunLeft');
-  });
-
-  btn_sunLeft.addClass('top');
-
-  let btn_sunRight = createButton('Sun Right');
-  // btn_sunRight.position(width*.3, height*.4);
-  btn_sunRight.touchStarted(() => {
-    initGame('sunRight');
-  });
-  btn_sunRight.mousePressed(() => {
-    initGame('sunRight');
-  });
-
-  btn_sunRight.addClass('middle');
-
-  let btn_birds = createButton('Bird Nest');
-  // btn_birds.position(width*.3, height*.6);
-  btn_birds.touchStarted(() => {
-    initGame('birds');
-  });
-  btn_birds.mousePressed(() => {
-    initGame('birds');
-  });
-
-
-  btn_birds.addClass('bottom');
-}
+// function setUpStartMenu() {
+//   image(bg_menu, 0, 0, width, height);
+//   gameMode = "menu";
+//   let btn_sunLeft = createButton('Sun Left');
+//   // btn_sunLeft.position(width*.3, height*.2);
+//   btn_sunLeft.touchStarted(() => {
+//     initGame('sunLeft');
+//   });
+//   btn_sunLeft.mousePressed(() => {
+//     initGame('sunLeft');
+//   });
+//
+//   btn_sunLeft.addClass('top');
+//
+//   let btn_sunRight = createButton('Sun Right');
+//   // btn_sunRight.position(width*.3, height*.4);
+//   btn_sunRight.touchStarted(() => {
+//     initGame('sunRight');
+//   });
+//   btn_sunRight.mousePressed(() => {
+//     initGame('sunRight');
+//   });
+//
+//   btn_sunRight.addClass('middle');
+//
+//   let btn_birds = createButton('Bird Nest');
+//   // btn_birds.position(width*.3, height*.6);
+//   btn_birds.touchStarted(() => {
+//     initGame('birds');
+//   });
+//   btn_birds.mousePressed(() => {
+//     initGame('birds');
+//   });
+//
+//
+//   btn_birds.addClass('bottom');
+// }
 
 function initGame(mode) {
   removeElements();
@@ -244,7 +241,6 @@ function initGame(mode) {
 }
 
 function bigReset(mode) {
-
   switch (mode) {
     case "sunLeft":
       tree = bg_sun_left;
@@ -366,8 +362,6 @@ function checkTouchOver() {
 }
 
 window.touchStarted = function() {
-
-  console.log("order counter: "+orderCounter);
   checkTouchOver();
   checkOnTree();
   for (let i = 0; i < myObjectNum; i++) {
@@ -395,69 +389,122 @@ window.touchStarted = function() {
     yOffset[i] = mouseY - myObjectY[i];
   }
 
-  if (orderCounter >= myObjectNum - 1 && mouseX > 0 && mouseX < 100 && mouseY > 0 && mouseY < 100) {
-    showOrderNumbers = !showOrderNumbers;
-    // for (let i = 0; i < myObjectNum; i++) {
-    //   hasMoved[j] = false;
-    //   noMoreMove[i] = false;
-    // }
+  console.log("order counter: "+orderCounter);
 
-    //game is all finished
-    //record the end time
-    //check if the end time has already been set
-    if (myTime.endTime == 0) {
-      myTime.endTime = millis();
-      timeTaken = (myTime.endTime - myTime.startTime) * .001;
-    }
+  if (orderCounter == myObjectNum && mouseX > 0 && mouseX < 100 && mouseY > 0 && mouseY < 100) {
+    showOrderNumbers = !showOrderNumbers;
+    // // for (let i = 0; i < myObjectNum; i++) {
+    // //   hasMoved[j] = false;
+    // //   noMoreMove[i] = false;
+    // // }
+    //
+    // //game is all finished
+    // //record the end time
+    // //check if the end time has already been set
+    // if (myTime.endTime == 0) {
+    //   myTime.endTime = millis();
+    //   console.log("end time: "+myTime.endTime);
+    //   timeTaken = (myTime.endTime - myTime.startTime) * .001;
+    // }
   }
 
 
   if (showOrderNumbers && mouseX < width && mouseX > width - myObjectSize && mouseY < height && mouseY > height - myObjectSize) {
     saveCanvas(myCanvas, dateAndTimeStarted + ".jpg");
     // bigReset();
-    setUpStartMenu();
+    // setUpStartMenu();
   }
 
   //check if the game is finished
   if (orderCounter == myObjectNum && gameOn) {
-    if(gameMode == "birds"){
-      for(let i=0; i < myObjectX.length; i++){
-        birds[i] = { x: myObjectX[i], y: myObjectY[i]};
-      }
-      sessionData.birds = {
-        position: birds,
-        startTime: dateAndTimeStarted,
-        timeTaken: round(timeTaken)
-      }
-      finishGame();
-    } else {
+    //show are you finished screen
+    if(ruFinishedBtn.hasClass('hidden'))
+      setTimeout(ruFinished, 3000);
+    // if(gameMode == "birds"){
+    //   for(let i=0; i < myObjectX.length; i++){
+    //     birds[i] = { x: myObjectX[i], y: myObjectY[i]};
+    //   }
+    //   sessionData.birds = {
+    //     position: birds,
+    //     startTime: dateAndTimeStarted,
+    //     timeTaken: round(timeTaken)
+    //   }
+    // } else {
       //apple game has been finished
       //package data and reload the bird game
-      for(let i=0; i < myObjectX.length; i++){
-        apples[i] = { x: myObjectX[i], y: myObjectY[i]};
-      }
-      sessionData.apples = {
-        position: apples,
-        startTime: dateAndTimeStarted,
-        timeTaken: round(timeTaken)
-      }
-      //show a button
-      setTimeout(ruFinished, 3000);
-    }
+      // for(let i=0; i < myObjectX.length; i++){
+      //   apples[i] = { x: myObjectX[i], y: myObjectY[i]};
+      // }
+      // sessionData.apples = {
+      //   position: apples,
+      //   startTime: dateAndTimeStarted,
+      //   timeTaken: round(timeTaken)
+      // }
+    // }
   }
 
   return false;
 }
 
+
+
 function ruFinished(){
-  let btn = createButton('Are you finished?');
-  btn.addClass('bottom');
+  ruFinishedBtn.removeClass('hidden');
   // btn_sunLeft.position(width*.3, height*.2);
-  btn.touchStarted(() => {
-    // initGame('birds');
-    showInstruction("This is some instruction about the bird game.");
+  ruFinishedBtn.touchStarted(() => {
+    //decide if this task has been done
+    if(gameIndex > 0){
+      //all two tasks are finished
+      //wrap it up
+      finishGame();
+    } else {
+      //only the first game is finished
+      //calculate the time
+      if (myTime.endTime == 0) {
+        myTime.endTime = millis();
+        // console.log("end time: "+myTime.endTime);
+        timeTaken = (myTime.endTime - myTime.startTime) * .001;
+      }
+      //restart the game with the next mode
+      if(gameMode == "birds"){
+        //if the current game mode was birds then package the current data before loading the new one
+          for(let i=0; i < myObjectX.length; i++){
+            birds[i] = { x: myObjectX[i], y: myObjectY[i]};
+          }
+          sessionData.birds = {
+            position: birds,
+            startTime: dateAndTimeStarted,
+            timeTaken: round(timeTaken)
+          }
+      } else {
+        // the current game is apples
+        // apple game has been finished
+        for(let i=0; i < myObjectX.length; i++){
+          apples[i] = { x: myObjectX[i], y: myObjectY[i]};
+        }
+        sessionData.apples = {
+          position: apples,
+          startTime: dateAndTimeStarted,
+          timeTaken: round(timeTaken)
+        }
+      }
+      //increment the gameIndex
+      gameIndex++;
+      gameMode = gameOrder[gameIndex];
+      if(gameMode == 'birds'){
+        initGame('birds');
+      } else {
+        if(Math.random()>0.5){
+          initGame('sunLeft');
+        }else{
+          initGame('sunRight');
+        }
+      }
+    }
+    //hide the button
+    ruFinishedBtn.addClass('hidden');
   });
-  btn.mousePressed(() => {
+  ruFinishedBtn.mousePressed(() => {
     // initGame('birds');
   });
 }
