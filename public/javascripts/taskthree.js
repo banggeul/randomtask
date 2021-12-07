@@ -472,6 +472,29 @@ function ruFinished(){
     if(gameIndex > 0){
       //all two tasks are finished
       //wrap it up
+      //save the game data 
+      if(gameMode == "birds"){
+        //if the current game mode was birds then package the current data before loading the new one
+          for(let i=0; i < myObjectX.length; i++){
+            birds[i] = { x: myObjectX[i], y: myObjectY[i]};
+          }
+          sessionData.birds = {
+            position: birds,
+            startTime: dateAndTimeStarted,
+            timeTaken: round(timeTaken)
+          }
+      } else {
+        // the current game is apples
+        // apple game has been finished
+        for(let i=0; i < myObjectX.length; i++){
+          apples[i] = { x: myObjectX[i], y: myObjectY[i]};
+        }
+        sessionData.apples = {
+          position: apples,
+          startTime: dateAndTimeStarted,
+          timeTaken: round(timeTaken)
+        }
+      }
       finishGame();
     } else {
       //only the first game is finished
@@ -482,6 +505,7 @@ function ruFinished(){
         timeTaken = (myTime.endTime - myTime.startTime) * .001;
       }
       //restart the game with the next mode
+      //save the data
       if(gameMode == "birds"){
         //if the current game mode was birds then package the current data before loading the new one
           for(let i=0; i < myObjectX.length; i++){
