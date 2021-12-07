@@ -257,8 +257,8 @@ function setUpGame() {
     //fade out the game ui
     fadeOut($gameUI, true);
     $gameUI.style.pointerEvents = "none";
-    //make sure the gameHUD is clickable
-    $gameHUD.style.pointerEvents = "auto";
+    // //make sure the gameHUD is clickable
+    // $gameHUD.style.pointerEvents = "auto";
     //move the bunny to the next position
     moveUpBunny();
   })
