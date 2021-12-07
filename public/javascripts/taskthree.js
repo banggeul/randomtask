@@ -515,6 +515,8 @@ function showInstruction(msg){
 }
 
 function finishGame() {
+  const thanks = select("#thanks");
+  thanks.removeClass("hidden");
   //turn off the game
   gameOn = false;
   //post the sessionData to the database
