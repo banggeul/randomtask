@@ -73,15 +73,16 @@ function showInstruction(){
   } else {
     $instructionMsg.innerHTML = "This is the instruction for the birds game";
   }
-  const instruction = select('#instruction');
-  if(instruction.hasClass('hidden'))
-    instruction.removeClass('hidden');
+  // const instruction = select('#instruction');
+  // if(instruction.hasClass('hidden'))
+  //   instruction.removeClass('hidden');
+  document.querySelector('#instruction').style.display = "flex";
 }
 
 function startTask(){
   gameOn = true;
   document.querySelector('canvas').style.display = "block";
-  document.querySelector('#instruction').classList.add("hidden");
+  document.querySelector('#instruction').style.display = "none";
   //decide which game to present
   gameMode = gameOrder[gameIndex];
   if(gameMode == 'birds'){
