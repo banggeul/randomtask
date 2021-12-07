@@ -275,17 +275,17 @@ canvas.animContainer {
 
 .choice-card:active {
   /* border: 2px red solid; */
-  background-position: 100% 0;
+  background-position: 50% 0;
 }
 
 .choice-card:focus {
   /* border: 2px red solid; */
-  background-position: 100% 0;
+  background-position: 50% 0;
 }
 
 .activeChoiceCard {
   /* border: 2px red solid; */
-  background-position: 100% 0;
+  background-position: 50% 0;
 }
 
 .inactiveChoiceCard {
@@ -294,7 +294,7 @@ canvas.animContainer {
 }
 
 .disabledChoiceCard {
-  background-position: 200% 0;
+  background-position: 100% 0;
 }
 
 div[data-choice='0'] {
