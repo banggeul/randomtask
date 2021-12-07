@@ -320,6 +320,13 @@ function setUpGame() {
   }
 
   function moveUpBunny() {
+    if(currentCardNum <= 27 && currentCardNum >= 15){
+      $bunny.classList.remove("bunny-waitingRight");
+      $bunny.classList.add("bunny-waitingLeft");
+    } else {
+      $bunny.classList.add("bunny-waitingRight");
+      $bunny.classList.remove("bunny-waitingLeft");
+    }
     let $current = $cards[currentCardNum];
     let nextBunnyPosition = $current.getBoundingClientRect();
     let currentBunnyPosition = $bunny.getBoundingClientRect();
