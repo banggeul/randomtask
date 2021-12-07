@@ -532,7 +532,7 @@ function setUpGame() {
   }
 
   function fadeInGameHUD(){
-    $gameHUD.style.display = flex;
+    $gameHUD.style.display = "flex";
     //elem.style.opacity = 0;
     gsap.to($gameHUD, {
       duration: duration,
