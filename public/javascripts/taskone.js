@@ -538,7 +538,7 @@ function setUpGame() {
       duration: 0.3,
       ease: "power1.inOut",
       opacity: 1,
-      delay: 0,
+      delay: 1,
       onComplete: enableChoiceButtons
     });
   }
