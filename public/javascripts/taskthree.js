@@ -60,15 +60,28 @@ fetchSubjectById().then((data) => {
   }
   //but for now just set it as the first one
   document.querySelector('#startBtn').addEventListener('touchstart', startTask);
+  //show instruction
+  showInstruction();
 })
 .catch((e) =>
   console.log(e)
 );
 
+function showInstruction(){
+  if(gameOrder[gameIndex]=="apple"){
+    $instructionMsg.innerHTML = "This is the instruction for the apple game";
+  } else {
+    $instructionMsg.innerHTML = "This is the instruction for the birds game";
+  }
+  const instruction = select('#instruction');
+  if(instruction.hasClass('hidden'))
+    instruction.removeClass('hidden');
+}
+
 function startTask(){
   gameOn = true;
   document.querySelector('canvas').style.display = "block";
-  document.querySelector('#instruction').style.display = "none";
+  document.querySelector('#instruction').classList.add("hidden");
   //decide which game to present
   gameMode = gameOrder[gameIndex];
   if(gameMode == 'birds'){
@@ -452,6 +465,8 @@ function ruFinished(){
   ruFinishedBtn.removeClass('hidden');
   // btn_sunLeft.position(width*.3, height*.2);
   ruFinishedBtn.touchStarted(() => {
+    //turn off the game
+    gameOn = false;
     //decide if this task has been done
     if(gameIndex > 0){
       //all two tasks are finished
@@ -490,16 +505,17 @@ function ruFinished(){
       }
       //increment the gameIndex
       gameIndex++;
-      gameMode = gameOrder[gameIndex];
-      if(gameMode == 'birds'){
-        initGame('birds');
-      } else {
-        if(Math.random()>0.5){
-          initGame('sunLeft');
-        }else{
-          initGame('sunRight');
-        }
-      }
+      showInstruction();
+      // gameMode = gameOrder[gameIndex];
+      // if(gameMode == 'birds'){
+      //   initGame('birds');
+      // } else {
+      //   if(Math.random()>0.5){
+      //     initGame('sunLeft');
+      //   }else{
+      //     initGame('sunRight');
+      //   }
+      // }
     }
     //hide the button
     ruFinishedBtn.addClass('hidden');
@@ -507,11 +523,6 @@ function ruFinished(){
   ruFinishedBtn.mousePressed(() => {
     // initGame('birds');
   });
-}
-
-function showInstruction(msg){
-  instructionMsg.html(msg);
-  instructionDiv.show();
 }
 
 function finishGame() {
