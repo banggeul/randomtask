@@ -520,7 +520,7 @@ function setUpGame() {
     })
   });
 
-  function choiceCard(){
+  function fadeInButtons(){
     // fadeIn($gameHUD, 0.3, 0, "flex");
     fadeInGameHUD();
     //put the bunny into the neutral position
