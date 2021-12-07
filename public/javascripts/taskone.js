@@ -535,10 +535,10 @@ function setUpGame() {
     $gameHUD.style.display = "flex";
     //elem.style.opacity = 0;
     gsap.to($gameHUD, {
-      duration: 1,
+      duration: 0.5,
       ease: "power1.inOut",
       opacity: 1,
-      delay: 1,
+      delay: 0.5,
       onComplete: enableChoiceButtons
     });
   }
