@@ -562,17 +562,22 @@ function setUpGame() {
   function fadeOutShowOptions() {
     //instead of fading it out
     // make it look disabled
-    document.querySelector("#left").classList.remove('activeChoiceCard');
-    document.querySelector("#right").classList.remove('activeChoiceCard');
-    document.querySelector("#left").classList.add('disabledChoiceCard');
-    document.querySelector("#right").classList.add('disabledChoiceCard');
+
     gsap.to($gameHUD, {
       duration: 0.5,
       delay: 1.5,
       ease: "power1.inOut",
       opacity: 1.0,
-      onComplete: generateNextOptions
+      onComplete: generateNextOptions,
+      onStart:disableChoiceCards
     });
+  }
+
+  function disableChoiceCards() {
+    document.querySelector("#left").classList.remove('activeChoiceCard');
+    document.querySelector("#right").classList.remove('activeChoiceCard');
+    document.querySelector("#left").classList.add('disabledChoiceCard');
+    document.querySelector("#right").classList.add('disabledChoiceCard');
   }
 
   function showFeedback() {
