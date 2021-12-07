@@ -166,8 +166,7 @@ window.setup = function() {
   //make an instruction screen
   instructionDiv = select('#instruction');
   instructionMsg = select('#instructionMsg');
-  ruFinishedBtn = createButton('Are you finished?');
-  ruFinishedBtn.addClass('ruFinishedBtn');
+  ruFinishedBtn = select("#ruFinishedBtn");
   ruFinishedBtn.addClass('hidden');
 }
 
@@ -417,6 +416,7 @@ window.touchStarted = function() {
 
   //check if the game is finished
   if (orderCounter == myObjectNum && gameOn) {
+    console.log("show r u finished button")
     //show are you finished screen
     if(ruFinishedBtn.hasClass('hidden'))
       setTimeout(ruFinished, 3000);
