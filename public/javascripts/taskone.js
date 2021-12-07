@@ -450,8 +450,8 @@ function setUpGame() {
     $rightChoice.setAttribute('data-choice', right);
     $leftChoice.classList.remove('activeChoiceCard');
     $rightChoice.classList.remove('activeChoiceCard');
-    $leftChoice.classList.remove('disabledChoiceCard');
-    $rightChoice.classList.remove('disabledChoiceCard');
+    // $leftChoice.classList.remove('disabledChoiceCard');
+    // $rightChoice.classList.remove('disabledChoiceCard');
 
   }
 
@@ -535,10 +535,10 @@ function setUpGame() {
     $gameHUD.style.display = "flex";
     //elem.style.opacity = 0;
     gsap.to($gameHUD, {
-      duration: 0.3,
+      duration: 1,
       ease: "power1.inOut",
       opacity: 1,
-      delay: 1,
+      delay: 1
       onComplete: enableChoiceButtons
     });
   }
