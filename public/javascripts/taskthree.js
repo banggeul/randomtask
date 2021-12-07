@@ -55,16 +55,16 @@ fetchSubjectById().then((data) => {
 );
 
 
-function findSubject(n) {
-  for(let i=0; i < subjects.length; i++){
-    let subjectObj = subjects[i][1][0];
-    if(subjectObj.subjectNum == subjectNum && subjectObj.age.year == ageGroup){
-      //found it
-      currentSubjectID = subjects[i][0];
-      return subjectObj;
-    }
-  }
-}
+// function findSubject(n) {
+//   for(let i=0; i < subjects.length; i++){
+//     let subjectObj = subjects[i][1][0];
+//     if(subjectObj.subjectNum == subjectNum && subjectObj.age.year == ageGroup){
+//       //found it
+//       currentSubjectID = subjects[i][0];
+//       return subjectObj;
+//     }
+//   }
+// }
 
 function startTask(){
   gameOn = true;
@@ -366,7 +366,8 @@ function checkTouchOver() {
 }
 
 window.touchStarted = function() {
-  console.log("touch started");
+
+  console.log("order counter: "+orderCounter);
   checkTouchOver();
   checkOnTree();
   for (let i = 0; i < myObjectNum; i++) {
