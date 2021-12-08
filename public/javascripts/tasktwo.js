@@ -40,6 +40,10 @@ const clickLimit = 50;
 const timeLimitOn = false;
 const timeLimit = timeLimitOn ? 20 : -1;
 
+//first thing first,
+//set up instructions
+setUpInstruction();
+
 //get the reference to the video
 var video = document.querySelector("video");
 //if video exists, pause it for now
@@ -110,7 +114,7 @@ function makeVideoVisible(){
 }
 
 function setUpInstruction(){
-
+  console.log(`instruction has ${instructions.length} slides`);
 }
 //when the submit button is clicked do this
 function getUserContext() {
