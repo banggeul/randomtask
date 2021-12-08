@@ -296,7 +296,7 @@ function checkSubjectID() {
     //this is not a new subject
     newSubject = false;
     experiment.uniqueId = subject.uniqueId;
-    // document.getElementById('subjectNumOptions').disabled = true;
+    document.getElementById('subjectNumOptions').disabled = false;
     document.querySelector('#subjectInfoLabel').innerHTML = "This is an existing subject. Please make sure the info below is correct.";
     const ageMonthOptions = document.getElementById('ageMonthOptions');
     // ageMonthOptions.options[ageMonthOptions.selectedIndex].value = subjectObj.age.month;
