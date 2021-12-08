@@ -414,7 +414,7 @@ function addNewSubject(e) {
 
 function updateExistingSubjectInfo(){
   let data = {};
-  data.id = id;
+  data.id = experiment.uniqueId;
   data.experiment = experiment;
   //update the database
   storeSubject.dispatch({
