@@ -1,3 +1,4 @@
+import storeSubject from '/utils/subject_storage.js'
 //import the data storing script
 import {
   postData,
@@ -52,6 +53,7 @@ let ageSortedSubjects = [];
 let sortedSubjectIds = [];
 let newId;
 let age;
+let subject;
 
 for (let i = 0; i < 10; i++) {
   ageSortedSubjects.push([]);
@@ -290,7 +292,7 @@ function checkSubjectID() {
   let match = false;
 
   //now find the subject with age and subject numbe
-  const subject = findSubjectByAge(subjectNum, ageGroup);
+  subject = findSubjectByAge(subjectNum, ageGroup);
 
   if (subject != null) {
     //this is not a new subject
@@ -410,6 +412,19 @@ function addNewSubject(e) {
     });
 }
 
+function updateExistingSubjectInfo(){
+  let data = {};
+  data.id = id;
+  data.experiment = experiment;
+  //update the database
+  storeSubject.dispatch({
+      type: "UPDATE_DATA",
+      payload: {
+        data: data
+      }
+  });
+}
+
 function startTheTask(e) {
   //add the new subject to the database if this subject is new
   updateSubject();
@@ -417,6 +432,7 @@ function startTheTask(e) {
   if (newSubject) {
     addNewSubject(e);
   } else {
+    updateExistingSubjectInfo();
     // location.
     if (e.target.name == "one") {
       fadeOutInterface($interface, "task1");
