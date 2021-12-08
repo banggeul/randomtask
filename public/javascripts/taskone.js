@@ -526,13 +526,13 @@ function setUpGame() {
     //put the bunny into the neutral position
     $bunny.classList.remove("bunny-skipRight");
     $bunny.classList.remove("bunny-skipLeft");
-    if(currentCardNum <= 27 && currentCardNum >= 15){
-      $bunny.classList.remove("bunny-waitingRight");
-      $bunny.classList.add("bunny-waitingLeft");
-    } else {
-      $bunny.classList.add("bunny-waitingRight");
-      $bunny.classList.remove("bunny-waitingLeft");
-    }
+    // if(currentCardNum <= 27 && currentCardNum >= 15){
+    //   $bunny.classList.remove("bunny-waitingRight");
+    //   $bunny.classList.add("bunny-waitingLeft");
+    // } else {
+    //   $bunny.classList.add("bunny-waitingRight");
+    //   $bunny.classList.remove("bunny-waitingLeft");
+    // }
     //draw some border around the card
     // $cards[currentCardNum - 1].classList.remove('currentCard');
     // $cards[currentCardNum].classList.add('currentCard');
