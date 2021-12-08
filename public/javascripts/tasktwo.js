@@ -40,6 +40,9 @@ const clickLimit = 50;
 const timeLimitOn = false;
 const timeLimit = timeLimitOn ? 20 : -1;
 
+let instructionPages = [];
+const pathToSlides = "/instructions/task2/"
+
 //first thing first,
 //set up instructions
 setUpInstruction();
@@ -113,8 +116,7 @@ function makeVideoVisible(){
   document.querySelector("#videoContainer").style.visibility = "visible";
 }
 
-let instructionPages = [];
-const pathToSlides = "/instructions/task2/"
+
 function setUpInstruction(){
 
   for(let i=0; i < instructions.length; i++){
