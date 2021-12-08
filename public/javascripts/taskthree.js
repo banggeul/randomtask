@@ -360,12 +360,12 @@ function setMyDate() {
 function checkOnTree() {
   for (let i = 0; i < myObjectNum; i++) {
     // if (myObjectY[i] < height * 0.57) {
-    if (myObjects[i].y < height * 0.57)
+    if (myObjects[i].y < height * 0.57) {
       onTree[i] = true;
-  } else {
-    onTree[i] = false;
+    } else {
+      onTree[i] = false;
+    }
   }
-}
 }
 
 function checkTouchOver() {
