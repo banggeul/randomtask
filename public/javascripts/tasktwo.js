@@ -113,8 +113,34 @@ function makeVideoVisible(){
   document.querySelector("#videoContainer").style.visibility = "visible";
 }
 
+let instructionPages = [];
+
 function setUpInstruction(){
-  console.log(`instruction has ${instructions.length} slides`);
+
+  for(let i=0; i < instructions.length; i++){
+
+    let $instruction = document.createElement("div");
+    $instruction.classList.add('instructionWrapper');
+    $instructionScreen.appendChild($instruction);
+
+    if(instructions[i].background!=null){
+      $instruction.appendChild(`<img src=${instructions[i].background}>`);
+    }
+    if(instructions[i].text!=null){
+      $instruction.appendChild(`<div class="instruction">${instructions[i].text.en}</div>`);
+    }
+    //not the last screen, so put the next button
+    if(i < instructions.length-1){
+      $instruction.appendChild(`<div class="nextBtn"></div>`);
+    }
+    instructionPages.push($instruction);
+  }
+  //once all set, hide all but the first one
+  for(let i=0; i < instructionPages.length; i++){
+    instructionPages[i].style.display = "none";
+  }
+
+  instructionPages[0].style.display = "block";
 }
 //when the submit button is clicked do this
 function getUserContext() {
