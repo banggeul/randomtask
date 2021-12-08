@@ -30,9 +30,15 @@ let ageGroup;
 //get the reference to the HTML elements we need
 const $getUserContext = document.querySelector('#collectUserContext');
 const $welcomeScreen = document.querySelector('.container');
+const $instructionScreen = document.querySelector('#instructionContainer');
 const $setTimeLimit = document.querySelector('#timeLimitSwitch');
 const $timeLimit = document.querySelector('#timeLimitRow');
 const $game = document.querySelector('#content');
+
+//task settings
+const clickLimit = 50;
+const timeLimitOn = false;
+const timeLimit = timeLimitOn ? 20 : -1;
 
 //get the reference to the video
 var video = document.querySelector("video");
@@ -84,12 +90,27 @@ fetchSubjectById().then((data) => {
     currentSubject = data.experiment;
     // console.log(currentSubject);
     //bind the click event listener with the submit button
-    $getUserContext.addEventListener('click', getUserContext);
+    //$getUserContext.addEventListener('click', getUserContext);
+    //now set up the game
+    setTaskSetting();
+    setUpGame();
+    showInstruction();
   })
   .catch((e) =>
     console.log(e)
   );
 
+function showInstruction(){
+  fadeIn($instructionScreen, 0, makeVideoVisible);
+}
+
+function makeVideoVisible(){
+  document.querySelector("#videoContainer").visibility = "visible";
+}
+
+function setUpInstruction(){
+
+}
 //when the submit button is clicked do this
 function getUserContext() {
     //get all the values from the input elements
@@ -122,16 +143,28 @@ function getUserContext() {
     fadeIn($game);
 }
 
+function setTaskSetting(){
+  //get the current date and time
+  //store it in the variable sessionData
+  sessionData.clickLimit = clickLimit;
+  sessionData.timeLimit = timeLimit;
+  //fade out the instruction screen and fade in the game screen
+}
+
 function setUpGame() {
+  //make sure the game view is all hidden
+  $game.style.display = "none";
+  $game.style.opacity = 0;
+
   // console.log("set up the game here");
   $game.innerHTML = `<div onclick="void(0);">
       <div id="gameView" class="gameView">
         <div id="clickArea" class="clickArea"></div>
         <!--video container used to be here-->
-        <div id="game-ui" class="game-ui">
+        <!-- <div id="game-ui" class="game-ui"> -->
           <!--<p class="instruction"> Click to create rain drops.</p>-->
-          <a class="cta" href="#" id="startBtn"> Start the Game </a>
-        </div>
+          <!-- <a class="cta" href="#" id="startBtn"> Start the Game </a> -->
+        <!-- </div> -->
         <div class="thanks">
           <h1> Thanks for your participation! </h1>
           <!-- <span class="sun"></span> -->
@@ -148,8 +181,6 @@ function setUpGame() {
   //   "bubbles": true,
   //   "cancelable": false
   // });
-
-
 
   let timeID;
   let isGameOn = false;
@@ -187,14 +218,21 @@ function setUpGame() {
   $startBtn.addEventListener('click', function(e) {
     e.preventDefault();
     //play the video
-    if (video) {
-      if (video.paused) {
-        video.play();
-      }
-    }
+    // if (video) {
+    //   if (video.paused) {
+    //     video.play();
+    //   }
+    // }
     //fade out the game ui
-    fadeOut($gameUI, true);
-    $gameUI.style.pointerEvents = "none";
+    // fadeOut($gameUI, true);
+    const timestamp = Date.now();
+    sessionData.timestamp = timestamp;
+
+    // $gameUI.style.pointerEvents = "none";
+    fadeOut($instructionScreen, true);
+    $instructionScreen.style.pointerEvents = "none";
+
+    fadeIn($game);
 
     //get the clickable area and store it to the variable
     const clickBound = $clickArea.getBoundingClientRect();
@@ -234,9 +272,9 @@ function setUpGame() {
     if(clickLimit > 0){
       const clickAreaRect = $clickArea.getBoundingClientRect();
       let inOrOut = isInside(e.offsetX, e.offsetY,clickAreaRect);
-      console.log("is it in or out?" + inOrOut);
+      // console.log("is it in or out?" + inOrOut);
       if (isGameOn && inOrOut) {
-        console.log("it's in");
+        // console.log("it's in");
         // if(inOrOut){
         clickLimit--;
         // }
@@ -367,14 +405,15 @@ function createDot(options, $gameView, fadeOut = true, remove = true) {
 
 }
 //some utility functions for fading in and out using Greensock animation library (GSAP)
-function fadeIn(elem, delay) {
+function fadeIn(elem, delay, func=null) {
   elem.style.display = "block";
   elem.style.opacity = 0;
   gsap.to(elem, {
     duration: 1,
     ease: "power1.inOut",
     opacity: 1,
-    delay: delay
+    delay: delay,
+    onComplete:func
   });
 }
 
