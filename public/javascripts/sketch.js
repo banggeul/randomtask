@@ -126,7 +126,10 @@ function changeLanguage(msgs) {
   for (const key in msgs) {
     let selector = '#' + key;
     // console.log(selector, msgs[key]);
-    document.querySelector(selector).innerHTML = msgs[key];
+    const $msg = document.querySelector(selector);
+    if($msg != null){
+      $msg.innerHTML = msgs[key];
+    }
     // console.log(document.querySelector(selector));
   }
 
