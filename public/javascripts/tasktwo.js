@@ -235,7 +235,7 @@ function setUpGame() {
       const clickAreaRect = $clickArea.getBoundingClientRect();
       let inOrOut = isInside(e.offsetX, e.offsetY,clickAreaRect);
       console.log("is it in or out?" + inOrOut);
-      if (isGameOn && isInside) {
+      if (isGameOn && inOrOut) {
         console.log("it's in");
         // if(inOrOut){
         clickLimit--;
