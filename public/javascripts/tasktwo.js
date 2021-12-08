@@ -105,7 +105,7 @@ function showInstruction(){
 }
 
 function makeVideoVisible(){
-  consoled.log("make the video visible");
+  console.log("make the video visible");
   document.querySelector("#videoContainer").visibility = "visible";
 }
 
