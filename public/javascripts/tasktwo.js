@@ -106,7 +106,7 @@ function showInstruction(){
 
 function makeVideoVisible(){
   console.log("make the video visible");
-  document.querySelector("#videoContainer").visibility = "visible";
+  document.querySelector("#videoContainer").style.visibility = "visible";
 }
 
 function setUpInstruction(){
