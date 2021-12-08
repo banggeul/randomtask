@@ -273,7 +273,7 @@ function setUpGame() {
     //load the sequence to the environment variable
     for (let i = 0; i < totalCards; i++) {
       //get the sequence from the sequence set
-      let env = sequenceSets[sequenceSetIndex - 1][i]
+      let env = sequenceSets[sequenceSetIndex][i]
       environment.push(env);
     }
 
