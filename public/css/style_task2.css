@@ -302,7 +302,8 @@ a.disabled {
   color: white;
 }
 
-.instruction {
+.instruction
+{
   color: ghostwhite;
 }
 
@@ -460,7 +461,8 @@ label {
   top: 0;
   left: 0;
   overflow: hidden;
-  visibility: hidden;
+  display: none;
+  opacity: 0;
   width: 100%;
   height: 100vh;
   /* background-color: seagreen; */
