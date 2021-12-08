@@ -101,7 +101,7 @@ fetchSubjectById().then((data) => {
   );
 
 function showInstruction(){
-  fadeIn($instructionScreen, 0, makeVideoVisible);
+  fadeIn($instructionScreen, 1, makeVideoVisible);
 }
 
 function makeVideoVisible(){
