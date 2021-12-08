@@ -114,7 +114,7 @@ function makeVideoVisible(){
 }
 
 let instructionPages = [];
-
+const pathToSlides = "/instructions/task2/"
 function setUpInstruction(){
 
   for(let i=0; i < instructions.length; i++){
@@ -124,7 +124,7 @@ function setUpInstruction(){
     $instructionScreen.appendChild($instruction);
 
     if(instructions[i].background!=null){
-      $instruction.appendChild(`<img src=${instructions[i].background}>`);
+      $instruction.appendChild(`<img src=${pathToSlides+instructions[i].background}>`);
     }
     if(instructions[i].text!=null){
       $instruction.appendChild(`<div class="instruction">${instructions[i].text.en}</div>`);
