@@ -163,7 +163,7 @@ function generateNewID() {
   if (!$checkSubjectID.classList.contains('disabled')) {
     $checkSubjectID.classList.add('disabled');
   }
-  document.querySelector('#subjectInfoLabel').innerHTML = "This is a new subject. Please enter the info below."
+  document.querySelector('#subjectInfoLabel').innerHTML = "We generated a new subject number. Please enter the gender below."
   fadeIn($inputGender);
   newSubject = true;
 }
@@ -335,7 +335,8 @@ function checkSubjectID() {
     //this is a new subject
     newSubject = true;
     console.log("nothing matching");
-    document.querySelector('#subjectInfoLabel').innerHTML = "This is a new subject. Please select their gender."
+    generateNewID();
+    document.querySelector('#subjectInfoLabel').innerHTML = "The subject number you entered did not match our record so we generated a new ID for you. Please select their gender."
     fadeIn($inputGender);
   }
 }
