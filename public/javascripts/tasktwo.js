@@ -85,7 +85,6 @@ fetchSubjectById().then((data) => {
     // console.log(currentSubject);
     //bind the click event listener with the submit button
     $getUserContext.addEventListener('click', getUserContext);
-
   })
   .catch((e) =>
     console.log(e)
@@ -235,7 +234,7 @@ function setUpGame() {
     if(clickLimit > 0){
       const clickAreaRect = $clickArea.getBoundingClientRect();
       let inOrOut = isInside(e.offsetX, e.offsetY,clickAreaRect);
-      if (isGameOn) {
+      if (isGameOn && isInside) {
         // console.log(inOrOut);
         // if(inOrOut){
         clickLimit--;
@@ -247,8 +246,8 @@ function setUpGame() {
             x: e.offsetX,
             y: e.offsetY,
             rX: inOrOut ? mapRange(e.offsetX, clickAreaRect.left, clickAreaRect.right, 0, 1) : -1,
-            rY: inOrOut ? mapRange(e.offsetY, clickAreaRect.top, clickAreaRect.bottom, 0, 1) : -1,
-            inside: inOrOut
+            rY: inOrOut ? mapRange(e.offsetY, clickAreaRect.top, clickAreaRect.bottom, 0, 1) : -1
+            // inside: inOrOut
           },
           time: currentTime
         }
