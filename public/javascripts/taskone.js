@@ -347,6 +347,9 @@ function setUpGame() {
     let onStartFunc = function(){
       let className = "bunny-" + options.transition;
       $bunny.classList.add(className);
+      if(currentCardNum >= 14 && currentCardNum <= 26){
+        $bunny.classList.remove("bunny-waitingLeft");
+      }
     }
     gsap.to(".bunny", {
       x: options.x,
@@ -527,7 +530,7 @@ function setUpGame() {
     $bunny.classList.remove("bunny-skipRight");
     $bunny.classList.remove("bunny-skipLeft");
     console.log(currentCardNum);
-    if(currentCardNum <= 27 && currentCardNum >= 15){
+    if(currentCardNum <= 26 && currentCardNum >= 14){
       $bunny.classList.add("bunny-waitingLeft");
     } else {
       $bunny.classList.remove("bunny-waitingLeft");
