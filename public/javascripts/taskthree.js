@@ -88,10 +88,7 @@ function startTask(){
   if(gameMode == 'birds'){
     initGame('birds');
   } else {
-    if(Math.random()>0.5){
-      initGame('sunLeft');
-    }else{
-      initGame('sunRight');
+    initGame('sunLeft');
     }
   }
 }
@@ -101,6 +98,8 @@ let myObjectSize = 134;
 
 let myObjectX = [];
 let myObjectY = [];
+let myObjects = [];
+
 let apples = [];
 let birds = [];
 let overMyObject = [];
@@ -278,9 +277,14 @@ function bigReset(mode) {
 
   for (let i = 0; i < myObjectNum; i++) {
     console.log(myObjectSize, windowHeight);
-    myObjectX[i] = i * myObjectSize;
-    myObjectY[i] = windowHeight - myObjectSize * 1.3;
-    console.log("apple "+i+": "+myObjectX[i]+", "+myObjectY[i]);
+    myObjects[i] = {};
+    myObjects[i].x = i * myObjectSize;
+    myObjects[i].y = windowHeight - myObjectSize * 1.3;
+
+    // myObjectX[i] = i * myObjectSize;
+    // myObjectY[i] = windowHeight - myObjectSize * 1.3;
+    console.log(gameMode+i+": "+myObjects[i].x +", "+myObjects[i].y);
+
     overMyObject[i] = false;
     xOffset[i] = 0.0;
     yOffset[i] = 0.0;
@@ -301,9 +305,11 @@ function bigReset(mode) {
 function drawObjects() {
   for (let i = 0; i < myObjectNum; i++) {
     if (noMoreMove[i]) {
-      image(object, myObjectX[i], myObjectY[i], myObjectSize, myObjectSize);
+      image(object, myObjects[i].x, myObjects[i].y, myObjectSize, myObjectSize);
+      // image(object, myObjectX[i], myObjectY[i], myObjectSize, myObjectSize);
     } else {
-      image(object_shadow, myObjectX[i], myObjectY[i], myObjectSize, myObjectSize);
+      image(object_shadow, myObjects[i].x, myObjects[i].y, myObjectSize, myObjectSize);
+      // image(object_shadow, myObjectX[i], myObjectY[i], myObjectSize, myObjectSize);
     }
     noFill();
     //rect(myObjectX[i], myObjectY[i], myObjectSize, myObjectSize);
@@ -311,10 +317,12 @@ function drawObjects() {
     if (showOrderNumbers) {
       textSize(myObjectSize / 1.4);
       fill(0);
-      text(myOrder[i], myObjectX[i] + 2 + myObjectSize * .35, myObjectY[i] + 3 + myObjectSize * .8);
+      // text(myOrder[i], myObjectX[i] + 2 + myObjectSize * .35, myObjectY[i] + 3 + myObjectSize * .8);
+      text(myOrder[i], myObjects[i].x + 2 + myObjectSize * .35, myObjects[i].y + 3 + myObjectSize * .8);
       textSize(myObjectSize / 1.45);
       fill(220, 220, 255);
-      text(myOrder[i], myObjectX[i] + myObjectSize * .35, myObjectY[i] + myObjectSize * .8);
+      text(myOrder[i], myObjects[i].x + myObjectSize * .35, myObjects[i].y + myObjectSize * .8);
+      // text(myOrder[i], myObjectX[i] + myObjectSize * .35, myObjectY[i] + myObjectSize * .8);
     }
 
     if (showThanks) {
@@ -351,7 +359,8 @@ function setMyDate() {
 
 function checkOnTree() {
   for (let i = 0; i < myObjectNum; i++) {
-    if (myObjectY[i] < height * 0.57) {
+    // if (myObjectY[i] < height * 0.57) {
+    if(myObjects[i].y < height * 0.57)
       onTree[i] = true;
     } else {
       onTree[i] = false;
@@ -361,11 +370,21 @@ function checkOnTree() {
 
 function checkTouchOver() {
   for (let i = 0; i < myObjectNum; i++) {
+    // if (
+    //   mouseX > myObjectX[i] &&
+    //   mouseX < myObjectX[i] + myObjectSize &&
+    //   mouseY > myObjectY[i] &&
+    //   mouseY < myObjectY[i] + myObjectSize
+    // ) {
+    //   overMyObject[i] = true;
+    // } else {
+    //   overMyObject[i] = false;
+    // }
     if (
-      mouseX > myObjectX[i] &&
-      mouseX < myObjectX[i] + myObjectSize &&
-      mouseY > myObjectY[i] &&
-      mouseY < myObjectY[i] + myObjectSize
+      mouseX > myObjects[i].x &&
+      mouseX < myObjects[i].x + myObjectSize &&
+      mouseY > myObjects[i].y &&
+      mouseY < myObjects[i].y + myObjectSize
     ) {
       overMyObject[i] = true;
     } else {
@@ -398,8 +417,8 @@ window.touchStarted = function() {
     if (overMyObject[i] && !noMoreMove[i]) {
       isMoving[i] = true;
     }
-    xOffset[i] = mouseX - myObjectX[i];
-    yOffset[i] = mouseY - myObjectY[i];
+    xOffset[i] = mouseX - myObjects[i].x;
+    yOffset[i] = mouseY - myObjects[i].y;
   }
 
   console.log("order counter: "+orderCounter);
@@ -472,11 +491,11 @@ function ruFinished(){
     if(gameIndex > 0){
       //all two tasks are finished
       //wrap it up
-      //save the game data 
+      //save the game data
       if(gameMode == "birds"){
         //if the current game mode was birds then package the current data before loading the new one
-          for(let i=0; i < myObjectX.length; i++){
-            birds[i] = { x: myObjectX[i], y: myObjectY[i]};
+          for(let i=0; i < myObjects.length; i++){
+            birds[i] = { x: myObjects[i].x, y: myObjects[i].y, order: myOrder[i], originalOrder: i};
           }
           sessionData.birds = {
             position: birds,
@@ -486,8 +505,8 @@ function ruFinished(){
       } else {
         // the current game is apples
         // apple game has been finished
-        for(let i=0; i < myObjectX.length; i++){
-          apples[i] = { x: myObjectX[i], y: myObjectY[i]};
+        for(let i=0; i < myObjects.length; i++){
+          apples[i] = { x: myObjects[i].x, y: myObjects[i].y, order: myOrder[i], originalOrder: i};
         }
         sessionData.apples = {
           position: apples,
@@ -508,8 +527,8 @@ function ruFinished(){
       //save the data
       if(gameMode == "birds"){
         //if the current game mode was birds then package the current data before loading the new one
-          for(let i=0; i < myObjectX.length; i++){
-            birds[i] = { x: myObjectX[i], y: myObjectY[i]};
+          for(let i=0; i < myObjects.length; i++){
+            birds[i] = { x: myObjects[i].x, y: myObjects[i].y, order: myOrder[i], originalOrder: i};
           }
           sessionData.birds = {
             position: birds,
@@ -519,8 +538,8 @@ function ruFinished(){
       } else {
         // the current game is apples
         // apple game has been finished
-        for(let i=0; i < myObjectX.length; i++){
-          apples[i] = { x: myObjectX[i], y: myObjectY[i]};
+        for(let i=0; i < myObjects.length; i++){
+          apples[i] = { x: myObjects[i].x, y: myObjects[i].y, order: myOrder[i], originalOrder: i};
         }
         sessionData.apples = {
           position: apples,
@@ -569,6 +588,7 @@ function finishGame() {
   });
   //package the data
   sessionData.subject = experiment;
+  sessionData.gameOrder = gameOrder;
   //then store it to the storage which will post it to the database
   store.dispatch({
     type: "ADD_DATA",
@@ -585,9 +605,9 @@ function finishGame() {
 window.touchMoved = function() {
   for (let i = myObjectNum-1; i >= 0; i--) {
     if (!noMoreMove[i] && isMoving[i]) {
-      myObjectX[i] = mouseX - xOffset[i];
-      myObjectY[i] = mouseY - yOffset[i];
-                break;
+      myObjects[i].x = mouseX - xOffset[i];
+      myObjects[i].y = mouseY - yOffset[i];
+      break;
     }
   }
   // console.log(mouseX, mouseY);
