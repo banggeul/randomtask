@@ -29,7 +29,7 @@ let gameIndex = 0;
 const $instructionMsg = document.querySelector("#instructionMsg");
 
 // fetch the subjectNumbers collection
-async function fetchSubject(){
+async function fetchSubject() {
   let response = await fetch('/subjects');
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
@@ -37,8 +37,8 @@ async function fetchSubject(){
   return await response.json();
 }
 
-async function fetchSubjectById(){
-  let response = await fetch('/single_subject/'+id);
+async function fetchSubjectById() {
+  let response = await fetch('/single_subject/' + id);
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
@@ -46,29 +46,29 @@ async function fetchSubjectById(){
 }
 
 fetchSubjectById().then((data) => {
-  //now do something with it
-  subjectNum = parseInt(subjectNumParam);
-  ageGroup = parseInt(ageGroupParam);
-  currentSubject = data.experiment;
-  //set the game order based on the subjecNum
-  if(subjectNum%2==0){
-    gameOrder = ["apple","birds"];
-    $instructionMsg.innerHTML = "This is the instruction for the apple game";
-  } else {
-    gameOrder = ["birds","apple"];
-    $instructionMsg.innerHTML = "This is the instruction for the birds game";
-  }
-  //but for now just set it as the first one
-  document.querySelector('#startBtn').addEventListener('touchstart', startTask);
-  //show instruction
-  showInstruction();
-})
-.catch((e) =>
-  console.log(e)
-);
+    //now do something with it
+    subjectNum = parseInt(subjectNumParam);
+    ageGroup = parseInt(ageGroupParam);
+    currentSubject = data.experiment;
+    //set the game order based on the subjecNum
+    if (subjectNum % 2 == 0) {
+      gameOrder = ["apple", "birds"];
+      $instructionMsg.innerHTML = "This is the instruction for the apple game";
+    } else {
+      gameOrder = ["birds", "apple"];
+      $instructionMsg.innerHTML = "This is the instruction for the birds game";
+    }
+    //but for now just set it as the first one
+    document.querySelector('#startBtn').addEventListener('touchstart', startTask);
+    //show instruction
+    showInstruction();
+  })
+  .catch((e) =>
+    console.log(e)
+  );
 
-function showInstruction(){
-  if(gameOrder[gameIndex]=="apple"){
+function showInstruction() {
+  if (gameOrder[gameIndex] == "apple") {
     $instructionMsg.innerHTML = "This is the instruction for the apple game";
   } else {
     $instructionMsg.innerHTML = "This is the instruction for the birds game";
@@ -79,19 +79,19 @@ function showInstruction(){
   document.querySelector('#instruction').style.display = "flex";
 }
 
-function startTask(){
+function startTask() {
   gameOn = true;
   document.querySelector('canvas').style.display = "block";
   document.querySelector('#instruction').style.display = "none";
   //decide which game to present
   gameMode = gameOrder[gameIndex];
-  if(gameMode == 'birds'){
+  if (gameMode == 'birds') {
     initGame('birds');
   } else {
     initGame('sunLeft');
-    }
   }
 }
+
 
 let myObjectNum = 10;
 let myObjectSize = 134;
@@ -184,15 +184,15 @@ window.setup = function() {
 }
 
 window.draw = function() {
-  if(gameOn) {
+  if (gameOn) {
     if (gameMode != 'menu') {
       background(220);
       //draw the background
       image(tree, 0, 0, width, height);
       //if the game mode is one of the apples then draw the sun
-      if(gameMode == 'sunLeft'){
+      if (gameMode == 'sunLeft') {
         image(sun, 325, 15);
-      } else if(gameMode == 'sunRight'){
+      } else if (gameMode == 'sunRight') {
         image(sun, 880, 15);
       }
       drawObjects();
@@ -283,7 +283,7 @@ function bigReset(mode) {
 
     // myObjectX[i] = i * myObjectSize;
     // myObjectY[i] = windowHeight - myObjectSize * 1.3;
-    console.log(gameMode+i+": "+myObjects[i].x +", "+myObjects[i].y);
+    console.log(gameMode + i + ": " + myObjects[i].x + ", " + myObjects[i].y);
 
     overMyObject[i] = false;
     xOffset[i] = 0.0;
@@ -360,12 +360,12 @@ function setMyDate() {
 function checkOnTree() {
   for (let i = 0; i < myObjectNum; i++) {
     // if (myObjectY[i] < height * 0.57) {
-    if(myObjects[i].y < height * 0.57)
+    if (myObjects[i].y < height * 0.57)
       onTree[i] = true;
-    } else {
-      onTree[i] = false;
-    }
+  } else {
+    onTree[i] = false;
   }
+}
 }
 
 function checkTouchOver() {
@@ -421,7 +421,7 @@ window.touchStarted = function() {
     yOffset[i] = mouseY - myObjects[i].y;
   }
 
-  console.log("order counter: "+orderCounter);
+  console.log("order counter: " + orderCounter);
 
   if (orderCounter == myObjectNum && mouseX > 0 && mouseX < 100 && mouseY > 0 && mouseY < 100) {
     showOrderNumbers = !showOrderNumbers;
@@ -451,7 +451,7 @@ window.touchStarted = function() {
   if (orderCounter == myObjectNum && gameOn) {
     console.log("show r u finished button")
     //show are you finished screen
-    if(ruFinishedBtn.hasClass('hidden'))
+    if (ruFinishedBtn.hasClass('hidden'))
       setTimeout(ruFinished, 3000);
     // if(gameMode == "birds"){
     //   for(let i=0; i < myObjectX.length; i++){
@@ -463,16 +463,16 @@ window.touchStarted = function() {
     //     timeTaken: round(timeTaken)
     //   }
     // } else {
-      //apple game has been finished
-      //package data and reload the bird game
-      // for(let i=0; i < myObjectX.length; i++){
-      //   apples[i] = { x: myObjectX[i], y: myObjectY[i]};
-      // }
-      // sessionData.apples = {
-      //   position: apples,
-      //   startTime: dateAndTimeStarted,
-      //   timeTaken: round(timeTaken)
-      // }
+    //apple game has been finished
+    //package data and reload the bird game
+    // for(let i=0; i < myObjectX.length; i++){
+    //   apples[i] = { x: myObjectX[i], y: myObjectY[i]};
+    // }
+    // sessionData.apples = {
+    //   position: apples,
+    //   startTime: dateAndTimeStarted,
+    //   timeTaken: round(timeTaken)
+    // }
     // }
   }
 
@@ -481,32 +481,42 @@ window.touchStarted = function() {
 
 
 
-function ruFinished(){
+function ruFinished() {
   ruFinishedBtn.removeClass('hidden');
   // btn_sunLeft.position(width*.3, height*.2);
   ruFinishedBtn.touchStarted(() => {
     //turn off the game
     gameOn = false;
     //decide if this task has been done
-    if(gameIndex > 0){
+    if (gameIndex > 0) {
       //all two tasks are finished
       //wrap it up
       //save the game data
-      if(gameMode == "birds"){
+      if (gameMode == "birds") {
         //if the current game mode was birds then package the current data before loading the new one
-          for(let i=0; i < myObjects.length; i++){
-            birds[i] = { x: myObjects[i].x, y: myObjects[i].y, order: myOrder[i], originalOrder: i};
-          }
-          sessionData.birds = {
-            position: birds,
-            startTime: dateAndTimeStarted,
-            timeTaken: round(timeTaken)
-          }
+        for (let i = 0; i < myObjects.length; i++) {
+          birds[i] = {
+            x: myObjects[i].x,
+            y: myObjects[i].y,
+            order: myOrder[i],
+            originalOrder: i
+          };
+        }
+        sessionData.birds = {
+          position: birds,
+          startTime: dateAndTimeStarted,
+          timeTaken: round(timeTaken)
+        }
       } else {
         // the current game is apples
         // apple game has been finished
-        for(let i=0; i < myObjects.length; i++){
-          apples[i] = { x: myObjects[i].x, y: myObjects[i].y, order: myOrder[i], originalOrder: i};
+        for (let i = 0; i < myObjects.length; i++) {
+          apples[i] = {
+            x: myObjects[i].x,
+            y: myObjects[i].y,
+            order: myOrder[i],
+            originalOrder: i
+          };
         }
         sessionData.apples = {
           position: apples,
@@ -525,21 +535,31 @@ function ruFinished(){
       }
       //restart the game with the next mode
       //save the data
-      if(gameMode == "birds"){
+      if (gameMode == "birds") {
         //if the current game mode was birds then package the current data before loading the new one
-          for(let i=0; i < myObjects.length; i++){
-            birds[i] = { x: myObjects[i].x, y: myObjects[i].y, order: myOrder[i], originalOrder: i};
-          }
-          sessionData.birds = {
-            position: birds,
-            startTime: dateAndTimeStarted,
-            timeTaken: round(timeTaken)
-          }
+        for (let i = 0; i < myObjects.length; i++) {
+          birds[i] = {
+            x: myObjects[i].x,
+            y: myObjects[i].y,
+            order: myOrder[i],
+            originalOrder: i
+          };
+        }
+        sessionData.birds = {
+          position: birds,
+          startTime: dateAndTimeStarted,
+          timeTaken: round(timeTaken)
+        }
       } else {
         // the current game is apples
         // apple game has been finished
-        for(let i=0; i < myObjects.length; i++){
-          apples[i] = { x: myObjects[i].x, y: myObjects[i].y, order: myOrder[i], originalOrder: i};
+        for (let i = 0; i < myObjects.length; i++) {
+          apples[i] = {
+            x: myObjects[i].x,
+            y: myObjects[i].y,
+            order: myOrder[i],
+            originalOrder: i
+          };
         }
         sessionData.apples = {
           position: apples,
@@ -581,10 +601,10 @@ function finishGame() {
   experiment.experiment = currentSubject;
   //update the database
   storeSubject.dispatch({
-      type: "UPDATE_DATA",
-      payload: {
-        data: experiment
-      }
+    type: "UPDATE_DATA",
+    payload: {
+      data: experiment
+    }
   });
   //package the data
   sessionData.subject = experiment;
@@ -598,12 +618,12 @@ function finishGame() {
   });
 
   setTimeout(function() {
-    window.location.href = "/"+"?subject="+currentSubject.subjectNum+"&id="+experiment.id+"&age="+currentSubject.age.year;
+    window.location.href = "/" + "?subject=" + currentSubject.subjectNum + "&id=" + experiment.id + "&age=" + currentSubject.age.year;
   }, 5000);
 }
 
 window.touchMoved = function() {
-  for (let i = myObjectNum-1; i >= 0; i--) {
+  for (let i = myObjectNum - 1; i >= 0; i--) {
     if (!noMoreMove[i] && isMoving[i]) {
       myObjects[i].x = mouseX - xOffset[i];
       myObjects[i].y = mouseY - yOffset[i];
