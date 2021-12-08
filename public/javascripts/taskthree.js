@@ -498,8 +498,8 @@ function ruFinished() {
           birds[i] = {
             x: myObjects[i].x,
             y: myObjects[i].y,
-            order: myOrder[i],
-            originalOrder: i
+            order: myOrder[i]+1,
+            originalOrder: i+1
           };
         }
         sessionData.birds = {
@@ -514,8 +514,8 @@ function ruFinished() {
           apples[i] = {
             x: myObjects[i].x,
             y: myObjects[i].y,
-            order: myOrder[i],
-            originalOrder: i
+            order: myOrder[i]+1,
+            originalOrder: i+1
           };
         }
         sessionData.apples = {
@@ -541,8 +541,8 @@ function ruFinished() {
           birds[i] = {
             x: myObjects[i].x,
             y: myObjects[i].y,
-            order: myOrder[i],
-            originalOrder: i
+            order: myOrder[i]+1,
+            originalOrder: i+1
           };
         }
         sessionData.birds = {
@@ -557,8 +557,8 @@ function ruFinished() {
           apples[i] = {
             x: myObjects[i].x,
             y: myObjects[i].y,
-            order: myOrder[i],
-            originalOrder: i
+            order: myOrder[i]+1,
+            originalOrder: i+1
           };
         }
         sessionData.apples = {
