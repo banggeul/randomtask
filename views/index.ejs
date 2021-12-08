@@ -76,7 +76,7 @@
           </div>
 
           <div class="formRowFlex flexLeft">
-            <label for="sessionID" id="enterSubjectNumMsg" class="inlineLabel labelBold">Subject Number</label>
+            <label for="sessionID" id="enterSubjectNumMsg" class="inlineLabel labelBold">Subject Number:</label>
 
             <!-- <input onClick="this.setSelectionRange(0, this.value.length);" type="text" name="name" id="name" value=""> -->
             <select id="subjectNumOptions" name="subjectNumOptions" class="dropdownExtend" disabled>
@@ -89,10 +89,10 @@
           </div>
         </div>
         <div class="inputGender" id="inputGender">
-          <div class="formRow" id="genderOptionRow">
+          <div class="formRow" id="genderOptionRow" style="margin-bottom: 0;">
             <label id="subjectInfoLabel">This is a new subject. Please select the gender.</label>
             <div class="formRowFlex flexLeft">
-              <label for="gender" id="genderLabel" class="inlineLabel labelBold">Gender</label>
+              <label for="gender" id="genderLabel" class="inlineLabel labelBold">Gender:</label>
               <select id="genderOptions" name="genderOptions" class="dropdownExtend">
                 <option value="female">F</option>
                 <option value="male">M</option>
@@ -100,10 +100,9 @@
               </select>
             </div>
           </div>
-          <div class="formRow">
+          <div class="formRowFlex flexLeft">
             <label for="" class="labelBold">Notes:</label>
-            <textarea rows="4" cols="50" name="comment" id="notesInput" class="notesInput">
-              Enter any notes here...</textarea>
+            <textarea rows="4" cols="50" name="comment" id="notesInput" class="notesInput dropdownExtend" placeholder="Enter any addtional notes here."></textarea>
           </div>
           <div class="formRowFlex formRowCenter">
             <a class="cta" href="#" id="rabbitTaskButton" name="one">Task 1</a>
