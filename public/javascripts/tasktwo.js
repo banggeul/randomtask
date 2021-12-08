@@ -126,14 +126,14 @@ function setUpInstruction(){
     $instructionScreen.appendChild($instruction);
 
     if(instructions[i].background!=null){
-      $instruction.appendChild(`<img src=${pathToSlides+instructions[i].background}>`);
+      $instruction.innerHTML += `<img src=${pathToSlides+instructions[i].background}>`;
     }
     if(instructions[i].text!=null){
-      $instruction.appendChild(`<div class="instruction">${instructions[i].text.en}</div>`);
+      $instruction.innerHTML += `<div class="instruction">${instructions[i].text.en}</div>`;
     }
     //not the last screen, so put the next button
     if(i < instructions.length-1){
-      $instruction.appendChild(`<div class="nextBtn"></div>`);
+      $instruction.innerHTML += `<div class="nextBtn"></div>`;
     }
     instructionPages.push($instruction);
   }
