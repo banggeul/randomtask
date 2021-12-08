@@ -385,6 +385,13 @@ function updateSubject() {
     two: 0,
     three: 0
   }
+  if(!newSubject && subject != null){
+    experiment.tasks = {
+      one: subject.tasks.one,
+      two: subject.tasks.two,
+      three: subject.tasks.three
+    }
+  }
   experiment.gender = gender;
   experiment.notes = notes;
 }
