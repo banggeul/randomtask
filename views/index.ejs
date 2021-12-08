@@ -19,27 +19,28 @@
   <div id="app-container">
     <div class="" id="content"></div>
     <div class="container" id="interfaceContainer">
-      <h1 id="welcomeMsg">Welcome to the experiment </h1>
+      <!-- <h1 id="welcomeMsg">Welcome to the experiment </h1> -->
       <div id="user-context">
-        <div class="formRow">
-          <div class="formRowFlex">
-            <label class="radioBtnContainer">English
-              <input type="radio" checked="checked" name="radio" value="en">
-              <span class="checkmark"></span>
-            </label>
-            <label class="radioBtnContainer">Deutsch
-              <input type="radio" name="radio" value="de">
-              <span class="checkmark"></span>
-            </label>
-          </div>
+        <div class="formRowFlex">
+          <label class="radioBtnContainer">English
+            <input type="radio" checked="checked" name="radio" value="en">
+            <span class="checkmark"></span>
+          </label>
+          <label class="radioBtnContainer">Deutsch
+            <input type="radio" name="radio" value="de">
+            <span class="checkmark"></span>
+          </label>
         </div>
-        <h2 id="enterAgeSubjectMsg">Please enter the age and subject number.</h2>
+        <div class="formRow">
+          <h2 id="enterAgeSubjectMsg">Please enter the age and subject number.</h2>
+        </div>
         <!-- <a class="cta" href="#" id="submitLanguage">Next</a> -->
         <div class="inputAgeSubjectNum" id="inputAgeSubjectNum">
 
           <div class="formRow" id="age">
-            <label for="age" id="ageLabel">Age:</label>
+
             <div class="ageInputRow">
+              <label for="age" id="ageLabel" class="ageInputCol labelBold">Age:</label>
               <div class="ageInputCol">
                 <label for="year" id="yearLabel"> Year </label>
                 <select id="ageYearOptions" name="ageYearOptions">
@@ -73,28 +74,31 @@
               </div>
             </div>
           </div>
-          <div class="formRow">
-            <div class="formRowFlex">
-              <label for="sessionID" id="enterSubjectNumMsg">Subject Number</label>
-              <label for="generateNew"><a href="#" id="generateNewIDButton" class="disabled"> Generate New Instead?</a></label>
-            </div>
+
+          <div class="formRowFlex flexLeft">
+            <label for="sessionID" id="enterSubjectNumMsg" class="inlineLabel labelBold">Subject Number</label>
+
             <!-- <input onClick="this.setSelectionRange(0, this.value.length);" type="text" name="name" id="name" value=""> -->
-            <select id="subjectNumOptions" name="subjectNumOptions" disabled>
+            <select id="subjectNumOptions" name="subjectNumOptions" class="dropdownExtend" disabled>
               <option disabled selected>Select the subject number below.</option>
             </select>
           </div>
-          <a class="cta disabled" href="#" id="checkSubjectID">Check Subject Number</a>
+          <div class="formRowFlex buttons">
+            <a href="#" id="generateNewIDButton" class="cta generateNewIDButton disabled"> Generate New Instead?</a>
+            <a class="cta disabled" href="#" id="checkSubjectID">Check Subject Number</a>
+          </div>
         </div>
-
         <div class="inputGender" id="inputGender">
           <div class="formRow" id="genderOptionRow">
             <label id="subjectInfoLabel">This is a new subject. Please select the gender.</label>
-            <label for="gender" id="genderLabel">Gender</label>
-            <select id="genderOptions" name="genderOptions">
-              <option value="female">F</option>
-              <option value="male">M</option>
-              <option value="nonbinary">X</option>
-            </select>
+            <div class="formRowFlex flexLeft">
+              <label for="gender" id="genderLabel" class="inlineLabel labelBold">Gender</label>
+              <select id="genderOptions" name="genderOptions" class="dropdownExtend">
+                <option value="female">F</option>
+                <option value="male">M</option>
+                <option value="nonbinary">X</option>
+              </select>
+            </div>
           </div>
           <div class="formRowFlex formRowCenter">
             <a class="cta" href="#" id="rabbitTaskButton" name="one">Task 1</a>
@@ -109,6 +113,11 @@
             <div class="checkbox" id="rainTaskCheckbox"></div>
           </div>
           <label id="tryAgain">This subject has finished all tasks. Check the number and try again.</label>
+          <div class="formRow">
+            <label for="" class="labelBold">Notes:</label>
+            <textarea rows="4" cols="50" name="comment" id="notesInput" class="notesInput">
+              Enter any notes here...</textarea>
+          </div>
         </div>
       </div>
     </div>
