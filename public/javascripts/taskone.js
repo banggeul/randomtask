@@ -182,7 +182,7 @@ function setUpInstruction(arr){
               x: toVal,
               duration: du
             });
-          } if(prop == "7"){
+          } if(prop == "y"){
             gsap.to($elem, {
               y: toVal,
               duration: du
@@ -211,6 +211,8 @@ function setUpInstruction(arr){
   //once all set, hide all
   for(let i=0; i < instructionPages.length; i++){
     instructionPages[i].style.display = "none";
+    instTexts[i].style.display = "none";
+    nextBtns[i].style.display = "none";
   }
 }
 
