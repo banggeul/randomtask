@@ -188,17 +188,17 @@ function setUpInstruction(arr){
 
         if(instructions[i].imgfadeOut == 1){
           //if image needs to be faded out, then fade out the whole thing
-          fadeOutDelay(instructionPages[i], 0, true);
+          fadeOut(instructionPages[i], true, 0);
         } else {
           //if image needs to stay, then just fade out the text and the button
-          fadeOutDelay(instTexts[i], 0, true);
-          fadeOutDelay(nextBtns[i], 0, true);
+          fadeOut(instTexts[i], true, 0);
+          fadeOut(nextBtns[i], true, 0);
         }
 
       } else {
         //it's the last slide
         //the button should trigger start game
-        fadeOutDelay(instructionPages[i], 0, true);
+        fadeOut(instructionPages[i], true, 0);
         startTask();
       }
     })

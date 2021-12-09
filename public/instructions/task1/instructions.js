@@ -19,7 +19,7 @@ export var instructions = [
     isVideo: "0",
     animation: {
       property: "x",
-      to: "100",
+      to: "300",
       duration: "1"
     },
     text: {
@@ -28,8 +28,8 @@ export var instructions = [
     textDelay: "2",
     x:"50%",
     y:"5%",
-    image_x: "-10%",
-    image_y: "0",
+    image_x: "-200px",
+    image_y: "5%",
     image_width: "200px",
     textAlign: "center",
     imgfadeOut: "1"
@@ -71,7 +71,7 @@ export var instructions = [
     foreground: "big_rabbit.png",
     animation: {
       property: "y",
-      to: "100",
+      to: "1000",
       duration: "2"
     },
     isVideo: "0",
