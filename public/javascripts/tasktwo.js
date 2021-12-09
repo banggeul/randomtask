@@ -34,6 +34,7 @@ const $instructionScreen = document.querySelector('#instructionContainer');
 const $setTimeLimit = document.querySelector('#timeLimitSwitch');
 const $timeLimit = document.querySelector('#timeLimitRow');
 const $game = document.querySelector('#content');
+const $startBtn = document.querySelector('#startBtn');
 
 //task settings
 const clickLimit = 50;
@@ -154,7 +155,7 @@ function setUpInstruction(){
       } else {
         fadeIn(instTexts[i+1], delay);
       }
-      
+
       if(instructions[i+1].isVideo == 1){
         if (video) {
           if (video.paused) {
@@ -250,7 +251,6 @@ function setUpGame() {
   let isGameOn = false;
 
   //get the reference to the game view HTML elements
-  const $startBtn = document.querySelector('#startBtn');
   const $gameView = document.querySelector('#gameView');
   const $clickArea = document.querySelector('#clickArea');
 
