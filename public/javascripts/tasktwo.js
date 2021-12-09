@@ -123,7 +123,7 @@ function setUpInstruction(){
     $instruction.classList.add('instructionWrapper');
     $instructionScreen.appendChild($instruction);
 
-    if(instructions[i].background!=null){
+    if(instructions[i].background!=null && instructions[i].isVideo!=1){
       $instruction.innerHTML += `<img src=${pathToSlides+instructions[i].background}>`;
     }
     if(instructions[i].text!=null){
@@ -139,7 +139,14 @@ function setUpInstruction(){
   const nextBtns = document.querySelectorAll('div.nextBtn');
   for(let i=0; i < nextBtns.length; i++){
     nextBtns[i].addEventListener('click', function(){
-      fadeIn(instructionPages[i+1]);
+      fadeIn(instructionPages[i+1], parseInt(instructions[i].textDelay));
+      if(instructions[i+1].isVideo == 1){
+        if (video) {
+          if (video.paused) {
+            video.play();
+          }
+        }
+      }
     })
   }
   //once all set, hide all but the first one
