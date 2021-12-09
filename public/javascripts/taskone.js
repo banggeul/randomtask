@@ -167,7 +167,7 @@ function setUpInstruction(arr){
       if(i < nextBtns.length-1){
         let delay = parseInt(arr[i+1].textDelay);
         // function fadeInInstruction(elem, duration, delay, func=null)
-        fadeInInstruction(instructionPages[i+1], 0, 0, playVideo);
+        fadeInInstruction(instructionPages[i+1], 1, 0, playVideo);
         fadeInInstruction(instTexts[i+1], 1, delay);
         fadeInInstruction(nextBtns[i+1], 1, delay+1);
         //now play animation if there's any
