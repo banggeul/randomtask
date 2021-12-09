@@ -26,7 +26,138 @@ let ageGroup;
 let gameOn = false;
 let gameOrder = [];
 let gameIndex = 0;
-const $instructionMsg = document.querySelector("#instructionMsg");
+const $instructionScreen = document.querySelector("#instructionContainer");
+let apple_instructionPages = [];
+let bird_instructionPages = [];
+let apple_instTexts = [];
+let bird_instTexts = [];
+let appleNextBtns = [];
+let birdNextBtns = [];
+const pathToSlides = "/instructions/task3/"
+
+//first thing first,
+//set up instructions
+setUpInstruction(apple_instructions);
+setUpInstruction(bird_instructions);
+
+function showInstruction(){
+
+  if (gameOrder[gameIndex] == "apple") {
+    for(let i=0; i < apple_instructionPages.length; i++){
+      $instructionScreen.appendChild(apple_instructionPages[i]);
+    }
+    apple_instructionPages[0].style.display = "block";
+    if(apple_instTexts.length > 0){
+      fadeIn(apple_instTexts[0], 3);
+      fadeIn(appleNextBtns[0], 3);
+    }
+
+  } else {
+    for(let i=0; i < bird_instructionPages.length; i++){
+      $instructionScreen.appendChild(bird_instructionPages[i]);
+    }
+    bird_instructionPages[0].style.display = "block";
+    if(bird_instTexts.length > 0){
+      fadeIn(bird_instTexts[0], 3);
+      fadeIn(birdNextBtns[0], 3);
+    }
+  }
+
+  fadeIn($instructionScreen, 1, null);
+  // const instTexts = document.querySelectorAll('.instruction');
+  // const nextBtns = document.querySelectorAll('div.nextBtn');
+
+}
+
+// function showInstruction() {
+//   if (gameOrder[gameIndex] == "apple") {
+//     $instructionMsg.innerHTML = "This is the instruction for the apple game";
+//   } else {
+//     $instructionMsg.innerHTML = "This is the instruction for the birds game";
+//   }
+//   // const instruction = select('#instruction');
+//   // if(instruction.hasClass('hidden'))
+//   //   instruction.removeClass('hidden');
+//   document.querySelector('#instruction').style.display = "flex";
+// }
+
+function setUpInstruction(arr){
+  let instructionPages = [];
+  let instTexts = [];
+  let nextBtns = [];
+
+  for(let i=0; i < arr.length; i++){
+    const inst = arr[i];
+    let $instruction = document.createElement("div");
+    $instruction.classList.add('instructionWrapper');
+    // $instructionScreen.appendChild($instruction)
+    if(inst.background!=null && inst.isVideo!=1){
+      $instruction.innerHTML += `<img src=${pathToSlides+inst.background}>`;
+    }
+    if(inst.bgColor!=null){
+      $instruction.style.backgroundColor = inst.bgColor;
+    }
+    if(inst.text!=null){
+      let instructionText = document.createElement('div');
+      instructionText.classList.add('instruction');
+      instructionText.innerHTML = inst.text.en;
+      $instruction.appendChild(instructionText);
+
+      if(inst.x != null) {
+        instructionText.style.right = inst.x;
+        instructionText.style.top = inst.y;
+      }
+      instTexts.push(instructionText);
+      // $instruction.innerHTML += `<div class="instruction">${inst.text.en}</div>`;
+    }
+    //not the last screen, so put the next button
+    let nextBtn = document.createElement('div');
+    if(i < arr.length-1){
+      // $instruction.innerHTML += `<div class="nextBtn"></div>`;
+      nextBtn.classList.add('nextBtn');
+    } else {
+      //it's the last screen - put startGameButton
+      nextBtn.classList.add('startGameButton');
+    }
+    $instruction.appendChild(nextBtn);
+    nextBtns.push(nextBtn);
+    instructionPages.push($instruction);
+  }
+  // const nextBtns = document.querySelectorAll('div.nextBtn');
+  // const instTexts = document.querySelectorAll('div.instruction');
+  //now set up buttons
+  for(let i=0; i < nextBtns.length; i++){
+    nextBtns[i].addEventListener('click', function(){
+      //if it's not the last screen button
+      if(i < nextBtns.length-1){
+        let delay = parseInt(arr[i+1].textDelay);
+        fadeIn(instructionPages[i+1]);
+        fadeIn(instTexts[i+1], delay+1);
+        fadeIn(nextBtns[i+1], delay+1);
+        fadeOutDelay(instructionPages[i], delay, true);
+      } else {
+        //it's the last slide
+        //the button should trigger start game
+        fadeOutDelay(instructionPages[i], delay, true);
+        startTask();
+      }
+    })
+  }
+  //once all set, hide all
+  for(let i=0; i < instructionPages.length; i++){
+    instructionPages[i].style.display = "none";
+  }
+
+  if(arr[0].mode == "apple"){
+    apple_instructionPages = instructionPages;
+    apple_instTexts = instTexts;
+    appleNextBtns = nextBtns;
+  }else{
+    bird_instructionPages = instructionPages;
+    bird_instTexts = instTexts;
+    birdNextBtns = nextBtns;
+  }
+}
 
 // fetch the subjectNumbers collection
 async function fetchSubject() {
@@ -53,13 +184,13 @@ fetchSubjectById().then((data) => {
     //set the game order based on the subjecNum
     if (subjectNum % 2 == 0) {
       gameOrder = ["apple", "birds"];
-      $instructionMsg.innerHTML = "This is the instruction for the apple game";
+      // $instructionMsg.innerHTML = "This is the instruction for the apple game";
     } else {
       gameOrder = ["birds", "apple"];
-      $instructionMsg.innerHTML = "This is the instruction for the birds game";
+      // $instructionMsg.innerHTML = "This is the instruction for the birds game";
     }
     //but for now just set it as the first one
-    document.querySelector('#startBtn').addEventListener('touchstart', startTask);
+    // document.querySelector('#startBtn').addEventListener('touchstart', startTask);
     //show instruction
     showInstruction();
   })
@@ -67,17 +198,7 @@ fetchSubjectById().then((data) => {
     console.log(e)
   );
 
-function showInstruction() {
-  if (gameOrder[gameIndex] == "apple") {
-    $instructionMsg.innerHTML = "This is the instruction for the apple game";
-  } else {
-    $instructionMsg.innerHTML = "This is the instruction for the birds game";
-  }
-  // const instruction = select('#instruction');
-  // if(instruction.hasClass('hidden'))
-  //   instruction.removeClass('hidden');
-  document.querySelector('#instruction').style.display = "flex";
-}
+
 
 function startTask() {
   gameOn = true;
@@ -151,7 +272,7 @@ let myCanvas;
 
 let gameMode = "menu";
 let instructionDiv;
-let instructionMsg;
+// let instructionMsg;
 let startBtn;
 
 window.preload = function() {
@@ -177,8 +298,8 @@ window.setup = function() {
   myObjectSize = windowWidth / myObjectNum;
   textSize(myObjectSize / 3);
   //make an instruction screen
-  instructionDiv = select('#instruction');
-  instructionMsg = select('#instructionMsg');
+  // instructionDiv = select('#instruction');
+  // instructionMsg = select('#instructionMsg');
   ruFinishedBtn = select("#ruFinishedBtn");
   ruFinishedBtn.addClass('hidden');
 }
@@ -662,3 +783,40 @@ window.touchEnded = function() {
 //     }
 //   }
 // }
+
+function fadeIn(elem, delay, func=null) {
+  elem.style.display = "block";
+  elem.style.opacity = 0;
+  gsap.to(elem, {
+    duration: 1,
+    ease: "power1.inOut",
+    opacity: 1,
+    delay: delay,
+    onComplete:func
+  });
+}
+
+function fadeOut(elem, duration, hide) {
+  gsap.to(elem, {
+    duration: duration,
+    ease: "power1.inOut",
+    opacity: 0,
+    onComplete: hide ? hideElem : null,
+    onCompleteParams: [elem]
+  });
+}
+
+function fadeOutDelay(elem, delay, hide) {
+  gsap.to(elem, {
+    duration: 1,
+    delay: delay,
+    ease: "power1.inOut",
+    opacity: 0,
+    onComplete: hide ? hideElem : null,
+    onCompleteParams: [elem]
+  });
+}
+
+function hideElem(elem) {
+  elem.style.display = "none";
+}
