@@ -43,6 +43,11 @@ setUpInstruction(bird_instructions);
 
 function showInstruction(){
 
+  //if there's a canvas
+  if(document.querySelector('canvas')){
+    fadeOut(document.querySelector('canvas'));
+  }
+
   if (gameOrder[gameIndex] == "apple") {
     for(let i=0; i < apple_instructionPages.length; i++){
       $instructionScreen.appendChild(apple_instructionPages[i]);
@@ -64,7 +69,7 @@ function showInstruction(){
     }
   }
 
-  fadeIn($instructionScreen, 1, null);
+  fadeIn($instructionScreen, 0, null);
   // const instTexts = document.querySelectorAll('.instruction');
   // const nextBtns = document.querySelectorAll('div.nextBtn');
 
@@ -529,7 +534,7 @@ window.touchStarted = function() {
   checkTouchOver();
   checkOnTree();
 
-  if(myObjects.length < 1)
+  if(myObjects.length < 1 || !gameOn)
     return;
 
   for (let i = 0; i < myObjectNum; i++) {
@@ -759,7 +764,7 @@ function finishGame() {
 }
 
 window.touchMoved = function() {
-  if(myObjects.length < 1)
+  if(myObjects.length < 1 || !gameOn)
     return;
   for (let i = myObjectNum - 1; i >= 0; i--) {
     if (!noMoreMove[i] && isMoving[i]) {
@@ -773,7 +778,7 @@ window.touchMoved = function() {
 }
 
 window.touchEnded = function() {
-  if(myObjects.length < 1)
+  if(myObjects.length < 1 || !gameOn)
     return;
   for (let i = 0; i < myObjectNum; i++) {
     if (isMoving[i]) {
