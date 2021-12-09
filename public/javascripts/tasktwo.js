@@ -142,7 +142,19 @@ function setUpInstruction(){
     nextBtns[i].addEventListener('click', function(){
       let delay = parseInt(instructions[i+1].textDelay);
       fadeIn(instructionPages[i+1]);
-      fadeIn(instTexts[i+1], delay);
+      if(i+1 == instructions.length-1) {
+        //if it's the last slide
+        //then after fading in the text
+        //set the pointerEvents of the instruction page to none
+        //fade in the startBtn
+        fadeIn(instTexts[i+1], delay, ()=>{
+          instructionPages[i+1].style.pointerEvents = "none";
+          fadeIn($startBtn);
+        })
+      } else {
+        fadeIn(instTexts[i+1], delay);
+      }
+      
       if(instructions[i+1].isVideo == 1){
         if (video) {
           if (video.paused) {
