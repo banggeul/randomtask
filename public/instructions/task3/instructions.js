@@ -43,7 +43,7 @@ export var apple_instructions = [
     },
     textDelay: "2",
     x:"50%",
-    y:"50%",
+    y:"20%",
     textAlign: "center"
   }
 ]
