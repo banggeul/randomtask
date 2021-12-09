@@ -143,13 +143,15 @@ function setUpInstruction(){
       let delay = parseInt(instructions[i+1].textDelay);
       fadeIn(instructionPages[i+1]);
       fadeIn(instTexts[i+1], delay);
-      fadeOutDelay(instructionPages[i], delay, true);
       if(instructions[i+1].isVideo == 1){
         if (video) {
           if (video.paused) {
             video.play();
           }
         }
+        fadeOut(instructionPages[i], true);
+      } else {
+        fadeOutDelay(instructionPages[i], delay, true);
       }
     })
   }
