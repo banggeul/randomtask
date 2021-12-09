@@ -111,7 +111,7 @@ function showInstruction(){
   fadeIn($instructionScreen, 1, makeVideoVisible);
   const instTexts = document.querySelectorAll('.instruction');
   if(instTexts.length > 0){
-    fadeIn(instTexts[0], 5);
+    fadeIn(instTexts[0], 3);
   }
 }
 
@@ -169,7 +169,7 @@ function setUpInstruction(){
           fadeIn($startBtn);
         })
 
-        fadeIn($startBtnContainer);
+        fadeIn($startBtnContainer, delay+1);
 
       } else {
         fadeIn(instTexts[i+1], delay+1);
