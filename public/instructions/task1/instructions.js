@@ -14,7 +14,7 @@ export var instructions = [
     imgfadeOut: "1"
   },
   {
-    background: "map.png",
+    background: "path.png",
     foreground: "politePose.png",
     isVideo: "0",
     animation: {

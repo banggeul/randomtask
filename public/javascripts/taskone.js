@@ -942,7 +942,7 @@ function fadeIn(elem, duration, delay, display = "block") {
 }
 
 function fadeInInstruction(elem, duration, delay, func=null){
-  elem.style.display = display;
+  elem.style.display = "block";
   //elem.style.opacity = 0;
   gsap.to(elem, {
     duration: duration,
