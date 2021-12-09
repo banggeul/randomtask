@@ -69,7 +69,7 @@ $setTimeLimit.addEventListener('click', function() {
   } else {
     // console.log("off");
     //if it's turned off, hide the time limit form
-    fadeOut($timeLimit, true);
+    fadeOut($timeLimit, 0.5, true);
   }
 })
 
@@ -162,7 +162,7 @@ function setUpInstruction(){
             video.play();
           }
         }
-        fadeOut(instructionPages[i], true);
+        fadeOut(instructionPages[i],0.5, true);
       } else {
         fadeOutDelay(instructionPages[i], delay, true);
       }
@@ -204,7 +204,7 @@ function getUserContext() {
     //now set up the game
     setUpGame();
     //fade out the welcome screen and fade in the game screen
-    fadeOut($welcomeScreen, true);
+    fadeOut($welcomeScreen,0.5, true);
     fadeIn($game);
 }
 
@@ -294,7 +294,7 @@ function setUpGame() {
 
     // $gameUI.style.pointerEvents = "none";
     console.log("start the game!");
-    fadeOut($instructionScreen, true);
+    fadeOut($instructionScreen,0.5, true);
     $instructionScreen.style.pointerEvents = "none";
 
     fadeIn($game);
@@ -482,7 +482,7 @@ function fadeIn(elem, delay, func=null) {
   });
 }
 
-function fadeOut(elem, duration=0.5, hide) {
+function fadeOut(elem, duration, hide) {
   gsap.to(elem, {
     duration: duration,
     ease: "power1.inOut",
