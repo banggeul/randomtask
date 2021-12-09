@@ -141,7 +141,7 @@ function setUpInstruction(arr){
       } else {
         //it's the last slide
         //the button should trigger start game
-        fadeOutDelay(instructionPages[i], delay, true);
+        fadeOutDelay(instructionPages[i], 0, true);
         startTask();
       }
     })
@@ -525,6 +525,10 @@ function checkTouchOver() {
 window.touchStarted = function() {
   checkTouchOver();
   checkOnTree();
+
+  if(myObjects.length < 0)
+    return;
+
   for (let i = 0; i < myObjectNum; i++) {
     if (overMyObject[i]) {
       console.log("hey it's over apple :" + i);
@@ -752,6 +756,8 @@ function finishGame() {
 }
 
 window.touchMoved = function() {
+  if(myObjects.length < 0)
+    return;
   for (let i = myObjectNum - 1; i >= 0; i--) {
     if (!noMoreMove[i] && isMoving[i]) {
       myObjects[i].x = mouseX - xOffset[i];
@@ -764,6 +770,8 @@ window.touchMoved = function() {
 }
 
 window.touchEnded = function() {
+  if(myObjects.length < 0)
+    return;
   for (let i = 0; i < myObjectNum; i++) {
     if (isMoving[i]) {
       isMoving[i] = false;
