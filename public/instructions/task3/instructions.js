@@ -1,4 +1,4 @@
-var apple_instructions = [
+export var apple_instructions = [
   {
     mode: "apple",
     background: "apple_instruction_0.png",
@@ -39,7 +39,7 @@ var apple_instructions = [
     mode: "apple",
     isVideo: "0",
     text: {
-      en:"Are you ready? <br><br>Use your finger to move the apples to where you think they will grow on the tree.
+      en:"Are you ready? <br><br>Use your finger to move the apples to where you think they will grow on the tree."
     },
     textDelay: "2",
     x:"50%",
@@ -48,7 +48,7 @@ var apple_instructions = [
   }
 ]
 
-var bird_instructions = [
+export var bird_instructions = [
   {
     mode: "birds",
     background: "apple_instruction_0.png",

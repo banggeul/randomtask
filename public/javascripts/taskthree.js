@@ -1,5 +1,6 @@
 import storeSubject from '/utils/subject_storage.js'
 import store from '/utils/apple_storage.js'
+import {apple_instructions, bird_instructions} from '/instructions/task3/instructions.js'
 //import the data storing script
 import {
   postData,
