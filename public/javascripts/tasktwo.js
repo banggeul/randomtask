@@ -109,6 +109,10 @@ fetchSubjectById().then((data) => {
 
 function showInstruction(){
   fadeIn($instructionScreen, 1, makeVideoVisible);
+  const instTexts = document.querySelectorAll('.instruction');
+  if(instTexts.length > 0){
+    fadeIn(instTexts[0], 2);
+  }
 }
 
 function makeVideoVisible(){
@@ -127,6 +131,10 @@ function setUpInstruction(){
     if(instructions[i].background!=null && instructions[i].isVideo!=1){
       $instruction.innerHTML += `<img src=${pathToSlides+instructions[i].background}>`;
     }
+    if(instructions[i].bgColor!=null){
+      $instruction.style.backgroundColor = instructions[i].bgColor;
+    }
+
     if(instructions[i].text!=null){
       $instruction.innerHTML += `<div class="instruction">${instructions[i].text.en}</div>`;
     }
@@ -139,6 +147,14 @@ function setUpInstruction(){
 
   const nextBtns = document.querySelectorAll('div.nextBtn');
   const instTexts = document.querySelectorAll('div.instruction');
+
+  for(let i=0; i < instTexts.length; i++){
+    if(instructions[i].x != null) {
+      instTexts[i].style.left = instructions[i].x;
+      instTexts[i].style.top = instructions[i].y;
+    }
+  }
+
   for(let i=0; i < nextBtns.length; i++){
     nextBtns[i].addEventListener('click', function(){
       let delay = parseInt(instructions[i+1].textDelay);
@@ -148,12 +164,12 @@ function setUpInstruction(){
         //then after fading in the text
         //set the pointerEvents of the instruction page to none
         //fade in the startBtn
-        fadeIn(instTexts[i+1], delay, ()=>{
+        fadeIn(instTexts[i+1], delay+1, ()=>{
           instructionPages[i+1].style.pointerEvents = "none";
           fadeIn($startBtn);
         })
       } else {
-        fadeIn(instTexts[i+1], delay);
+        fadeIn(instTexts[i+1], delay+1);
       }
 
       if(instructions[i+1].isVideo == 1){
@@ -172,9 +188,7 @@ function setUpInstruction(){
   for(let i=0; i < instructionPages.length; i++){
     instructionPages[i].style.display = "none";
   }
-
   instructionPages[0].style.display = "block";
-  fadeIn(instTexts[0], parseInt(instructions[0].delay)+2 );
 }
 //when the submit button is clicked do this
 function getUserContext() {
@@ -294,7 +308,7 @@ function setUpGame() {
 
     // $gameUI.style.pointerEvents = "none";
     console.log("start the game!");
-    fadeOut($instructionScreen,0.5, true);
+    fadeOut($instructionScreen, 2, true);
     $instructionScreen.style.pointerEvents = "none";
 
     fadeIn($game);
