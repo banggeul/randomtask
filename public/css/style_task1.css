@@ -689,16 +689,17 @@ a#startBtn {
 .startGameButton {
   position: absolute;
   text-align: center;
-  /* line-height: 100px; */
-  bottom: 20%;
-  left: 50%;
+  line-height: 200px;
+  bottom: 4%;
+  left: 60%;
   transform: translate(-50%, -50%);
   display: none;
-  background-color: #004D80;
+  background-color: #00a2ff;
   width: 500px;
   height: 200px;
-  font-size: 4em;
+  font-size: 3em;
   border-radius: 50% 50%;
+  box-shadow: 4px 4px 20px black;
 }
 
 .instructionWrapper > video {

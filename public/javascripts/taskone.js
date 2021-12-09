@@ -152,7 +152,7 @@ function setUpInstruction(arr){
     } else {
       //it's the last screen - put startGameButton
       nextBtn.classList.add('startGameButton');
-      nextBtn.innerHTML = "Let's Start!"
+      nextBtn.innerHTML = "Are you ready?"
     }
 
     $instruction.appendChild(nextBtn);

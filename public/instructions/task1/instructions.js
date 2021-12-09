@@ -71,7 +71,7 @@ export var instructions = [
     foreground: "big_rabbit.png",
     animation: {
       property: "y",
-      to: "1000",
+      to: "1300",
       duration: "2"
     },
     isVideo: "0",
@@ -79,7 +79,7 @@ export var instructions = [
       en:"Maxi knows that it is just as likely to <br> find food under a card as it is to not <br>find food under a card.."
     },
     textDelay: "0",
-    x:"50%",
+    x:"39%",
     y:"82%",
     textAlign: "center",
     image_x: "50%",
@@ -92,7 +92,7 @@ export var instructions = [
     foreground: "big_rabbit.png",
     animation: {
       property: "y",
-      to: "-800",
+      to: "-1317",
       duration: "2"
     },
     isVideo: "0",
@@ -103,9 +103,9 @@ export var instructions = [
     x:"10%",
     y:"82%",
     textAlign: "left",
-    image_x: "80%",
-    image_y: "1500px",
-    image_width: "800px",
+    image_x: "62%",
+    image_y: "1994px",
+    image_width: "1000px",
     imgfadeOut: "1"
   }
 ]
