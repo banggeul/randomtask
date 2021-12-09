@@ -480,6 +480,8 @@ function setMyDate() {
 }
 
 function checkOnTree() {
+  if(!gameOn)
+    return;
   for (let i = 0; i < myObjectNum; i++) {
     // if (myObjectY[i] < height * 0.57) {
     if (myObjects[i].y < height * 0.57) {
@@ -491,6 +493,9 @@ function checkOnTree() {
 }
 
 function checkTouchOver() {
+  if(!gameOn)
+    return;
+
   for (let i = 0; i < myObjectNum; i++) {
     // if (
     //   mouseX > myObjectX[i] &&
