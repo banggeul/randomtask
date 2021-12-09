@@ -109,6 +109,11 @@ function setUpInstruction(arr){
         instructionText.style.top = inst.y;
         instructionText.style.textAlign = inst.textAlign;
       }
+
+      if(i == arr.length-1){
+        //last slide apply transform
+        instructionText.style.transform = "translate(-50%, 0)";
+      }
       instTexts.push(instructionText);
       // $instruction.innerHTML += `<div class="instruction">${inst.text.en}</div>`;
     }
@@ -526,7 +531,7 @@ window.touchStarted = function() {
   checkTouchOver();
   checkOnTree();
 
-  if(myObjects.length < 0)
+  if(myObjects.length < 1)
     return;
 
   for (let i = 0; i < myObjectNum; i++) {
@@ -756,7 +761,7 @@ function finishGame() {
 }
 
 window.touchMoved = function() {
-  if(myObjects.length < 0)
+  if(myObjects.length < 1)
     return;
   for (let i = myObjectNum - 1; i >= 0; i--) {
     if (!noMoreMove[i] && isMoving[i]) {
@@ -770,7 +775,7 @@ window.touchMoved = function() {
 }
 
 window.touchEnded = function() {
-  if(myObjects.length < 0)
+  if(myObjects.length < 1)
     return;
   for (let i = 0; i < myObjectNum; i++) {
     if (isMoving[i]) {
