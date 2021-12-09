@@ -174,7 +174,7 @@ function setUpInstruction(){
   }
 
   instructionPages[0].style.display = "block";
-  fadeIn(instTexts[0], parseInt(instructions[0].delay) );
+  fadeIn(instTexts[0], parseInt(instructions[0].delay)+2 );
 }
 //when the submit button is clicked do this
 function getUserContext() {
@@ -293,6 +293,7 @@ function setUpGame() {
     sessionData.timestamp = timestamp;
 
     // $gameUI.style.pointerEvents = "none";
+    console.log("start the game!");
     fadeOut($instructionScreen, true);
     $instructionScreen.style.pointerEvents = "none";
 
