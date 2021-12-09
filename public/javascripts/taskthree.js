@@ -104,7 +104,7 @@ function setUpInstruction(arr){
       instructionText.innerHTML = inst.text.en;
       $instruction.appendChild(instructionText);
 
-      if(inst.x != null && inst.y != null inst.textAlign != null) {
+      if(inst.x != null && inst.y != null && inst.textAlign != null) {
         instructionText.style.right = inst.x;
         instructionText.style.top = inst.y;
         instructionText.style.textAlign = inst.textAlign;
