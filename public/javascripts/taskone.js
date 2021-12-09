@@ -627,6 +627,7 @@ $choiceCards.forEach(function(userItem) {
     // console.log("current card number: " + currentCardNum);
     if (currentCardNum <= totalCards - 1) {
       let choice = e.target.dataset.choice;
+      console.log(e.target.id);
       // console.log("choice: " + choice);
       choices = [...choices, parseInt(choice)];
       //choices.push[choice];

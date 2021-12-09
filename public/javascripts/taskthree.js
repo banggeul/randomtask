@@ -197,6 +197,16 @@ fetchSubjectById().then((data) => {
     subjectNum = parseInt(subjectNumParam);
     ageGroup = parseInt(ageGroupParam);
     currentSubject = data.experiment;
+    console.log(currentSubject.lang);
+    //swap out all the instruction if this is german
+    if(currentSubject.lang == "de"){
+      //say german
+      for(let i=0; i < instTexts.length; i++){
+        if(instructions[i].text.de != null){
+          instTexts[i].innerHTML = instructions[i].text.de;
+        }
+      }
+    }
     //set the game order based on the subjecNum
     if (subjectNum % 2 == 0) {
       gameOrder = ["apple", "birds"];
