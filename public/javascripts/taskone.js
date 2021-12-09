@@ -174,10 +174,16 @@ function setUpInstruction(arr){
         if(instructions[i+1].animation != null){
           //get the foreground image
           const $elem = instructionPages[i+1].querySelector('img.foreground');
-          gsap.to($elem, {
-            instructions[i+1].animation.property: instructions[i+1].animation.to,
-            duration: instructions[i+1].animation.duration
-          });
+          const prop = arr[i+1].animation.property;
+          const toVal = parseInt(arr[i+1].animation.to);
+          const du = parseInt(arr[i+1].animation.duration);
+          if(prop == "x"){
+            gsap.to($elem, {
+              x: toVal,
+              duration: du
+            });
+          }
+
         }
 
         if(instructions[i].imgfadeOut == 1){
