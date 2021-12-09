@@ -43,7 +43,7 @@ export var instructions = [
     },
     textDelay: "0",
     x:"50%",
-    y:"90%",
+    y:"80%",
     textAlign: "center",
     image_x: "0",
     image_y: "0",
@@ -59,7 +59,7 @@ export var instructions = [
     },
     textDelay: "0",
     x:"50%",
-    y:"10%",
+    y:"80%",
     textAlign: "center",
     image_x: "1367px",
     image_y: "0",
@@ -83,7 +83,7 @@ export var instructions = [
     y:"10%",
     textAlign: "center",
     image_x: "50%",
-    image_y: "-100%",
+    image_y: "-1000px",
     image_width: "600px",
     imgfadeOut: "1"
   },
@@ -92,7 +92,7 @@ export var instructions = [
     foreground: "big_rabbit.png",
     animation: {
       property: "y",
-      to: "800",
+      to: "-800",
       duration: "2"
     },
     isVideo: "0",
@@ -104,7 +104,7 @@ export var instructions = [
     y:"80%",
     textAlign: "left",
     image_x: "80%",
-    image_y: "110%",
+    image_y: "1500px",
     image_width: "800px",
     imgfadeOut: "1"
   }

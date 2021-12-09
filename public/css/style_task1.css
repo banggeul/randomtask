@@ -658,7 +658,7 @@ label {
   position: absolute;
   color: white;
   font-size: 3em;
-  width: 600px;
+  width: 1000px;
   /* bottom: 10%;
   left: 50%; */
   /* transform: translate(-50%, 0); */
@@ -673,7 +673,7 @@ label {
   width: 100px;
   height: 100px;
   position: absolute;
-  bottom: 20%;
+  top: 80%;
   right: 10%;
   display: none;
 }
