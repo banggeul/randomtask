@@ -35,7 +35,7 @@ const $setTimeLimit = document.querySelector('#timeLimitSwitch');
 const $timeLimit = document.querySelector('#timeLimitRow');
 const $game = document.querySelector('#content');
 const $startBtn = document.querySelector('#startBtn');
-
+const $startBtnContainer = document.querySelector('#startBtnContainer');
 //task settings
 const clickLimit = 50;
 const timeLimitOn = false;
@@ -168,6 +168,9 @@ function setUpInstruction(){
           instructionPages[i+1].style.pointerEvents = "none";
           fadeIn($startBtn);
         })
+
+        fadeIn($startBtnContainer);
+
       } else {
         fadeIn(instTexts[i+1], delay+1);
       }
