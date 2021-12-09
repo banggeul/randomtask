@@ -55,6 +55,10 @@ let newId;
 let age;
 let subject;
 
+document.body.addEventListener('touchstart', () => {
+  document.activeElement.blur();
+});
+
 for (let i = 0; i < 10; i++) {
   ageSortedSubjects.push([]);
   sortedSubjectIds.push([]);
