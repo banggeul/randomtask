@@ -43,6 +43,9 @@ const timeLimit = timeLimitOn ? 20 : -1;
 let instructionPages = [];
 const pathToSlides = "/instructions/task2/"
 
+function nextInstruction(n){
+  fadeIn(instructionPages[n]);
+}
 //first thing first,
 //set up instructions
 setUpInstruction();
@@ -116,9 +119,7 @@ function makeVideoVisible(){
   document.querySelector("#videoContainer").style.visibility = "visible";
 }
 
-function nextInstruction(n){
-  fadeIn(instructionPages[n]);
-}
+
 
 function setUpInstruction(){
 
