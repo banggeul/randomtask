@@ -193,17 +193,18 @@ function setUpInstruction(arr){
 
         if(instructions[i].imgfadeOut == 1){
           //if image needs to be faded out, then fade out the whole thing
-          fadeOut(instructionPages[i], true, 0);
+          console.log("fade out the whole thing");
+          fadeOut(instructionPages[i], true, 0.5);
         } else {
           //if image needs to stay, then just fade out the text and the button
-          fadeOut(instTexts[i], true, 0);
-          fadeOut(nextBtns[i], true, 0);
+          fadeOut(instTexts[i], true, 0.5);
+          fadeOut(nextBtns[i], true, 0.5);
         }
 
       } else {
         //it's the last slide
         //the button should trigger start game
-        fadeOut(instructionPages[i], true, 0);
+        fadeOut(instructionPages[i], true, 1);
         startTask();
       }
     })
@@ -349,8 +350,17 @@ fetchSubjectById().then((data) => {
 );
 
 function startTask(){
-  fadeIn($game, 1, 0);
-  fadeOut($instructionScreen, true);
+  for(let i=0; i < instructionPages.length-1; i++){
+    instructionPages[i].style.display = "none";
+    instructionPages[i].style.opacity = "0";
+    instTexts[i].style.display = "none";
+    instTexts[i].style.opacity = "0";
+    nextBtns[i].style.display = "none";
+    nextBtns[i].style.opacity = "0";
+  }
+  fadeOut($instructionScreen, true, 0);
+  fadeIn($game, 1, 1);
+
   moveUpBunny();
 }
 
