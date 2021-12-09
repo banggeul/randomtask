@@ -206,12 +206,10 @@ fetchSubjectById().then((data) => {
     console.log(e)
   );
 
-
-
 function startTask() {
   gameOn = true;
   document.querySelector('canvas').style.display = "block";
-  document.querySelector('#instruction').style.display = "none";
+  document.querySelector('#instructionContainer').style.display = "none";
   //decide which game to present
   gameMode = gameOrder[gameIndex];
   if (gameMode == 'birds') {
