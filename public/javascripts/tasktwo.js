@@ -116,6 +116,9 @@ function makeVideoVisible(){
   document.querySelector("#videoContainer").style.visibility = "visible";
 }
 
+function nextInstruction(n){
+  fadeIn(instructionPages[n]);
+}
 
 function setUpInstruction(){
 
@@ -133,7 +136,7 @@ function setUpInstruction(){
     }
     //not the last screen, so put the next button
     if(i < instructions.length-1){
-      $instruction.innerHTML += `<div class="nextBtn"></div>`;
+      $instruction.innerHTML += `<div class="nextBtn" onclick="nextInstruction(${i+1})"></div>`;
     }
     instructionPages.push($instruction);
   }
