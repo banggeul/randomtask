@@ -37,8 +37,8 @@ button {
   position: absolute;
   background-color: yellow;
   color: black;
-  top: 50%;
-  left: 50%;
+  top: 70%;
+  left: 49%;
   transform: translate(-50%, -50%);
   text-align: center;
   text-decoration: none;
@@ -46,7 +46,7 @@ button {
   font-size: 1.5em;
   width: 220px;
   height: 100px;
-  line-height: 100px;
+  /* line-height: 100px; */
   border-radius: 50% 50%;
   z-index: 100;
   box-shadow: 2px 2px 20px black;

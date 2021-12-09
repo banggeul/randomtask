@@ -736,7 +736,7 @@ function ruFinished() {
 }
 
 function finishGame() {
-  const thanks = select("#thanks");
+  const thanks = document.querySelector("#thanks");
   // thanks.removeClass("hidden");
   fadeIn(thanks, 1);
   //turn off the game
