@@ -628,7 +628,8 @@ window.touchStarted = function() {
 
 
 function ruFinished() {
-  ruFinishedBtn.removeClass('hidden');
+  // ruFinishedBtn.removeClass('hidden');
+  fadeIn(document.querySelector("#ruFinishedBtn"), 0)
   // btn_sunLeft.position(width*.3, height*.2);
   ruFinishedBtn.touchStarted(() => {
     //turn off the game
@@ -728,7 +729,8 @@ function ruFinished() {
       // }
     }
     //hide the button
-    ruFinishedBtn.addClass('hidden');
+    // ruFinishedBtn.addClass('hidden');
+    fadeOut(document.querySelector("#ruFinishedBtn"), 0.5, true);
   });
   ruFinishedBtn.mousePressed(() => {
     // initGame('birds');

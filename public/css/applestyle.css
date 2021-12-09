@@ -91,7 +91,7 @@ canvas {
   text-align: center;
   width: 60%;
   margin: auto;
-  top: 60%;
+  bottom: 10%;
   left: 0;
   right: 0;
   z-index: 2;
