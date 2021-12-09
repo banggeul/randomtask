@@ -20,7 +20,7 @@ export var instructions = [
     animation: {
       property: "x",
       to: "350",
-      duration: "1"
+      duration: "3"
     },
     text: {
       en: "There is a path in the forest. Along the path, there are some cards. <br> Maxi will follow the path looking for carrots."
@@ -93,7 +93,7 @@ export var instructions = [
     animation: {
       property: "y",
       to: "-1317",
-      duration: "2"
+      duration: "3"
     },
     isVideo: "0",
     text: {
