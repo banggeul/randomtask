@@ -182,6 +182,11 @@ function setUpInstruction(arr){
               x: toVal,
               duration: du
             });
+          } if(prop == "7"){
+            gsap.to($elem, {
+              y: toVal,
+              duration: du
+            });
           }
 
         }

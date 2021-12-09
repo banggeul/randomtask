@@ -27,7 +27,7 @@ export var instructions = [
     },
     textDelay: "2",
     x:"50%",
-    y:"5%",
+    y:"90%",
     image_x: "-200px",
     image_y: "5%",
     image_width: "200px",
@@ -43,10 +43,10 @@ export var instructions = [
     },
     textDelay: "0",
     x:"50%",
-    y:"10%",
+    y:"90%",
     textAlign: "center",
-    image_x: 0,
-    image_y: 0,
+    image_x: "0",
+    image_y: "0",
     image_width: "1366px",
     imgfadeOut: "0"
   },
@@ -62,7 +62,7 @@ export var instructions = [
     y:"10%",
     textAlign: "center",
     image_x: "1367px",
-    image_y: 0,
+    image_y: "0",
     image_width: "1366px",
     imgfadeOut: "0"
   },
@@ -84,7 +84,7 @@ export var instructions = [
     textAlign: "center",
     image_x: "50%",
     image_y: "-100%",
-    image_width: "400px",
+    image_width: "600px",
     imgfadeOut: "1"
   },
   {
