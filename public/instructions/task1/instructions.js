@@ -35,7 +35,7 @@ export var instructions = [
     imgfadeOut: "1"
   },
   {
-    background: "flip_bg_1.png",
+    background: "flip_bg.png",
     foreground: "carrot_flip.mp4",
     isVideo: "1",
     text: {

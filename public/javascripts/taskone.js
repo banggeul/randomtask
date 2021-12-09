@@ -167,9 +167,9 @@ function setUpInstruction(arr){
       if(i < nextBtns.length-1){
         let delay = parseInt(arr[i+1].textDelay);
         // function fadeInInstruction(elem, duration, delay, func=null)
-        fadeInInstruction(instructionPages[i+1], 1, 0, playVideo);
-        fadeInInstruction(instTexts[i+1], 1, delay);
-        fadeInInstruction(nextBtns[i+1], 1, delay+1);
+        fadeInInstruction(instructionPages[i+1], 1, 1, playVideo);
+        fadeInInstruction(instTexts[i+1], 1, delay+1);
+        fadeInInstruction(nextBtns[i+1], 1, delay+2);
         //now play animation if there's any
         if(instructions[i+1].animation != null){
           //get the foreground image
@@ -194,17 +194,17 @@ function setUpInstruction(arr){
         if(instructions[i].imgfadeOut == 1){
           //if image needs to be faded out, then fade out the whole thing
           console.log("fade out the whole thing");
-          fadeOut(instructionPages[i], true, 0.5);
+          fadeOut(instructionPages[i], true, 0);
         } else {
           //if image needs to stay, then just fade out the text and the button
-          fadeOut(instTexts[i], true, 0.5);
-          fadeOut(nextBtns[i], true, 0.5);
+          fadeOut(instTexts[i], true, 0);
+          fadeOut(nextBtns[i], true, 0);
         }
 
       } else {
         //it's the last slide
         //the button should trigger start game
-        fadeOut(instructionPages[i], true, 1);
+        fadeOut(instructionPages[i], true, 0);
         startTask();
       }
     })
