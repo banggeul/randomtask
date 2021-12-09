@@ -211,8 +211,11 @@ function setUpInstruction(arr){
   //once all set, hide all
   for(let i=0; i < instructionPages.length; i++){
     instructionPages[i].style.display = "none";
+    instructionPages[i].style.opacity = "0";
     instTexts[i].style.display = "none";
+    instTexts[i].style.opacity = "0";
     nextBtns[i].style.display = "none";
+    nextBtns[i].style.opacity = "0";
   }
 }
 

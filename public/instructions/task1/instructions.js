@@ -3,11 +3,11 @@ export var instructions = [
     foreground: "big_rabbit.png",
     isVideo: "0",
     text: {
-      en:"This is the little rabbit Maxi.  <br><br>He is very hungry and carrots are his favorite food.  <br><br>Maxi is looking for carrots to eat."
+      en:"This is the little rabbit Maxi.  <br><br>He is very hungry and carrots<br>are his favorite food.  <br><br>Maxi is looking for carrots to eat."
     },
     textDelay: "1",
     x:"45%",
-    y:"30%",
+    y:"40%",
     image_x: "5%",
     image_y: "0",
     textAlign: "left",
@@ -19,7 +19,7 @@ export var instructions = [
     isVideo: "0",
     animation: {
       property: "x",
-      to: "300",
+      to: "400",
       duration: "1"
     },
     text: {
@@ -29,13 +29,13 @@ export var instructions = [
     x:"50%",
     y:"82%",
     image_x: "-200px",
-    image_y: "5%",
-    image_width: "200px",
+    image_y: "9%",
+    image_width: "300px",
     textAlign: "center",
     imgfadeOut: "1"
   },
   {
-    background: "flip_bg.png",
+    background: "flip_bg_1.png",
     foreground: "carrot_flip.mp4",
     isVideo: "1",
     text: {
@@ -71,7 +71,7 @@ export var instructions = [
     foreground: "big_rabbit.png",
     animation: {
       property: "y",
-      to: "1300",
+      to: "1350",
       duration: "2"
     },
     isVideo: "0",
@@ -79,10 +79,10 @@ export var instructions = [
       en:"Maxi knows that it is just as likely to <br> find food under a card as it is to not <br>find food under a card.."
     },
     textDelay: "0",
-    x:"39%",
+    x:"50%",
     y:"82%",
     textAlign: "center",
-    image_x: "50%",
+    image_x: "39%",
     image_y: "-1000px",
     image_width: "600px",
     imgfadeOut: "1"
