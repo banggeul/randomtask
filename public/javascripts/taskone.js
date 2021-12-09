@@ -85,7 +85,7 @@ function setUpInstruction(arr){
       $instruction.innerHTML += `<img class="background" src=${pathToSlides+inst.background}>`;
     }
     if(inst.foreground!=null){
-      if(inst.isVideo){
+      if(inst.isVideo == 1){
         //this is a video - make video
         let videlem = document.createElement("video");
         videlem.playsinline = true;
