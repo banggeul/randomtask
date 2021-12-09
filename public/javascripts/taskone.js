@@ -222,10 +222,11 @@ function setUpInstruction(arr){
 function showInstruction(){
 
   //show the first slide
-  instructionPages[0].style.display = "block";
+  // instructionPages[0].style.display = "block";
   fadeInInstruction(instTexts[0], 1, 1.5);
-  fadeInInstruction(nextBtns[0], 1, 2.5)
-  fadeInInstruction($instructionScreen,0.5, 0);
+  fadeInInstruction(nextBtns[0], 1, 2.5);
+  fadeInInstruction(instructionPages[0], 1, 0);
+  fadeInInstruction($instructionScreen, 1, 0);
   // const instTexts = document.querySelectorAll('.instruction');
   // const nextBtns = document.querySelectorAll('div.nextBtn');
 }
