@@ -137,10 +137,13 @@ function setUpInstruction(){
   }
 
   const nextBtns = document.querySelectorAll('div.nextBtn');
+  const instTexts = document.querySelectorAll('div.instruction');
   for(let i=0; i < nextBtns.length; i++){
     nextBtns[i].addEventListener('click', function(){
-      fadeIn(instructionPages[i+1], parseInt(instructions[i].textDelay));
-      fadeOut(instructionPages[i], true);
+      let delay = parseInt(instructions[i+1].textDelay);
+      fadeIn(instructionPages[i+1]);
+      fadeIn(instTexts[i+1], delay);
+      fadeOutDelay(instructionPages[i], delay, true);
       if(instructions[i+1].isVideo == 1){
         if (video) {
           if (video.paused) {
@@ -466,6 +469,17 @@ function fadeIn(elem, delay, func=null) {
 function fadeOut(elem, hide) {
   gsap.to(elem, {
     duration: .5,
+    ease: "power1.inOut",
+    opacity: 0,
+    onComplete: hide ? hideElem : null,
+    onCompleteParams: [elem]
+  });
+}
+
+function fadeOutDelay(elem, delay, hide) {
+  gsap.to(elem, {
+    duration: 1,
+    delay: delay,
     ease: "power1.inOut",
     opacity: 0,
     onComplete: hide ? hideElem : null,
