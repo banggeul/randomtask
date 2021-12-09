@@ -543,10 +543,26 @@ label {
   display: none;
 }
 
-a#startBtn {
+/* a#startBtn {
   position: absolute;
   bottom: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: none;
+} */
+
+a#startBtn {
+  position: absolute;
+  text-align: center;
+  line-height: 100px;
+  bottom: 4%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  display: none;
+  background-color: #00a2ff;
+  width: 220px;
+  height: 100px;
+  font-size: 1.5em;
+  border-radius: 50% 50%;
+  box-shadow: 4px 4px 20px black;
 }
