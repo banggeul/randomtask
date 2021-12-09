@@ -19,7 +19,7 @@ export var instructions = [
     isVideo: "0",
     animation: {
       property: "x",
-      to: "400",
+      to: "350",
       duration: "1"
     },
     text: {
@@ -29,8 +29,8 @@ export var instructions = [
     x:"50%",
     y:"82%",
     image_x: "-200px",
-    image_y: "9%",
-    image_width: "300px",
+    image_y: "6%",
+    image_width: "230px",
     textAlign: "center",
     imgfadeOut: "1"
   },
