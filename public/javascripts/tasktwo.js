@@ -322,7 +322,7 @@ function setUpGame() {
             finishGame();
           }, timeLimit*1000);
         }
-    }, 4000);
+    }, 2000);
 
   })
 
@@ -481,9 +481,9 @@ function fadeIn(elem, delay, func=null) {
   });
 }
 
-function fadeOut(elem, hide) {
+function fadeOut(elem, duration=0.5, hide) {
   gsap.to(elem, {
-    duration: .5,
+    duration: duration,
     ease: "power1.inOut",
     opacity: 0,
     onComplete: hide ? hideElem : null,
