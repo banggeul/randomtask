@@ -737,7 +737,8 @@ function ruFinished() {
 
 function finishGame() {
   const thanks = select("#thanks");
-  thanks.removeClass("hidden");
+  // thanks.removeClass("hidden");
+  fadeIn(thanks, 1);
   //turn off the game
   gameOn = false;
   //post the sessionData to the database
@@ -765,7 +766,7 @@ function finishGame() {
 
   setTimeout(function() {
     window.location.href = "/" + "?subject=" + currentSubject.subjectNum + "&id=" + experiment.id + "&age=" + currentSubject.age.year;
-  }, 5000);
+  }, 3000);
 }
 
 window.touchMoved = function() {
