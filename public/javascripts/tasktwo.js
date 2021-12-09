@@ -159,6 +159,7 @@ function setUpInstruction(){
   }
 
   instructionPages[0].style.display = "block";
+  fadeIn(instTexts[0], parseInt(instructions[0].delay) );
 }
 //when the submit button is clicked do this
 function getUserContext() {
