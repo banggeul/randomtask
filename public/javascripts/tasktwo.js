@@ -110,8 +110,10 @@ fetchSubjectById().then((data) => {
 function showInstruction(){
   fadeIn($instructionScreen, 1, makeVideoVisible);
   const instTexts = document.querySelectorAll('.instruction');
+  const nextBtns = document.querySelectorAll('div.nextBtn');
   if(instTexts.length > 0){
     fadeIn(instTexts[0], 3);
+    fadeIn(nextBtns[0], 3);
   }
 }
 
@@ -159,8 +161,8 @@ function setUpInstruction(){
     nextBtns[i].addEventListener('click', function(){
       let delay = parseInt(instructions[i+1].textDelay);
       fadeIn(instructionPages[i+1]);
+      //if it's the last slide
       if(i+1 == instructions.length-1) {
-        //if it's the last slide
         //then after fading in the text
         //set the pointerEvents of the instruction page to none
         //fade in the startBtn
@@ -168,11 +170,11 @@ function setUpInstruction(){
           instructionPages[i+1].style.pointerEvents = "none";
           fadeIn($startBtn);
         })
-
         fadeIn($startBtnContainer, delay+1);
 
       } else {
         fadeIn(instTexts[i+1], delay+1);
+        fadeIn(nextBtns[i+1], delay+1);
       }
 
       if(instructions[i+1].isVideo == 1){
@@ -181,7 +183,7 @@ function setUpInstruction(){
             video.play();
           }
         }
-        fadeOut(instructionPages[i],0.5, true);
+        fadeOut(instructionPages[i], 1, true);
       } else {
         fadeOutDelay(instructionPages[i], delay, true);
       }
