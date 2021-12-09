@@ -110,15 +110,18 @@ function setUpInstruction(arr){
       $instruction.appendChild(instructionText);
 
       if(inst.x != null && inst.y != null && inst.textAlign != null) {
-        instructionText.style.right = inst.x;
+        if(i == arr.length-1){
+          //last slide apply transform
+          instructionText.style.transform = "translate(-50%, 0)";
+          instructionText.style.left = inst.x;
+        } else {
+          instructionText.style.right = inst.x;
+        }
         instructionText.style.top = inst.y;
         instructionText.style.textAlign = inst.textAlign;
       }
 
-      if(i == arr.length-1){
-        //last slide apply transform
-        instructionText.style.transform = "translate(-50%, 0)";
-      }
+
       instTexts.push(instructionText);
       // $instruction.innerHTML += `<div class="instruction">${inst.text.en}</div>`;
     }
@@ -213,8 +216,10 @@ fetchSubjectById().then((data) => {
 
 function startTask() {
   gameOn = true;
-  document.querySelector('canvas').style.display = "block";
-  document.querySelector('#instructionContainer').style.display = "none";
+  fadeIn(document.querySelector('canvas'));
+  fadeOut(document.querySelector('#instructionContainer'));
+  // document.querySelector('canvas').style.display = "block";
+  // document.querySelector('#instructionContainer').style.display = "none";
   //decide which game to present
   gameMode = gameOrder[gameIndex];
   if (gameMode == 'birds') {
