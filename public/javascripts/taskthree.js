@@ -54,8 +54,8 @@ function showInstruction(){
     }
     apple_instructionPages[0].style.display = "block";
     if(apple_instTexts.length > 0){
-      fadeIn(apple_instTexts[0], 3);
-      fadeIn(appleNextBtns[0], 3);
+      fadeIn(apple_instTexts[0], 1);
+      fadeIn(appleNextBtns[0], 2);
     }
 
   } else {
@@ -64,8 +64,8 @@ function showInstruction(){
     }
     bird_instructionPages[0].style.display = "block";
     if(bird_instTexts.length > 0){
-      fadeIn(bird_instTexts[0], 3);
-      fadeIn(birdNextBtns[0], 3);
+      fadeIn(bird_instTexts[0], 1);
+      fadeIn(birdNextBtns[0], 2);
     }
   }
 
@@ -148,7 +148,7 @@ function setUpInstruction(arr){
       if(i < nextBtns.length-1){
         let delay = parseInt(arr[i+1].textDelay);
         fadeIn(instructionPages[i+1]);
-        fadeIn(instTexts[i+1], delay+1);
+        fadeIn(instTexts[i+1], delay);
         fadeIn(nextBtns[i+1], delay+1);
         fadeOutDelay(instructionPages[i], delay, true);
       } else {
