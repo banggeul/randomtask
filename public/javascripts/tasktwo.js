@@ -43,7 +43,7 @@ const timeLimit = timeLimitOn ? 20 : -1;
 let instructionPages = [];
 const pathToSlides = "/instructions/task2/"
 
-function nextInstruction(n){
+var nextInstruction = function(n){
   fadeIn(instructionPages[n]);
 }
 //first thing first,
