@@ -312,6 +312,16 @@ fetchSubjectById().then((data) => {
     ageGroup = parseInt(ageGroupParam);
     // //now do something with it
     currentSubject = data.experiment;
+    console.log(currentSubject.lang);
+    //swap out all the instruction if this is german
+    if(currentSubject.lang == "de"){
+      //say german
+      for(let i=0; i < instTexts.length; i++){
+        if(instructions[i].text.de != null){
+          instTexts[i].innerHTML = instructions[i].text.de;
+        }
+      }
+    }
     //set the sequence based on the subjectNumber
     sequenceSetIndex = subjectNum-1;
     //set the choice cards mode based on the subject number

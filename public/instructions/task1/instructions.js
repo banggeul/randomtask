@@ -3,7 +3,8 @@ export var instructions = [
     foreground: "big_rabbit.png",
     isVideo: "0",
     text: {
-      en:"This is the little rabbit Maxi.  <br><br>He is very hungry and carrots<br>are his favorite food.  <br><br>Maxi is looking for carrots to eat."
+      en:"This is the little rabbit Maxi.  <br><br>They are very hungry and carrots<br>are their favorite food.  <br><br>Maxi is looking for carrots to eat.",
+      de:"something german"
     },
     textDelay: "1",
     x:"45%",
