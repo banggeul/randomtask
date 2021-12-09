@@ -182,7 +182,7 @@ function resetAllInput() {
   document.querySelector('#rainTaskButton').classList.remove("disabled");
   document.querySelector('#rainTaskCheckbox').classList.remove('checked');
   document.querySelector('#tryAgain').style.display = "none";
-  document.querySelector('#notesInput').value = "";
+  // document.querySelector('#notesInput').value = "";
 }
 
 // document.querySelector('#name').addEventListener('change', function() {
@@ -313,9 +313,9 @@ function checkSubjectID() {
     // genderOptions.options[genderOptions.selectedIndex].value = subjectObj.gender;
     genderOptions.value = subject.gender;
     //populate the notes if there's any
-    if(subject.notes != null){
-      document.querySelector('#notesInput').value = subject.notes;
-    }
+    // if(subject.notes != null){
+    //   document.querySelector('#notesInput').value = subject.notes;
+    // }
     let task = 0;
     if (subject.tasks.one == 1) {
       document.querySelector('#rabbitTaskButton').classList.add("disabled");
@@ -364,7 +364,7 @@ function updateSubject() {
   const genderOptions = document.getElementById('genderOptions');
   // console.log(genderOptions.options)
   const gender = genderOptions.options[genderOptions.selectedIndex].value;
-  const notes = document.querySelector("#notesInput").value;
+  // const notes = document.querySelector("#notesInput").value;
   //
   // const germanOn = document.querySelector('#languageToggleSwitch').checked;
   const language = lang;
@@ -398,7 +398,7 @@ function updateSubject() {
     }
   }
   experiment.gender = gender;
-  experiment.notes = notes;
+  // experiment.notes = notes;
 }
 
 function addNewSubject(e) {
