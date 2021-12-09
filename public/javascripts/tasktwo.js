@@ -42,10 +42,6 @@ const timeLimit = timeLimitOn ? 20 : -1;
 
 let instructionPages = [];
 const pathToSlides = "/instructions/task2/"
-
-var nextInstruction = function(n){
-  fadeIn(instructionPages[n]);
-}
 //first thing first,
 //set up instructions
 setUpInstruction();
@@ -119,8 +115,6 @@ function makeVideoVisible(){
   document.querySelector("#videoContainer").style.visibility = "visible";
 }
 
-
-
 function setUpInstruction(){
 
   for(let i=0; i < instructions.length; i++){
@@ -137,9 +131,16 @@ function setUpInstruction(){
     }
     //not the last screen, so put the next button
     if(i < instructions.length-1){
-      $instruction.innerHTML += `<div class="nextBtn" onclick="nextInstruction(${i+1})"></div>`;
+      $instruction.innerHTML += `<div class="nextBtn"></div>`;
     }
     instructionPages.push($instruction);
+  }
+
+  const nextBtns = document.querySelectorAll('div.nextBtn');
+  for(let i=0; i < nextBtns.length; i++){
+    nextBtns[i].addEventListener('click', function(){
+      fadeIn(instructionPages[i+1]);
+    })
   }
   //once all set, hide all but the first one
   for(let i=0; i < instructionPages.length; i++){
