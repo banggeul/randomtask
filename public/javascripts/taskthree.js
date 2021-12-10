@@ -241,7 +241,7 @@ function startTask() {
 
 
 let myObjectNum = 10;
-let myObjectSize = 134;
+let myObjectSize = 80;
 
 let myObjectX = [];
 let myObjectY = [];
