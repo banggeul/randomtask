@@ -59,7 +59,7 @@ document.body.addEventListener('touchstart', () => {
   document.activeElement.blur();
 });
 
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 8; i++) {
   ageSortedSubjects.push([]);
   sortedSubjectIds.push([]);
 }
@@ -157,22 +157,57 @@ Array.prototype.forEach.call(radios, function(radio) {
 $generateNewID.addEventListener('click', generateNewID);
 
 function generateNewID() {
-  //create a new subject id;
-  //get the age
-  const ageGroup = parseInt(document.getElementById('ageYearOptions').value);
-  const ageGroupArray = ageSortedSubjects[ageGroup-1];
-  let newId = ageGroupArray.length + startIndex;
+  //empty all the array
+  subjects = [];
+  ageSortedSubjects = [];
+  sortedSubjectIds = [];
 
-  document.querySelector('#subjectNumOptions').value = newId;
-  resetAllInput();
-
-  if (!$checkSubjectID.classList.contains('disabled')) {
-    $checkSubjectID.classList.add('disabled');
+  for (let i = 0; i < 8; i++) {
+    ageSortedSubjects.push([]);
+    sortedSubjectIds.push([]);
   }
-  document.querySelector('#subjectInfoLabel').innerHTML = "We generated a new subject number. Please select their gender."
-  fadeIn($inputGender);
-  document.querySelector('#genderOptions').selectedIndex = 0;
-  newSubject = true;
+
+  //fetch the data again
+  fetch('/subjects')
+    .then((response) => {
+      response.json().then((data) => {
+        for (let i in data) {
+          let innerarray = [];
+          for (let j in data[i]) {
+            innerarray.push(data[i][j]);
+          }
+          // console.log(innerarray);
+          // subjects.push(innerarray[1]);
+          let thisSubject = innerarray[1];
+          const thisSubjectId = innerarray[0];
+          // console.log(thisSubjectId);
+          if (thisSubject.uniqueId == null) {
+            thisSubject.uniqueId = thisSubjectId;
+          }
+          const ageGroupIndex = parseInt(thisSubject.age.year) - 1;
+          ageSortedSubjects[ageGroupIndex].push(thisSubject);
+          // sortedSubjectIds[ageGroupIndex].push(thisSubjectId);
+        }
+        //done sorting
+        //now generate the new id
+        //get the age
+        const ageGroup = parseInt(document.getElementById('ageYearOptions').value);
+        const ageGroupArray = ageSortedSubjects[ageGroup-1];
+        let newId = ageGroupArray.length + startIndex;
+
+        document.querySelector('#subjectNumOptions').value = newId;
+        resetAllInput();
+
+        if (!$checkSubjectID.classList.contains('disabled')) {
+          $checkSubjectID.classList.add('disabled');
+        }
+        document.querySelector('#subjectInfoLabel').innerHTML = "We generated a new subject number. Please select their gender."
+        fadeIn($inputGender);
+        newSubject = true;
+      })
+    }).catch((err) => {console.log(err)});
+  //create a new subject id;
+
 }
 
 function resetAllInput() {
@@ -183,6 +218,7 @@ function resetAllInput() {
   document.querySelector('#rainTaskButton').classList.remove("disabled");
   document.querySelector('#rainTaskCheckbox').classList.remove('checked');
   document.querySelector('#tryAgain').style.display = "none";
+  document.querySelector('#genderOptions').selectedIndex = 0;
   // document.querySelector('#notesInput').value = "";
 }
 
