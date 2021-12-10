@@ -199,6 +199,18 @@ document.querySelector("#ageYearOptions").addEventListener('change', function() 
   }
 })
 
+document.querySelector("#genderOptions").addEventListener('change', function() {
+  if(this.value != null){
+    // $generateNewID.classList.remove('disabled');
+    // document.querySelector('#subjectNumOptions').disabled = false;
+    if(document.querySelector("#errorMsg")!=null){
+      // document.querySelector('#errorMsg').style.display = "none";
+      let error = document.querySelector('#errorMsg');
+      error.remove();
+    }
+  }
+})
+
 document.querySelector('#subjectNumOptions').addEventListener('change', function() {
   //if there's something in the subjectID then enable the check button
   if (this.options[subjectNumOptions.selectedIndex].value != null) {
@@ -438,6 +450,17 @@ function updateExistingSubjectInfo(){
 }
 
 function startTheTask(e) {
+  if(document.getElementById('genderOptions').value == null){
+    //highlight the gender option
+    document.getElementById('genderOptions').classList.add("error");
+    const genderOptionContainer = document.getElementById('genderOptionRow');
+    let validationText = document.createElement('label');
+    validationText.innerHTML = "Please select gender.";
+    validationText.classList.add('error');
+    validationText.id = "errorMsg";
+    genderOptionContainer.appendChild(validationText);
+    return;
+  }
   //add the new subject to the database if this subject is new
   updateSubject();
 
