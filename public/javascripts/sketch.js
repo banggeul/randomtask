@@ -450,9 +450,10 @@ function updateExistingSubjectInfo(){
 }
 
 function startTheTask(e) {
+  console.log("check the gender:"+document.getElementById('genderOptions').value+"!!!");
   if(document.getElementById('genderOptions').value == null){
     //highlight the gender option
-    console.log("check the gender");
+
     document.getElementById('genderOptions').classList.add("error");
     const genderOptionContainer = document.getElementById('genderOptionRow');
     let validationText = document.createElement('label');
