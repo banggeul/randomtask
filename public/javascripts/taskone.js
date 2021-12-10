@@ -628,13 +628,13 @@ $choiceCards.forEach(function(userItem) {
     if (currentCardNum <= totalCards - 1) {
       let choice = e.target.dataset.choice;
       // console.log(e.target.id);
-      if(e.target.id == "left"){
-        //change the right
-        $rightChoice.classList.add('disabledChoiceCard');
-      } else {
-        //change the left
-        $leftChoice.classList.add('disabledChoiceCard');
-      }
+      // if(e.target.id == "left"){
+      //   //change the right
+      //   $rightChoice.classList.add('disabledChoiceCard');
+      // } else {
+      //   //change the left
+      //   $leftChoice.classList.add('disabledChoiceCard');
+      // }
       // console.log("choice: " + choice);
       choices = [...choices, parseInt(choice)];
       //choices.push[choice];
