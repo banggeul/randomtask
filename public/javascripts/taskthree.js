@@ -303,8 +303,10 @@ let startBtn;
 
 window.preload = function() {
   // preload() runs once
-  apple = loadImage("/images/apples/apple.png");
-  apple_shadow = loadImage("/images/apples/apple_shadow.png");
+  // apple = loadImage("/images/apples/apple.png");
+  // apple_shadow = loadImage("/images/apples/apple_shadow.png");
+  apple = loadImage("/images/apples/apple_small.png");
+  apple_shadow = loadImage("/images/apples/apple_shadow_small.png");
 
   bg_sky = loadImage("/images/apples/tree.png");
   bg_sun_left = loadImage("/images/apples/tree.png");
