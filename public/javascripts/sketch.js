@@ -171,6 +171,7 @@ function generateNewID() {
   }
   document.querySelector('#subjectInfoLabel').innerHTML = "We generated a new subject number. Please select their gender."
   fadeIn($inputGender);
+  document.querySelector('#genderOptions').selectedIndex = 0;
   newSubject = true;
 }
 
