@@ -7,13 +7,13 @@ html, body {
   height: 100vh;
   font-family: Nunito, Geneva, sans-serif;
   background: url(/instructions/task3/apple_instruction_0.png);
-  /* background-position: center; */
+  background-position: 0 0;
   background-repeat: no-repeat;
 }
 canvas {
   display: block;
   background: url(/instructions/task3/apple_instruction_0.png);
-  /* background-position: center; */
+  background-position: 0 0;
   background-repeat: no-repeat;
 }
 
