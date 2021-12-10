@@ -630,6 +630,7 @@ label.error {
   color: #F30;
   font-size: 0.8em;
   margin-top: 0;
+  text-align: right;
 }
 
 .container h1 {
