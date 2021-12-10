@@ -312,8 +312,8 @@ window.preload = function() {
   bg_sun_left = loadImage("/images/apples/tree.png");
   bg_sun_right = loadImage("/images/apples/tree.png");
 
-  bird = loadImage("/images/apples/bird.png");
-  bird_shadow = loadImage("/images/apples/bird_shadow.png");
+  bird = loadImage("/images/apples/bird_small.png");
+  bird_shadow = loadImage("/images/apples/bird_shadow_small.png");
 
   bg_menu = loadImage("/images/apples/tree.png");
   sun = loadImage("/images/apples/sun.png");
@@ -428,7 +428,8 @@ function bigReset(mode) {
     console.log(myObjectSize, windowHeight);
     myObjects[i] = {};
     myObjects[i].x = i * myObjectSize;
-    myObjects[i].y = windowHeight - myObjectSize * 1.3;
+    myObjects[i].y = windowHeight - myObjectSize;
+    // myObjects[i].y = windowHeight - myObjectSize * 1.3;
 
     // myObjectX[i] = i * myObjectSize;
     // myObjectY[i] = windowHeight - myObjectSize * 1.3;
