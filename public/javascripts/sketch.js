@@ -200,11 +200,12 @@ document.querySelector("#ageYearOptions").addEventListener('change', function() 
 })
 
 document.querySelector("#genderOptions").addEventListener('change', function() {
-  if(this.value != null){
+  if(this.value != "null"){
     // $generateNewID.classList.remove('disabled');
     // document.querySelector('#subjectNumOptions').disabled = false;
     if(document.querySelector("#errorMsg")!=null){
       // document.querySelector('#errorMsg').style.display = "none";
+      this.classList.remove('error');
       let error = document.querySelector('#errorMsg');
       error.remove();
     }
